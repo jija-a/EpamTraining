@@ -18,4 +18,9 @@ public class PointServiceImpl implements PointService {
         return Math.hypot(ac, cb);
     }
 
+    @Override
+    public boolean isPointBelongsToLine(Point point, double m, double n) {
+        return point.getX() >= m && point.getX() <= n;
+    }
+
 }

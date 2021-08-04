@@ -1,6 +1,11 @@
 package com.epam.jwd.context.impl;
 
 import com.epam.jwd.context.ApplicationMenu;
+import com.epam.jwd.domain.Point;
+import com.epam.jwd.domain.Triangle;
+import com.epam.jwd.service.Calculator;
+import com.epam.jwd.service.impl.CalculatorImpl;
+import com.epam.jwd.service.impl.PointServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +17,7 @@ public class TrueFalseMenu implements ApplicationMenu {
     protected static final TrueFalseMenu TRUE_FALSE_MENU = new TrueFalseMenu();
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final Logger LOGGER = LoggerFactory.getLogger(TrueFalseMenu.class);
+    private Calculator calculator = CalculatorImpl.CALCULATOR;
 
     @Override
     public void printAvailableOptions() {
@@ -41,35 +47,92 @@ public class TrueFalseMenu implements ApplicationMenu {
 
     @Override
     public void handleUserInput(byte input) {
+        double a;
+        byte digitsInNumber;
         LOGGER.info("Handling user input");
         boolean result = false;
         switch (input) {
             case 1:
-                result = this.handleFirstTask();
+                digitsInNumber = 2;
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+
+                result = calculator.isEvenNumber(a) && calculator.isXDigitNumber(a, digitsInNumber);
                 break;
             case 2:
-                result = this.handleSecondTask();
+                digitsInNumber = 4;
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+
+                result = calculator.isXDigitNumber(a, digitsInNumber) && calculator.isSumFirstTwoDigitEqualsSumLastTwoDigit(a);
                 break;
             case 3:
-                result = this.handleThirdTask();
+                digitsInNumber = 3;
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+
+                int sum = calculator.sumOfDigits((int) a);
+                result = calculator.isXDigitNumber(a, digitsInNumber) && calculator.isEvenNumber(sum);
                 break;
             case 4:
-                result = this.handleFourthTask();
+                System.out.print("Input 'x': ");
+                double x = SCANNER.nextDouble();
+                System.out.print("Input 'y': ");
+                double y = SCANNER.nextDouble();
+                Point point = new Point(x, y);
+                System.out.print("Input 'm': ");
+                double m = SCANNER.nextDouble();
+                System.out.print("Input 'n': ");
+                double n = SCANNER.nextDouble();
+
+                result = PointServiceImpl.POINT_SERVICE.isPointBelongsToLine(point, m, n);
                 break;
             case 5:
-                result = this.handleFifthTask();
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+
+                sum = calculator.sumOfDigits((int) a);
+
+                result = a * a == Math.pow(sum, 3);
                 break;
             case 6:
-                result = this.handleSixTask();
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+                System.out.print("Input 'b': ");
+                double b = SCANNER.nextDouble();
+                System.out.print("Input 'c': ");
+                double c = SCANNER.nextDouble();
+
+                result = calculator.triangleIsIsosceles(new Triangle(a, b, c));
                 break;
             case 7:
-                result = this.handleSevenTask();
+                digitsInNumber = 3;
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+
+                result = calculator.isXDigitNumber(a, digitsInNumber) && calculator.sumOfAnyTwoDigitsEqualsThirdDigit(a);
                 break;
             case 8:
-                result = this.handleEightTask();
+                System.out.print("Input 'n': ");
+                n = SCANNER.nextDouble();
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+
+                result = calculator.isOnePowerOfAnother(n, a);
                 break;
             case 9:
-                result = this.handleNineTask();
+                System.out.print("Input 'a': ");
+                a = SCANNER.nextDouble();
+                System.out.print("Input 'b': ");
+                b = SCANNER.nextDouble();
+                System.out.print("Input 'c': ");
+                c = SCANNER.nextDouble();
+                System.out.print("Input 'x': ");
+                x = SCANNER.nextDouble();
+                System.out.print("Input 'y': ");
+                y = SCANNER.nextDouble();
+
+                result = y == a * x * x + b * x + c;
                 break;
             case 0:
                 break;
@@ -78,112 +141,6 @@ public class TrueFalseMenu implements ApplicationMenu {
                 break;
         }
         System.out.println(result);
-    }
-
-    private boolean handleFirstTask() {
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-
-        return a > 9 && a < 100 && a % 2 == 0;
-    }
-
-    private boolean handleSecondTask() {
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-
-        return (a % 2 == 0) &&
-                (Math.round(a / 1000) + Math.round((a / 100) % 10) == Math.round((a % 100) / 10) + Math.round(a % 10));
-    }
-
-    private boolean handleThirdTask() {
-        boolean result = false;
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-
-        while (a > 99 && a < 1000) {
-            result = (Math.round(a / 100) + (a / 10 % 10) + (a % 10)) % 2 == 0;
-        }
-        return result;
-    }
-
-    private boolean handleFourthTask() {
-        System.out.print("Input 'x': ");
-        double x = SCANNER.nextDouble();
-        System.out.print("Input 'y': ");
-        double y = SCANNER.nextDouble();
-        System.out.print("Input 'm': ");
-        double m = SCANNER.nextDouble();
-        System.out.print("Input 'n': ");
-        double n = SCANNER.nextDouble();
-
-        return x >= m && x <= n;
-    }
-
-    private boolean handleFifthTask() {
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-
-        double sum = 0;
-        double newA = a;
-        int count = 0;
-        while (count < 3) {
-            sum = sum + (newA % 10);
-            newA = newA / 10;
-            count++;
-        }
-
-        return a * a == Math.pow(sum, 3);
-    }
-
-    private boolean handleSixTask() {
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-        System.out.print("Input 'b': ");
-        double b = SCANNER.nextDouble();
-        System.out.print("Input 'c': ");
-        double c = SCANNER.nextDouble();
-
-        return (a == b && a != c) || (a == c && a != b) || (b == c && b != a);
-    }
-
-    private boolean handleSevenTask() {
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-
-        double newA = a;
-        double firstDigit = newA % 10;
-        newA = newA / 10;
-        double secondDigit = newA % 10;
-        newA = newA / 10;
-        double thirdDigit = newA % 10;
-
-        return firstDigit + secondDigit == thirdDigit
-                || firstDigit + thirdDigit == secondDigit
-                || thirdDigit + secondDigit == firstDigit;
-    }
-
-    private boolean handleEightTask() {
-        System.out.print("Input 'n': ");
-        double n = SCANNER.nextDouble();
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-
-        return (n == 1) || (n == a) || (n == a * a) || (n == Math.pow(a, 3)) || (n == Math.pow(a, 4));
-    }
-
-    private boolean handleNineTask() {
-        System.out.print("Input 'a': ");
-        double a = SCANNER.nextDouble();
-        System.out.print("Input 'b': ");
-        double b = SCANNER.nextDouble();
-        System.out.print("Input 'c': ");
-        double c = SCANNER.nextDouble();
-        System.out.print("Input 'x': ");
-        double x = SCANNER.nextDouble();
-        System.out.print("Input 'y': ");
-        double y = SCANNER.nextDouble();
-
-        return y == a * x * x + b * x + c;
     }
 
 }

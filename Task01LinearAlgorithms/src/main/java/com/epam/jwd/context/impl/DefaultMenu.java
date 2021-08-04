@@ -59,6 +59,7 @@ public class DefaultMenu implements ApplicationMenu {
                 TrueFalseMenu.TRUE_FALSE_MENU.printAvailableOptions();
                 break;
             case 0:
+                LOGGER.debug("Exiting application");
                 System.out.println("Exit...");
                 System.exit(-1);
                 break;
