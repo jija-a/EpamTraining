@@ -1,7 +1,5 @@
 package com.epam.jwd.service;
 
-import com.epam.jwd.domain.Triangle;
-
 public interface Calculator {
 
     double geometricMean(double[] values);
@@ -19,8 +17,6 @@ public interface Calculator {
     boolean isXDigitNumber(double a, byte digitsInNumber);
 
     int sumOfDigits(int a);
-
-    boolean triangleIsIsosceles(Triangle triangle);
 
     boolean sumOfAnyTwoDigitsEqualsThirdDigit(double a);
 

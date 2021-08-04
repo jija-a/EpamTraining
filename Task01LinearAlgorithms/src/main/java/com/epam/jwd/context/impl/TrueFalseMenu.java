@@ -6,6 +6,7 @@ import com.epam.jwd.domain.Triangle;
 import com.epam.jwd.service.Calculator;
 import com.epam.jwd.service.impl.CalculatorImpl;
 import com.epam.jwd.service.impl.PointServiceImpl;
+import com.epam.jwd.service.impl.TriangleServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,7 +104,7 @@ public class TrueFalseMenu implements ApplicationMenu {
                 System.out.print("Input 'c': ");
                 double c = SCANNER.nextDouble();
 
-                result = calculator.triangleIsIsosceles(new Triangle(a, b, c));
+                result = TriangleServiceImpl.TRIANGLE_SERVICE.triangleIsIsosceles(new Triangle(a, b, c));
                 break;
             case 7:
                 digitsInNumber = 3;
