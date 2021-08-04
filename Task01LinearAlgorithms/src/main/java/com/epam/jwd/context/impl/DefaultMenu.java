@@ -41,19 +41,50 @@ public class DefaultMenu implements ApplicationMenu {
     @Override
     public void handleUserInput(byte input) {
         String result = "";
-        LOGGER.info("Handling user input: ", input);
+        LOGGER.info("Handling user input: ");
         switch (input) {
             case 1:
-                result = this.handleCFunctionChoice();
+                System.out.println("Enter 'a': ");
+                double a = SCANNER.nextDouble();
+
+                result = String.valueOf(CalculatorImpl.CALCULATOR.calculateCFunction(a));
                 break;
             case 2:
-                result = this.handleAvgChoice();
+                System.out.println("Enter a: ");
+                a = SCANNER.nextByte();
+                System.out.println("Enter b: ");
+                double b = SCANNER.nextByte();
+
+                double[] values = new double[]{a, b};
+                double mathAvg = CalculatorImpl.CALCULATOR.arithmeticMean(values);
+                double geoAvg = CalculatorImpl.CALCULATOR.geometricMean(values);
+
+                result = "Math avg: " + mathAvg + "\nGeo avg: " + geoAvg;
                 break;
             case 3:
-                result = this.handleDistanceChoice();
+                System.out.println("Enter x1: ");
+                double x1 = SCANNER.nextByte();
+                System.out.println("Enter y1: ");
+                double y1 = SCANNER.nextByte();
+                System.out.println("Enter x2: ");
+                double x2 = SCANNER.nextByte();
+                System.out.println("Enter y2: ");
+                double y2 = SCANNER.nextByte();
+
+                Point firstPoint = new Point(x1, y1);
+                Point secondPoint = new Point(x2, y2);
+                double distance = PointServiceImpl.POINT_SERVICE.findDistanceBetweenTwoPoints(firstPoint, secondPoint);
+
+                result = "Distance between two points is: " + distance;
                 break;
             case 4:
-                result = this.handlePowChoice();
+                System.out.println("Enter 'a'");
+                a = SCANNER.nextDouble();
+
+                double eightPow = CalculatorImpl.CALCULATOR.numberInEightPowOnlyByMultiplying(a);
+                double tenPow = CalculatorImpl.CALCULATOR.numberInTenPowOnlyByMultiplying(a);
+
+                result = "a^8 = " + eightPow + "\na^10 = " + tenPow;
                 break;
             case 5:
                 TrueFalseMenu.TRUE_FALSE_MENU.printAvailableOptions();
@@ -70,46 +101,5 @@ public class DefaultMenu implements ApplicationMenu {
         System.out.println(result);
     }
 
-    private String handleAvgChoice() {
-        System.out.println("Enter a: ");
-        double a = SCANNER.nextByte();
-        System.out.println("Enter b: ");
-        double b = SCANNER.nextByte();
-        double[] values = new double[]{a, b};
-        double mathAvg = CalculatorImpl.CALCULATOR.arithmeticMean(values);
-        double geoAvg = CalculatorImpl.CALCULATOR.geometricMean(values);
-        return "Math avg: " + mathAvg + "\nGeo avg: " + geoAvg;
-    }
-
-    private String handlePowChoice() {
-        System.out.println("Enter 'a'");
-        double a = SCANNER.nextDouble();
-        double b = a * a;
-        double c = b * b;
-        double d = c * c;
-        double e = d * b;
-        return "a^8 = " + d + "\na^10 = " + e;
-    }
-
-    private String handleCFunctionChoice() {
-        System.out.println("Enter 'a': ");
-        double a = SCANNER.nextDouble();
-        return a + 3 + "";
-    }
-
-    private String handleDistanceChoice() {
-        System.out.println("Enter x1: ");
-        double x1 = SCANNER.nextByte();
-        System.out.println("Enter y1: ");
-        double y1 = SCANNER.nextByte();
-        System.out.println("Enter x2: ");
-        double x2 = SCANNER.nextByte();
-        System.out.println("Enter y2: ");
-        double y2 = SCANNER.nextByte();
-        Point firstPoint = new Point(x1, y1);
-        Point secondPoint = new Point(x2, y2);
-        double result = PointServiceImpl.POINT_SERVICE.findDistanceBetweenTwoPoints(firstPoint, secondPoint);
-        return "Distance between two points is: " + result;
-    }
 
 }

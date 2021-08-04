@@ -26,4 +26,9 @@ public interface Calculator {
 
     boolean isOnePowerOfAnother(double n, double a);
 
+    double calculateCFunction(double a);
+
+    double numberInEightPowOnlyByMultiplying(double a);
+
+    double numberInTenPowOnlyByMultiplying(double a);
 }

@@ -5,6 +5,7 @@ import com.epam.jwd.service.Calculator;
 
 public class CalculatorImpl implements Calculator {
 
+    private static final int C_FUNCTION_CONSTANT = 3;
     public static final Calculator CALCULATOR = new CalculatorImpl();
 
     private CalculatorImpl() {
@@ -110,6 +111,23 @@ public class CalculatorImpl implements Calculator {
     @Override
     public boolean isOnePowerOfAnother(double n, double a) {
         return (n == 1) || (n == a) || (n == a * a) || (n == Math.pow(a, 3)) || (n == Math.pow(a, 4));
+    }
+
+    @Override
+    public double calculateCFunction(double a) {
+        return C_FUNCTION_CONSTANT + a;
+    }
+
+    @Override
+    public double numberInEightPowOnlyByMultiplying(double a) {
+        double b = a * a;
+        double c = b * b;
+        return c * c;
+    }
+
+    @Override
+    public double numberInTenPowOnlyByMultiplying(double a) {
+        return numberInEightPowOnlyByMultiplying(a) * a * a;
     }
 
 }
