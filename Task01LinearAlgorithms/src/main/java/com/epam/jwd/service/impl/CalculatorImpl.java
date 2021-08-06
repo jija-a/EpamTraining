@@ -70,11 +70,13 @@ public class CalculatorImpl implements Calculator {
     }
 
     @Override
-    public boolean isXDigitNumber(double a, byte digitsInNumber) {
-        if (digitsInNumber < 1) {
-            return false;
+    public boolean isXDigitNumber(double number, int digitsInNumber) {
+        int count = (number == 0) ? 1 : 0;
+        while (number != 0) {
+            count++;
+            number = Math.round(number / 10);
         }
-        return a > Math.pow(10, digitsInNumber - 1) - 1 && a < Math.pow(10, digitsInNumber);
+        return count == digitsInNumber;
     }
 
     @Override

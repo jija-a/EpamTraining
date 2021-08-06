@@ -14,7 +14,7 @@ public interface Calculator {
 
     boolean isSumFirstTwoDigitEqualsSumLastTwoDigit(double a);
 
-    boolean isXDigitNumber(double a, byte digitsInNumber);
+    boolean isXDigitNumber(double number, int digitsInNumber);
 
     int sumOfDigits(int a);
 

@@ -1,42 +1,62 @@
 package com.epam.jwd.service.impl;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class CalculatorImplTest {
 
-    @Test
-    public void testIsEvenNumber() {
-        double a1 = 20;
-        double a2 = 19;
-        double a3 = -1;
-        double a4 = 0;
-        double a5 = -12;
-        assertTrue(CalculatorImpl.CALCULATOR.isEvenNumber(a1));
-        assertFalse(CalculatorImpl.CALCULATOR.isEvenNumber(a2));
-        assertFalse(CalculatorImpl.CALCULATOR.isEvenNumber(a3));
-        assertTrue(CalculatorImpl.CALCULATOR.isEvenNumber(a4));
-        assertTrue(CalculatorImpl.CALCULATOR.isEvenNumber(a5));
+    @DataProvider(name = "correctDataForEvenNumber")
+    public Object[] createCorrectDataForEvenNumber() {
+        return
+                new Object[]{20, 0, -12};
     }
 
-    @Test
-    public void testIsXDigitNumber() {
-        byte digitsInNumber1 = 0;
-        byte digitsInNumber2 = 2;
-        byte digitsInNumber3 = -1;
-        double a1 = 0;
-        double a2 = 12;
-        double a3 = 123;
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a1, digitsInNumber1));
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a1, digitsInNumber2));
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a1, digitsInNumber3));
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a2, digitsInNumber1));
-        assertTrue(CalculatorImpl.CALCULATOR.isXDigitNumber(a2, digitsInNumber2));
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a2, digitsInNumber3));
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a3, digitsInNumber1));
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a3, digitsInNumber2));
-        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(a3, digitsInNumber3));
+
+    @DataProvider(name = "incorrectDataForEvenNumber")
+    public Object[] createIncorrectDataForEvenNumber() {
+        return
+                new Object[]{19, -1};
+    }
+
+    @DataProvider(name = "correctDataForDigits")
+    public Object[] createCorrectDataForDigits() {
+        return
+                new Object[]{new int[]{1, 1},
+                        new int[]{-1, 1},
+                        new int[]{123, 3},
+                };
+    }
+
+    @DataProvider(name = "incorrectDataForDigits")
+    public Object[] createIncorrectDataForDigits() {
+        return
+                new Object[]{new int[]{1, 0},
+                        new int[]{-1, 2},
+                        new int[]{0, 2},
+                };
+    }
+
+    @Test(dataProvider = "correctDataForEvenNumber")
+    public void testEvenNumber(int a) {
+        assertTrue(CalculatorImpl.CALCULATOR.isEvenNumber(a));
+    }
+
+
+    @Test(dataProvider = "incorrectDataForEvenNumber")
+    public void testNotEvenNumber(int a) {
+        assertFalse(CalculatorImpl.CALCULATOR.isEvenNumber(a));
+    }
+
+    @Test(dataProvider = "incorrectDataForDigits")
+    public void testIncorrectDigitsInNumber(int[] values) {
+        assertFalse(CalculatorImpl.CALCULATOR.isXDigitNumber(values[0], values[1]));
+    }
+
+    @Test(dataProvider = "correctDataForDigits")
+    public void testCorrectDigitsInNumber(int[] values) {
+        assertTrue(CalculatorImpl.CALCULATOR.isXDigitNumber(values[0], values[1]));
     }
 
 }

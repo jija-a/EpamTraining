@@ -57,7 +57,7 @@ public class TrueFalseMenu implements ApplicationMenu {
         double y;
         double m;
         double n;
-        byte digitsInNumber;
+        int digitsInNumber;
         LOGGER.info("Handling user input");
         boolean result = false;
         switch (input) {

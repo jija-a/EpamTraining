@@ -1,4 +1,4 @@
-package com.epam.jwd.context.impl;
+package com.epam.jwd.context.menu;
 
 public class FileOrTerminalMenu {
 }
