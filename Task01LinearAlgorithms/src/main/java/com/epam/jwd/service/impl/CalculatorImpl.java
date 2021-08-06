@@ -71,6 +71,9 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public boolean isXDigitNumber(double a, byte digitsInNumber) {
+        if (digitsInNumber < 1) {
+            return false;
+        }
         return a > Math.pow(10, digitsInNumber - 1) - 1 && a < Math.pow(10, digitsInNumber);
     }
 
@@ -88,12 +91,9 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public boolean sumOfAnyTwoDigitsEqualsThirdDigit(double a) {
-        double newA = a;
-        double firstDigit = newA % 10;
-        newA = newA / 10;
-        double secondDigit = newA % 10;
-        newA = newA / 10;
-        double thirdDigit = newA % 10;
+        int firstDigit = (int) (a % 10);
+        int secondDigit = (int) (a / 10 % 10);
+        int thirdDigit = (int) (a / 100);
 
         return firstDigit + secondDigit == thirdDigit
                 || firstDigit + thirdDigit == secondDigit

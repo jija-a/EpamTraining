@@ -5,8 +5,7 @@ import com.epam.jwd.context.impl.DefaultMenu;
 public interface Application {
 
     static void run() {
-        ApplicationMenu applicationMenu = new DefaultMenu();
-        applicationMenu.printAvailableOptions();
+        DefaultMenu.DEFAULT_MENU.printAvailableOptions();
     }
 
 }

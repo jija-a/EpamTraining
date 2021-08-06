@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class DefaultMenu implements ApplicationMenu {
 
+    public static final ApplicationMenu DEFAULT_MENU = new DefaultMenu();
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMenu.class);
 
@@ -40,53 +41,71 @@ public class DefaultMenu implements ApplicationMenu {
 
     @Override
     public void handleUserInput(byte input) {
+        double a;
+        double b;
+        double[] values;
+        double mathAvg;
+        double geoAvg;
+        double x1;
+        double y1;
+        double x2;
+        double y2;
+        double distance;
+        double eightPow;
+        double tenPow;
+
         String result = "";
         LOGGER.info("Handling user input: ");
         switch (input) {
             case 1:
+                LOGGER.trace("User choose Case 1");
                 System.out.println("Enter 'a': ");
-                double a = SCANNER.nextDouble();
+                a = SCANNER.nextDouble();
 
                 result = String.valueOf(CalculatorImpl.CALCULATOR.calculateCFunction(a));
                 break;
             case 2:
+                LOGGER.trace("User choose Case 2");
                 System.out.println("Enter a: ");
                 a = SCANNER.nextByte();
                 System.out.println("Enter b: ");
-                double b = SCANNER.nextByte();
+                b = SCANNER.nextByte();
 
-                double[] values = new double[]{a, b};
-                double mathAvg = CalculatorImpl.CALCULATOR.arithmeticMean(values);
-                double geoAvg = CalculatorImpl.CALCULATOR.geometricMean(values);
+                values = new double[]{a, b};
+                mathAvg = CalculatorImpl.CALCULATOR.arithmeticMean(values);
+                geoAvg = CalculatorImpl.CALCULATOR.geometricMean(values);
 
                 result = "Math avg: " + mathAvg + "\nGeo avg: " + geoAvg;
                 break;
             case 3:
+                LOGGER.trace("User choose Case 3");
                 System.out.println("Enter x1: ");
-                double x1 = SCANNER.nextByte();
+                x1 = SCANNER.nextByte();
                 System.out.println("Enter y1: ");
-                double y1 = SCANNER.nextByte();
+                y1 = SCANNER.nextByte();
                 System.out.println("Enter x2: ");
-                double x2 = SCANNER.nextByte();
+                x2 = SCANNER.nextByte();
                 System.out.println("Enter y2: ");
-                double y2 = SCANNER.nextByte();
+                y2 = SCANNER.nextByte();
 
                 Point firstPoint = new Point(x1, y1);
                 Point secondPoint = new Point(x2, y2);
-                double distance = PointServiceImpl.POINT_SERVICE.findDistanceBetweenTwoPoints(firstPoint, secondPoint);
+                distance = PointServiceImpl.POINT_SERVICE.findDistanceBetweenTwoPoints(firstPoint, secondPoint);
 
                 result = "Distance between two points is: " + distance;
                 break;
             case 4:
+                LOGGER.trace("User choose Case 4");
                 System.out.println("Enter 'a'");
                 a = SCANNER.nextDouble();
 
-                double eightPow = CalculatorImpl.CALCULATOR.numberInEightPowOnlyByMultiplying(a);
-                double tenPow = CalculatorImpl.CALCULATOR.numberInTenPowOnlyByMultiplying(a);
+                eightPow = CalculatorImpl.CALCULATOR.numberInEightPowOnlyByMultiplying(a);
+                tenPow = CalculatorImpl.CALCULATOR.numberInTenPowOnlyByMultiplying(a);
 
                 result = "a^8 = " + eightPow + "\na^10 = " + tenPow;
                 break;
             case 5:
+                LOGGER.trace("User choose Case 5");
                 TrueFalseMenu.TRUE_FALSE_MENU.printAvailableOptions();
                 break;
             case 0:
@@ -100,6 +119,4 @@ public class DefaultMenu implements ApplicationMenu {
         }
         System.out.println(result);
     }
-
-
 }

@@ -22,6 +22,7 @@ public class TrueFalseMenu implements ApplicationMenu {
 
     @Override
     public void printAvailableOptions() {
+        LOGGER.info("Showing true false menu");
         byte input = -1;
         while (input != 0) {
             System.out.println("1. The integer N is an even two-digit number.\n" +
@@ -48,12 +49,20 @@ public class TrueFalseMenu implements ApplicationMenu {
 
     @Override
     public void handleUserInput(byte input) {
+        int sum;
         double a;
+        double b;
+        double c;
+        double x;
+        double y;
+        double m;
+        double n;
         byte digitsInNumber;
         LOGGER.info("Handling user input");
         boolean result = false;
         switch (input) {
             case 1:
+                LOGGER.trace("User choose Case 1");
                 digitsInNumber = 2;
                 System.out.print("Input 'a': ");
                 a = SCANNER.nextDouble();
@@ -61,6 +70,7 @@ public class TrueFalseMenu implements ApplicationMenu {
                 result = calculator.isEvenNumber(a) && calculator.isXDigitNumber(a, digitsInNumber);
                 break;
             case 2:
+                LOGGER.trace("User choose Case 2");
                 digitsInNumber = 4;
                 System.out.print("Input 'a': ");
                 a = SCANNER.nextDouble();
@@ -68,27 +78,30 @@ public class TrueFalseMenu implements ApplicationMenu {
                 result = calculator.isXDigitNumber(a, digitsInNumber) && calculator.isSumFirstTwoDigitEqualsSumLastTwoDigit(a);
                 break;
             case 3:
+                LOGGER.trace("User choose Case 3");
                 digitsInNumber = 3;
                 System.out.print("Input 'a': ");
                 a = SCANNER.nextDouble();
 
-                int sum = calculator.sumOfDigits((int) a);
+                sum = calculator.sumOfDigits((int) a);
                 result = calculator.isXDigitNumber(a, digitsInNumber) && calculator.isEvenNumber(sum);
                 break;
             case 4:
+                LOGGER.trace("User choose Case 4");
                 System.out.print("Input 'x': ");
-                double x = SCANNER.nextDouble();
+                x = SCANNER.nextDouble();
                 System.out.print("Input 'y': ");
-                double y = SCANNER.nextDouble();
+                y = SCANNER.nextDouble();
                 Point point = new Point(x, y);
                 System.out.print("Input 'm': ");
-                double m = SCANNER.nextDouble();
+                m = SCANNER.nextDouble();
                 System.out.print("Input 'n': ");
-                double n = SCANNER.nextDouble();
+                n = SCANNER.nextDouble();
 
                 result = PointServiceImpl.POINT_SERVICE.isPointBelongsToLine(point, m, n);
                 break;
             case 5:
+                LOGGER.trace("User choose Case 5");
                 System.out.print("Input 'a': ");
                 a = SCANNER.nextDouble();
 
@@ -97,16 +110,18 @@ public class TrueFalseMenu implements ApplicationMenu {
                 result = a * a == Math.pow(sum, 3);
                 break;
             case 6:
+                LOGGER.trace("User choose Case 6");
                 System.out.print("Input 'a': ");
                 a = SCANNER.nextDouble();
                 System.out.print("Input 'b': ");
-                double b = SCANNER.nextDouble();
+                b = SCANNER.nextDouble();
                 System.out.print("Input 'c': ");
-                double c = SCANNER.nextDouble();
+                c = SCANNER.nextDouble();
 
                 result = TriangleServiceImpl.TRIANGLE_SERVICE.triangleIsIsosceles(new Triangle(a, b, c));
                 break;
             case 7:
+                LOGGER.trace("User choose Case 7");
                 digitsInNumber = 3;
                 System.out.print("Input 'a': ");
                 a = SCANNER.nextDouble();
@@ -114,6 +129,8 @@ public class TrueFalseMenu implements ApplicationMenu {
                 result = calculator.isXDigitNumber(a, digitsInNumber) && calculator.sumOfAnyTwoDigitsEqualsThirdDigit(a);
                 break;
             case 8:
+                LOGGER.trace("User choose Case 8");
+
                 System.out.print("Input 'n': ");
                 n = SCANNER.nextDouble();
                 System.out.print("Input 'a': ");
@@ -122,6 +139,7 @@ public class TrueFalseMenu implements ApplicationMenu {
                 result = calculator.isOnePowerOfAnother(n, a);
                 break;
             case 9:
+                LOGGER.trace("User choose Case 9");
                 System.out.print("Input 'a': ");
                 a = SCANNER.nextDouble();
                 System.out.print("Input 'b': ");
@@ -136,6 +154,8 @@ public class TrueFalseMenu implements ApplicationMenu {
                 result = y == a * x * x + b * x + c;
                 break;
             case 0:
+                LOGGER.trace("User choose Case 0");
+                LOGGER.trace("Go back to Main menu");
                 break;
             default:
                 System.out.println("Unknown command, please, try again...");
