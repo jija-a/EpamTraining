@@ -22,6 +22,9 @@ public class MessageConstant {
     public static final String TASK_BRANCHING = "task.branching";
     public static final String LANG_CHOICE = "lang.choice";
     public static final String EXIT = "main.exit";
+    public static final String MAIN_GO_BACK = "main.back";
+
+    public static final String MAIN_PLEASE_INPUT = "main.please.input";
 
     public static final String MAIN_CHOICE_FROM_FILE_OR_MENU = "main.choice.from_file_or_menu";
     public static final String FROM_FILE = "main.choice.from_file";
@@ -29,6 +32,8 @@ public class MessageConstant {
 
     public static final String MENU_BRANCHING = "main.menu.branching";
     public static final String MENU_CYCLE = "main.menu.cycle";
+
+    public static final String UNKNOWN_COMMAND = "main.unknown_command";
 
     public static final String MAIN_ERROR_FAILED_TO_START_APP = "main.error.failed_to_start";
 }

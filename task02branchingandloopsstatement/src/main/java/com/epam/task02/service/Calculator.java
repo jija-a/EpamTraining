@@ -1,4 +1,6 @@
 package com.epam.task02.service;
 
-public interface LoopsService {
+public interface Calculator {
+
+
 }

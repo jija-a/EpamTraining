@@ -11,6 +11,7 @@ public class Main {
         try {
             Application.run();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.MAIN_ERROR_FAILED_TO_START_APP));
         }
 

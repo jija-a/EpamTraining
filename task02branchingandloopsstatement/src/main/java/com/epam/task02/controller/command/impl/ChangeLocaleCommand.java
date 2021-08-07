@@ -1,10 +1,10 @@
 package com.epam.task02.controller.command.impl;
 
+import com.epam.task02.context.ViewResolver;
 import com.epam.task02.controller.command.Command;
 import com.epam.task02.util.MessageManager;
 
 import java.util.Locale;
-import java.util.Map;
 
 public class ChangeLocaleCommand implements Command {
 
@@ -12,7 +12,9 @@ public class ChangeLocaleCommand implements Command {
     private final Locale ru = new Locale("ru", "RU");
 
     @Override
-    public void execute(Map<String, Object> parameters) {
+    public ViewResolver execute() {
+
+        ViewResolver resolver = new ViewResolver();
 
         if (MessageManager.INSTANCE.getLocale().equals(en)) {
             MessageManager.INSTANCE.changeLocale(ru);
@@ -20,6 +22,8 @@ public class ChangeLocaleCommand implements Command {
             MessageManager.INSTANCE.changeLocale(en);
         }
 
+        resolver.setOutput("Locale changed");
+        return resolver;
     }
 
 }

@@ -36,7 +36,7 @@ public class ApplicationMainMenuImpl implements ApplicationMenu {
                 input = SCANNER.nextInt();
                 handleUserInput(input);
             } catch (InputMismatchException e) {
-                System.out.println("Unknown command, please try again: ");
+                System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.UNKNOWN_COMMAND));
                 SCANNER.nextLine();
             }
         }
@@ -52,16 +52,17 @@ public class ApplicationMainMenuImpl implements ApplicationMenu {
                 ApplicationLoopMenuImpl.APPLICATION_LOOPS_MENU.printAvailableOptions();
                 break;
             case 3:
-                Controller.CONTROLLER.handleRequest(CommandType.CHANGE_INPUT_TYPE);
+                System.out.println(Controller.CONTROLLER.handleRequest(CommandType.CHANGE_INPUT_TYPE));
                 break;
             case 4:
-                Controller.CONTROLLER.handleRequest(CommandType.CHANGE_LOCALE_COMMAND);
+                System.out.println(Controller.CONTROLLER.handleRequest(CommandType.CHANGE_LOCALE_COMMAND));
                 break;
             case 0:
-                System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.EXIT + "..."));
+                System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.EXIT) + "...");
                 System.exit(-1);
                 break;
             default:
+                System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.UNKNOWN_COMMAND));
                 break;
         }
     }
