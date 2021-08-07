@@ -1,4 +1,4 @@
-package com.epam.jwd.util;
+package com.epam.task01linear_algrorithms.util;
 
 public class MessageConstant {
 

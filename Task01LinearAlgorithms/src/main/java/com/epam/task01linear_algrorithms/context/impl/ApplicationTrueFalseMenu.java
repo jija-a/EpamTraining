@@ -1,23 +1,23 @@
-package com.epam.jwd.context.impl;
+package com.epam.task01linear_algrorithms.context.impl;
 
-import com.epam.jwd.context.ApplicationMenu;
-import com.epam.jwd.domain.Point;
-import com.epam.jwd.domain.Triangle;
-import com.epam.jwd.service.Calculator;
-import com.epam.jwd.service.impl.CalculatorImpl;
-import com.epam.jwd.service.impl.PointServiceImpl;
-import com.epam.jwd.service.impl.TriangleServiceImpl;
+import com.epam.task01linear_algrorithms.context.ApplicationMenu;
+import com.epam.task01linear_algrorithms.domain.Point;
+import com.epam.task01linear_algrorithms.domain.Triangle;
+import com.epam.task01linear_algrorithms.service.Calculator;
+import com.epam.task01linear_algrorithms.service.impl.CalculatorImpl;
+import com.epam.task01linear_algrorithms.service.impl.PointServiceImpl;
+import com.epam.task01linear_algrorithms.service.impl.TriangleServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class TrueFalseMenu implements ApplicationMenu {
+public class ApplicationTrueFalseMenu implements ApplicationMenu {
 
-    protected static final TrueFalseMenu TRUE_FALSE_MENU = new TrueFalseMenu();
+    protected static final ApplicationTrueFalseMenu TRUE_FALSE_MENU = new ApplicationTrueFalseMenu();
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrueFalseMenu.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationTrueFalseMenu.class);
     private Calculator calculator = CalculatorImpl.CALCULATOR;
 
     @Override
@@ -25,16 +25,16 @@ public class TrueFalseMenu implements ApplicationMenu {
         LOGGER.info("Showing true false menu");
         byte input = -1;
         while (input != 0) {
-            System.out.println("1. The integer N is an even two-digit number.\n" +
-                    "2. The sum of the first two digits of a given four-digit number is equal to the sum of the last two digits.\n" +
-                    "3. The sum of the digits of a given three-digit number N is an even number.\n" +
-                    "4. A point with coordinates (x, y) belongs to the part of the plane lying between the straight lines x = t, x = n (t <n).\n" +
-                    "5. The square of a given three-digit number is equal to the cube of the sum of the digits of that number.\n" +
-                    "6. A triangle with sides a, b, c is isosceles.\n" +
-                    "7. The sum of any two digits of a given three-digit natural number N is equal to the third digit.\n" +
-                    "8. The specified number N is a power of a (the exponent can range from 0 to 4).\n" +
-                    "9. The graph of the function y = ax2 + bx + c passes through a given point with coordinates (m, n).\n" +
-                    "0. Back to main menu");
+            System.out.println("1. The integer N is an even two-digit number.\n"
+                    + "2. The sum of the first two digits of a given four-digit number is equal to the sum of the last two digits.\n"
+                    + "3. The sum of the digits of a given three-digit number N is an even number.\n"
+                    + "4. A point with coordinates (x, y) belongs to the part of the plane lying between the straight lines x = t, x = n (t <n).\n"
+                    + "5. The square of a given three-digit number is equal to the cube of the sum of the digits of that number.\n"
+                    + "6. A triangle with sides a, b, c is isosceles.\n"
+                    + "7. The sum of any two digits of a given three-digit natural number N is equal to the third digit.\n"
+                    + "8. The specified number N is a power of a (the exponent can range from 0 to 4).\n"
+                    + "9. The graph of the function y = ax2 + bx + c passes through a given point with coordinates (m, n).\n"
+                    + "0. Back to main menu");
             try {
                 LOGGER.info("Getting user input");
                 input = SCANNER.nextByte();
@@ -48,9 +48,9 @@ public class TrueFalseMenu implements ApplicationMenu {
     }
 
 
-
     @Override
     public void handleUserInput(byte input) {
+        LOGGER.info("Handling user input");
         int sum;
         double a;
         double b;
@@ -60,8 +60,8 @@ public class TrueFalseMenu implements ApplicationMenu {
         double m;
         double n;
         int digitsInNumber;
-        LOGGER.info("Handling user input");
         boolean result = false;
+
         switch (input) {
             case 1:
                 LOGGER.trace("User choose Case 1");

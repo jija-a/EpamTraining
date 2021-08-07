@@ -1,4 +1,4 @@
-package com.epam.jwd.domain;
+package com.epam.task01linear_algrorithms.domain;
 
 import java.util.Objects;
 

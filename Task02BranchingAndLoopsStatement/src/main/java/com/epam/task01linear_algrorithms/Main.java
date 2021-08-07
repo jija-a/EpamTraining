@@ -1,7 +1,7 @@
-package com.epam.jwd;
+package com.epam.task01linear_algrorithms;
 
-import com.epam.jwd.util.MessageConstant;
-import com.epam.jwd.util.MessageManager;
+import com.epam.task01linear_algrorithms.util.MessageConstant;
+import com.epam.task01linear_algrorithms.util.MessageManager;
 
 import java.util.Locale;
 

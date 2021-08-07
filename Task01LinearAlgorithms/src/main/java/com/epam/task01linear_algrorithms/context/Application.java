@@ -1,11 +1,11 @@
-package com.epam.jwd.context;
+package com.epam.task01linear_algrorithms.context;
 
-import com.epam.jwd.context.impl.DefaultMenu;
+import com.epam.task01linear_algrorithms.context.impl.ApplicationMainMenu;
 
 public interface Application {
 
     static void run() {
-        DefaultMenu.DEFAULT_MENU.printAvailableOptions();
+        ApplicationMainMenu.DEFAULT_MENU.printAvailableOptions();
     }
 
 }

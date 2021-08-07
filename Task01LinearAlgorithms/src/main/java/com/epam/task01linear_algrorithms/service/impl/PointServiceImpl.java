@@ -1,7 +1,7 @@
-package com.epam.jwd.service.impl;
+package com.epam.task01linear_algrorithms.service.impl;
 
-import com.epam.jwd.domain.Point;
-import com.epam.jwd.service.PointService;
+import com.epam.task01linear_algrorithms.domain.Point;
+import com.epam.task01linear_algrorithms.service.PointService;
 
 public class PointServiceImpl implements PointService {
 

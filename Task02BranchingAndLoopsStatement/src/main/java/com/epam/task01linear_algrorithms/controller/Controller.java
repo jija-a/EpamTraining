@@ -1,4 +1,4 @@
-package com.epam.jwd.controller;
+package com.epam.task01linear_algrorithms.controller;
 
 public class Controller {
 }

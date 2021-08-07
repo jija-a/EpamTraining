@@ -1,4 +1,4 @@
-package com.epam.jwd.service.impl;
+package com.epam.task01linear_algrorithms.service.impl;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -42,7 +42,6 @@ public class CalculatorImplTest {
     public void testEvenNumber(int a) {
         assertTrue(CalculatorImpl.CALCULATOR.isEvenNumber(a));
     }
-
 
     @Test(dataProvider = "incorrectDataForEvenNumber")
     public void testNotEvenNumber(int a) {

@@ -1,7 +1,7 @@
-package com.epam.jwd.service.impl;
+package com.epam.task01linear_algrorithms.service.impl;
 
-import com.epam.jwd.domain.Triangle;
-import com.epam.jwd.service.TriangleService;
+import com.epam.task01linear_algrorithms.domain.Triangle;
+import com.epam.task01linear_algrorithms.service.TriangleService;
 
 public class TriangleServiceImpl implements TriangleService {
 

@@ -1,4 +1,4 @@
-package com.epam.jwd.service;
+package com.epam.task01linear_algrorithms.service;
 
 public interface Calculator {
 

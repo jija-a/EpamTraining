@@ -1,4 +1,4 @@
-package com.epam.jwd.context.menu;
+package com.epam.task01linear_algrorithms.context.menu;
 
 public class MainMenu {
 }

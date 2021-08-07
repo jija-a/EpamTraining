@@ -1,4 +1,4 @@
-package com.epam.jwd.context;
+package com.epam.task01linear_algrorithms.context;
 
 public interface ApplicationMenu {
 

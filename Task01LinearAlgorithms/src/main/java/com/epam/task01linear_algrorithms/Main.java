@@ -1,6 +1,6 @@
-package com.epam.jwd;
+package com.epam.task01linear_algrorithms;
 
-import com.epam.jwd.context.Application;
+import com.epam.task01linear_algrorithms.context.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.plugin.dom.exception.InvalidStateException;
@@ -10,9 +10,9 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-//todo start info
-        LOGGER.debug("Start application");
+
         try {
+            LOGGER.info("Start application");
             Application.run();
         } catch (InvalidStateException e) {
             LOGGER.error("Failed to start application: ", e);

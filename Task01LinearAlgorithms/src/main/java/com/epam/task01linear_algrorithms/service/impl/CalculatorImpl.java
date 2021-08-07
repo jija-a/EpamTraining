@@ -1,6 +1,6 @@
-package com.epam.jwd.service.impl;
+package com.epam.task01linear_algrorithms.service.impl;
 
-import com.epam.jwd.service.Calculator;
+import com.epam.task01linear_algrorithms.service.Calculator;
 
 public class CalculatorImpl implements Calculator {
 

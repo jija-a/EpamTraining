@@ -1,32 +1,32 @@
-package com.epam.jwd.context.impl;
+package com.epam.task01linear_algrorithms.context.impl;
 
-import com.epam.jwd.context.ApplicationMenu;
-import com.epam.jwd.domain.Point;
-import com.epam.jwd.service.impl.CalculatorImpl;
-import com.epam.jwd.service.impl.PointServiceImpl;
+import com.epam.task01linear_algrorithms.context.ApplicationMenu;
+import com.epam.task01linear_algrorithms.domain.Point;
+import com.epam.task01linear_algrorithms.service.impl.CalculatorImpl;
+import com.epam.task01linear_algrorithms.service.impl.PointServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class DefaultMenu implements ApplicationMenu {
+public class ApplicationMainMenu implements ApplicationMenu {
 
-    public static final ApplicationMenu DEFAULT_MENU = new DefaultMenu();
+    public static final ApplicationMenu DEFAULT_MENU = new ApplicationMainMenu();
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMenu.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationMainMenu.class);
 
     @Override
     public void printAvailableOptions() {
         byte input = -1;
         while (input != 0) {
-            System.out.println("1. Find function c = a + 3" + "\n" +
-                    "2. Math avg and Geo avg" + "\n" +
-                    "3. Distance between two points" + "\n" +
-                    "4. Power a^8 and a^10" + "\n" +
-                    "5. True False menu" + "\n" +
-                    "0. Exit " + "\n" +
-                    "Enter option: ");
+            System.out.println("1. Find function c = a + 3" + "\n"
+                    + "2. Math avg and Geo avg" + "\n"
+                    + "3. Distance between two points" + "\n"
+                    + "4. Power a^8 and a^10" + "\n"
+                    + "5. True False menu" + "\n"
+                    + "0. Exit " + "\n"
+                    + "Enter option: ");
             try {
                 LOGGER.info("Getting input from user");
                 input = SCANNER.nextByte();
@@ -106,10 +106,10 @@ public class DefaultMenu implements ApplicationMenu {
                 break;
             case 5:
                 LOGGER.trace("User choose Case 5");
-                TrueFalseMenu.TRUE_FALSE_MENU.printAvailableOptions();
+                ApplicationTrueFalseMenu.TRUE_FALSE_MENU.printAvailableOptions();
                 break;
             case 0:
-                LOGGER.debug("Exiting application");
+                LOGGER.info("Exit application");
                 System.out.println("Exit...");
                 System.exit(-1);
                 break;
@@ -119,4 +119,5 @@ public class DefaultMenu implements ApplicationMenu {
         }
         System.out.println(result);
     }
+
 }
