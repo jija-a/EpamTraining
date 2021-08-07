@@ -19,7 +19,7 @@ public class DefaultMenu implements ApplicationMenu {
     @Override
     public void printAvailableOptions() {
         byte input = -1;
-        while (input != 6) {
+        while (input != 0) {
             System.out.println("1. Find function c = a + 3" + "\n" +
                     "2. Math avg and Geo avg" + "\n" +
                     "3. Distance between two points" + "\n" +

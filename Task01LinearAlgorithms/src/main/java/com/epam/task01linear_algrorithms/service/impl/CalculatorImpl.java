@@ -58,7 +58,6 @@ public class CalculatorImpl implements Calculator {
         return sum;
     }
 
-
     @Override
     public boolean isEvenNumber(double a) {
         return a % 2 == 0;

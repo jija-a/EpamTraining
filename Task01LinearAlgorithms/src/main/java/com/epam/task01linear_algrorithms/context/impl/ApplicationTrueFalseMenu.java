@@ -47,6 +47,8 @@ public class TrueFalseMenu implements ApplicationMenu {
         }
     }
 
+
+
     @Override
     public void handleUserInput(byte input) {
         int sum;

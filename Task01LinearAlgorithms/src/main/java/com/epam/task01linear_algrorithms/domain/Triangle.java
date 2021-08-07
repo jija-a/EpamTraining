@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Triangle {
 
-    final double a;
-    final double b;
-    final double c;
+    private final double a;
+    private final double b;
+    private final double c;
 
     public Triangle(double a, double b, double c) {
         this.a = a;
