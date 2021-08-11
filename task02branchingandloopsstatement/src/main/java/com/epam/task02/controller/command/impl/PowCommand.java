@@ -1,34 +1,25 @@
 package com.epam.task02.controller.command.impl;
 
-import com.epam.task02.context.ViewResolver;
+import com.epam.task02.context.util.InputReader;
 import com.epam.task02.controller.command.Command;
+import com.epam.task02.domain.ApplicationProperties;
+import com.epam.task02.service.impl.CalculatorImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class PowCommand implements Command {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PowCommand.class);
     private static final int QTY_OF_PARAMETERS = 3;
 
     @Override
-    public ViewResolver execute() {
+    public String execute() {
+        LOGGER.info("executing pow command");
+        List<Double> values = InputReader.readInput(ApplicationProperties.APPLICATION_PROPERTIES.getInputType(), QTY_OF_PARAMETERS);
 
-        ViewResolver resolver = new ViewResolver();
-        StringBuilder output = new StringBuilder();
-
-        List<Double> values = resolver.getInput(QTY_OF_PARAMETERS);
-
-        for (double value : values) {
-            if (value > -1) {
-                value = value * value;
-            } else {
-                value = Math.pow(value, 4);
-            }
-            output.append(value).append(" ");
-        }
-
-        resolver.setOutput(String.valueOf(output));
-
-        return resolver;
+        return String.valueOf(CalculatorImpl.CALCULATOR.powValues(values));
     }
 
 }

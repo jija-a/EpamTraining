@@ -1,21 +1,24 @@
 package com.epam.task02.context.impl;
 
 import com.epam.task02.context.ApplicationMenu;
+import com.epam.task02.context.util.InputReader;
 import com.epam.task02.controller.Controller;
-import com.epam.task02.controller.command.CommandType;
+import com.epam.task02.controller.command.CommandName;
 import com.epam.task02.util.MessageConstant;
 import com.epam.task02.util.MessageManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class ApplicationBranchingMenuImpl implements ApplicationMenu {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationBranchingMenuImpl.class);
     public static final ApplicationMenu APPLICATION_BRANCHING_MENU = new ApplicationBranchingMenuImpl();
-    private static final Scanner SCANNER = new Scanner(System.in);
 
     @Override
     public void printAvailableOptions() {
+        LOGGER.trace("printing available options");
         int input = -1;
         while (input != 0) {
             System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.TASK_BRANCHING)
@@ -26,32 +29,34 @@ public class ApplicationBranchingMenuImpl implements ApplicationMenu {
                     + "\n5. " + MessageManager.INSTANCE.getMessage(MessageConstant.TASK_BRANCHING_FUNCTION)
                     + "\n0. " + MessageManager.INSTANCE.getMessage(MessageConstant.MAIN_GO_BACK));
             try {
-                input = SCANNER.nextInt();
+                input = InputReader.readInteger();
                 handleUserInput(input);
             } catch (InputMismatchException e) {
+                LOGGER.trace("input mismatch from user", e);
                 System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.UNKNOWN_COMMAND));
-                SCANNER.nextLine();
+                InputReader.readLine();
             }
         }
     }
 
     @Override
     public void handleUserInput(int input) {
+        LOGGER.info("handling user input");
         switch (input) {
             case 1:
-                System.out.println(Controller.CONTROLLER.handleRequest(CommandType.COMPARE_TWO_NUMBERS));
+                System.out.println(Controller.CONTROLLER.handleRequest(CommandName.COMPARE_TWO_NUMBERS));
                 break;
             case 2:
-                System.out.println(Controller.CONTROLLER.handleRequest(CommandType.POW_COMMAND));
+                System.out.println(Controller.CONTROLLER.handleRequest(CommandName.POW));
                 break;
             case 3:
-                System.out.println(Controller.CONTROLLER.handleRequest(CommandType.REPLACEMENT_COMMAND));
+                System.out.println(Controller.CONTROLLER.handleRequest(CommandName.REPLACEMENT));
                 break;
             case 4:
-                System.out.println(Controller.CONTROLLER.handleRequest(CommandType.MAX_MIN_COMMAND));
+                System.out.println(Controller.CONTROLLER.handleRequest(CommandName.MAX_MIN));
                 break;
             case 5:
-
+                System.out.println(Controller.CONTROLLER.handleRequest(CommandName.BRANCHING_FUNCTION));
                 break;
             case 0:
                 System.out.println(MessageManager.INSTANCE.getMessage(MessageConstant.MAIN_GO_BACK) + "...");

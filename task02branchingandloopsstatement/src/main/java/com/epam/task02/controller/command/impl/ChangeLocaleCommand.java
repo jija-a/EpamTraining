@@ -1,20 +1,22 @@
 package com.epam.task02.controller.command.impl;
 
-import com.epam.task02.context.ViewResolver;
 import com.epam.task02.controller.command.Command;
 import com.epam.task02.util.MessageManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 
 public class ChangeLocaleCommand implements Command {
 
-    private final Locale en = new Locale("en", "US");
-    private final Locale ru = new Locale("ru", "RU");
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChangeLocaleCommand.class);
+
+    private static final Locale en = new Locale("en", "US");
+    private static final Locale ru = new Locale("ru", "RU");
 
     @Override
-    public ViewResolver execute() {
-
-        ViewResolver resolver = new ViewResolver();
+    public String execute() {
+        LOGGER.info("executing changing locale command");
 
         if (MessageManager.INSTANCE.getLocale().equals(en)) {
             MessageManager.INSTANCE.changeLocale(ru);
@@ -22,8 +24,7 @@ public class ChangeLocaleCommand implements Command {
             MessageManager.INSTANCE.changeLocale(en);
         }
 
-        resolver.setOutput("Locale changed");
-        return resolver;
+        return "locale changed";
     }
 
 }

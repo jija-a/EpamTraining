@@ -1,18 +1,15 @@
 package com.epam.task02.controller.command.impl;
 
-import com.epam.task02.context.ViewResolver;
 import com.epam.task02.controller.command.Command;
+import com.epam.task02.util.MessageConstant;
+import com.epam.task02.util.MessageManager;
 
 public class NoSuchCommandCommand implements Command {
 
     @Override
-    public ViewResolver execute() {
+    public String execute() {
 
-        ViewResolver resolver = new ViewResolver();
-        //todo
-        resolver.setOutput("No such command");
-
-        return resolver;
+        return MessageManager.INSTANCE.getMessage(MessageConstant.UNKNOWN_COMMAND);
     }
 
 }
