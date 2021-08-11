@@ -11,6 +11,7 @@
     <modules>
         <module>Task01LinearAlgorithms</module>
         <module>Task02BranchingAndLoopsStatement</module>
+        <module>task03arraysdecompositionla</module>
     </modules>
 
     <properties>

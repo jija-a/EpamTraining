@@ -1,0 +1,6 @@
+#rows;columns;{value,value,...,value}
+#rows;columns;{value,value,...,value}
+#...
+1;2;{1,2}
+2;2;{2,2,3,4}
+2;3;{1,2,3,4,5,6}
