@@ -1,4 +1,4 @@
-package by.alex.task03.service;
+package by.alex.task03.exception;
 
 public class ServiceException extends RuntimeException {
 

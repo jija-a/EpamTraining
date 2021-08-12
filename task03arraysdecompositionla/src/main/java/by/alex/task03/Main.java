@@ -1,22 +1,26 @@
 package by.alex.task03;
 
-import by.alex.task03.context.impl.ApplicationContextImpl;
-import by.alex.task03.context.impl.ReadArrayFile;
-import by.alex.task03.context.impl.ReadMatrixFile;
-import by.alex.task03.domain.Matrix;
-import by.alex.task03.domain.MatrixException;
+import by.alex.task03.context.Application;
+import by.alex.task03.exception.InvalidStateException;
+import by.alex.task03.service.ArrayService;
+import by.alex.task03.service.impl.ArrayServiceImpl;
 
-import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) throws MatrixException, IOException {
-         ReadMatrixFile readMatrixFile = new ReadMatrixFile();
-        readMatrixFile.read("C:\\Users\\Lenovo\\IdeaProjects\\EpamTasks\\task03arraysdecompositionla\\src\\main\\resources\\input\\matrix.txt");
-        System.out.println(ApplicationContextImpl.APPLICATION_CONTEXT.retrieveBaseEntityList(Matrix.class));
-        ReadArrayFile readArrayFile = new ReadArrayFile();
-        readArrayFile.read("C:\\Users\\Lenovo\\IdeaProjects\\EpamTasks\\task03arraysdecompositionla\\src\\main\\resources\\input\\array.txt");
-        //Application.start();
+    public static void main(String[] args) {
+
+        /*try {
+            Application.start();
+        } catch (InvalidStateException e) {
+            System.out.println("Invalid state of application, exiting...");
+            System.exit(0);
+        }*/
+
+        ArrayServiceImpl arrayService = new ArrayServiceImpl();
+        System.out.println(Arrays.toString(arrayService.generateRandomArray()));
+
     }
 
 }

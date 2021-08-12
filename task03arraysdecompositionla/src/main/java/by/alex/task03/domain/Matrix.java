@@ -1,13 +1,15 @@
 package by.alex.task03.domain;
 
+import by.alex.task03.exception.MatrixException;
+
 import java.util.Arrays;
 
 public class Matrix extends AbstractBaseEntity {
 
-    private final int[][] values;
+    private final double[][] values;
 
     public Matrix(int rows, int columns) {
-        values = new int[rows][columns];
+        values = new double[rows][columns];
     }
 
     public int getRows() {
@@ -18,14 +20,14 @@ public class Matrix extends AbstractBaseEntity {
         return values[0].length;
     }
 
-    public int getElement(int row, int column) throws MatrixException {
+    public double getElement(int row, int column) throws MatrixException {
         if (checkRange(row, column)) {
             return values[row][column];
         }
         throw new MatrixException("incompatible range of matrix");
     }
 
-    public void setElement(int i, int j, int value) throws MatrixException {
+    public void setElement(int i, int j, double value) throws MatrixException {
         if (checkRange(i, j)) {
             values[i][j] = value;
         } else {
@@ -57,8 +59,8 @@ public class Matrix extends AbstractBaseEntity {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("\nMatrix : " + values.length + "x" + values[0].length + "\n");
-        for (int[] row : values) {
-            for (int value : row) {
+        for (double[] row : values) {
+            for (double value : row) {
                 s.append(value + " ");
             }
             s.append("\n");

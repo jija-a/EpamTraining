@@ -1,6 +1,8 @@
 package by.alex.task03.domain;
 
-public interface BaseEntity {
+import java.io.Serializable;
+
+public interface BaseEntity extends Serializable, Cloneable {
 
     Long getId();
 

@@ -1,21 +1,21 @@
 package by.alex.task03.context.impl;
 
-import by.alex.task03.context.ReadBaseEntityFile;
+import by.alex.task03.context.BaseEntityFileReader;
 import by.alex.task03.domain.Matrix;
 import by.alex.task03.service.ServiceFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class ReadMatrixFile implements ReadBaseEntityFile {
+public class MatrixFileReader implements BaseEntityFileReader {
 
     @Override
     public void read(String filePath) throws IOException {
         Scanner scanner = new Scanner(new File(filePath));
-        if (!scanner.hasNextLine()) throw new IllegalArgumentException("Non readable file");
+        if (!scanner.hasNextLine()) {
+            throw new IllegalArgumentException("Non readable file");
+        }
 
         scanner.nextLine();
         scanner.nextLine();
@@ -27,17 +27,17 @@ public class ReadMatrixFile implements ReadBaseEntityFile {
             int rows = Integer.parseInt(fileLineSplit[0]);
             int columns = Integer.parseInt(fileLineSplit[1]);
 
-            String valuesSplit = fileLineSplit[2].substring(1, fileLineSplit[2].length() - 1);
+            String valuesSubstring = fileLineSplit[2].substring(1, fileLineSplit[2].length() - 1);
+            String[] valuesLine = valuesSubstring.split(",", rows * columns);
 
-            String[] values = valuesSplit.split(",", rows * columns);
-
-            List<Integer> list = new ArrayList<>();
-            for (int i = 0; i <= values.length - 1; i++) {
-                list.add(Integer.valueOf(values[i]));
+            double[][] matrixValues = new double[rows][columns];
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    matrixValues[i][j] = Double.parseDouble(valuesLine[i + j]);
+                }
             }
-
             Matrix matrix = ServiceFactory.getInstance().getMatrixService().createMatrix(rows, columns);
-            ServiceFactory.getInstance().getMatrixService().fillFromFile(matrix, list);
+            ServiceFactory.getInstance().getMatrixService().fillMatrixWithValues(matrix, matrixValues);
         }
         scanner.close();
     }
