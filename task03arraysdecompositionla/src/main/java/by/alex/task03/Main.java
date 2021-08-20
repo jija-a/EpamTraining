@@ -9,7 +9,6 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-    //todo tests
     public static void main(String[] args) {
 
         try {
@@ -21,5 +20,6 @@ public class Main {
             System.exit(0);
         }
     }
+
 
 }

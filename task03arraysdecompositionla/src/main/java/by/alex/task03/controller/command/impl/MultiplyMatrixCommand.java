@@ -3,7 +3,6 @@ package by.alex.task03.controller.command.impl;
 import by.alex.task03.controller.command.Command;
 import by.alex.task03.domain.Matrix;
 import by.alex.task03.service.MatrixService;
-import by.alex.task03.service.ServiceException;
 import by.alex.task03.service.ServiceFactory;
 import by.alex.task03.util.ConsoleWriter;
 import by.alex.task03.util.InputReader;
@@ -41,13 +40,8 @@ public class MultiplyMatrixCommand implements Command {
         if (firstMatrix.isEmpty() || secondMatrix.isEmpty()) {
             ConsoleWriter.writeln(messageManager.getMessage(MessageConstant.OUTPUT_ERROR_MATRIX_NOT_FOUND));
         } else {
-            try {
-                Matrix resultMatrix = matrixService.multiply(firstMatrix.get(), secondMatrix.get());
-                ConsoleWriter.writeln(resultMatrix.toString());
-            } catch (IllegalArgumentException e) {
-                LOGGER.trace("Wrong arguments for multiplying");
-                ConsoleWriter.writeln(messageManager.getMessage(MessageConstant.OUTPUT_ERROR_WRONG_ARGUMENTS));
-            }
+            Matrix resultMatrix = matrixService.multiply(firstMatrix.get(), secondMatrix.get());
+            ConsoleWriter.writeln(resultMatrix.toString());
         }
     }
 

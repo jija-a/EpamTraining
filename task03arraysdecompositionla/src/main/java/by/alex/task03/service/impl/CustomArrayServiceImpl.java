@@ -31,7 +31,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void bubbleSort(CustomArray customArray) throws ServiceException {
+    public void bubbleSort(CustomArray customArray) {
         LOGGER.trace("Executing bubble sort");
 
         int size = customArray.getSize();
@@ -49,7 +49,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void shakerSort(CustomArray customArray) throws ServiceException {
+    public void shakerSort(CustomArray customArray) {
         LOGGER.trace("Executing shaker sort");
 
         boolean swapped = true;
@@ -80,7 +80,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void selectionSort(CustomArray customArray) throws ServiceException {
+    public void selectionSort(CustomArray customArray) {
         LOGGER.trace("Executing selection sort");
 
         int n = customArray.getSize();
@@ -96,7 +96,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void insertionSort(CustomArray customArray) throws ServiceException {
+    public void insertionSort(CustomArray customArray) {
         LOGGER.trace("Executing insertion sort");
 
         int n = customArray.getSize();
@@ -113,7 +113,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void mergeSort(CustomArray customArray) throws ServiceException {
+    public void mergeSort(CustomArray customArray) {
         LOGGER.trace("Executing merge sort");
 
         mergesort(customArray, 0, customArray.getSize() - 1);
@@ -146,7 +146,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void shellSort(CustomArray customArray) throws ServiceException {
+    public void shellSort(CustomArray customArray) {
         LOGGER.trace("Executing Shell sort");
 
         int size = customArray.getSize();
@@ -163,7 +163,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void externalSort(CustomArray customArray) throws ServiceException {
+    public void externalSort(CustomArray customArray) {
         LOGGER.trace("Executing external sort");
 
     }
@@ -175,13 +175,9 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     }
 
     @Override
-    public void fillArray(CustomArray array, double[] values) throws ServiceException {
+    public void fillArray(CustomArray array, double[] values) {
         LOGGER.trace("Filling array with values");
 
-        if (values.length < 1) {
-            LOGGER.warn("Can't be 0 values while creating array");
-            throw new ServiceException("Can't be 0 values while creating array");
-        }
         for (int i = 0; i < array.getSize(); i++) {
             array.setValue(i, values[i]);
         }

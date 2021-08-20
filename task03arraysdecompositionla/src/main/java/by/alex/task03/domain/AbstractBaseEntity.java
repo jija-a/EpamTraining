@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public abstract class AbstractBaseEntity implements BaseEntity {
 
-    private final Long id;
+    private final long id;
     private static Long idCounter = 0L;
 
     public AbstractBaseEntity() {

@@ -40,13 +40,8 @@ public class SumMatrixCommand implements Command {
         if (firstMatrix.isEmpty() || secondMatrix.isEmpty()) {
             ConsoleWriter.writeln(messageManager.getMessage(MessageConstant.OUTPUT_ERROR_MATRIX_NOT_FOUND));
         } else {
-            try {
-                Matrix resultMatrix = matrixService.sum(firstMatrix.get(), secondMatrix.get());
-                ConsoleWriter.writeln(resultMatrix.toString());
-            } catch (IllegalArgumentException e) {
-                LOGGER.trace("Wrong arguments for sum");
-                ConsoleWriter.writeln(messageManager.getMessage(MessageConstant.OUTPUT_ERROR_WRONG_ARGUMENTS));
-            }
+            Matrix resultMatrix = matrixService.sum(firstMatrix.get(), secondMatrix.get());
+            ConsoleWriter.writeln(resultMatrix.toString());
         }
     }
 

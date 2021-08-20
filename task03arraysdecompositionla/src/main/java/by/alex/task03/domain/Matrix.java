@@ -18,27 +18,12 @@ public class Matrix extends AbstractBaseEntity {
         return values[0].length;
     }
 
-    public double getElement(int row, int column) throws MatrixException {
-        if (checkRange(row, column)) {
-            return values[row][column];
-        }
-        throw new MatrixException("incompatible range of matrix");
+    public double getElement(int row, int column) {
+        return values[row][column];
     }
 
-    public void setElement(int i, int j, double value) throws MatrixException {
-        if (checkRange(i, j)) {
-            values[i][j] = value;
-        } else {
-            throw new MatrixException("incompatible range of matrix");
-        }
-    }
-
-    private boolean checkRange(int rows, int columns) {
-        if (rows >= 0 && rows < values.length && columns >= 0 && columns < values[0].length) {
-            return true;
-        } else {
-            return false;
-        }
+    public void setElement(int i, int j, double value) {
+        values[i][j] = value;
     }
 
     @Override

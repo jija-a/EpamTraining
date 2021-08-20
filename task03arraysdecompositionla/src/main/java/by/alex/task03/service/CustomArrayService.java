@@ -25,7 +25,7 @@ public interface CustomArrayService {
 
     void externalSort(CustomArray customArray);
 
-    void fillArray(CustomArray array, double[] values) throws ServiceException;
+    void fillArray(CustomArray array, double[] values);
 
     void fillArrayWithRandomValues(CustomArray array, int start, int end);
 

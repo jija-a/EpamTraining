@@ -11,16 +11,16 @@ public interface MatrixService {
 
     List<Matrix> findAllMatrix();
 
-    void fillRandomized(Matrix matrix, int start, int end) throws ServiceException;
+    void fillRandomized(Matrix matrix, int start, int end);
 
-    void fillMatrixWithValues(Matrix matrix, double[][] values) throws ServiceException;
+    void fillMatrixWithValues(Matrix matrix, double[][] values);
 
-    Matrix multiply(Matrix firstMatrix, Matrix secondMatrix) throws ServiceException, IllegalArgumentException;
+    Matrix multiply(Matrix firstMatrix, Matrix secondMatrix) throws ServiceException;
 
-    Matrix sum(Matrix firstMatrix, Matrix secondMatrix) throws ServiceException, IllegalArgumentException;
+    Matrix sum(Matrix firstMatrix, Matrix secondMatrix) throws ServiceException;
 
-    Matrix subtract(Matrix firstMatrix, Matrix secondMatrix) throws ServiceException, IllegalArgumentException;
+    Matrix subtract(Matrix firstMatrix, Matrix secondMatrix) throws ServiceException;
 
-    Matrix transpose(Matrix matrix) throws ServiceException;
+    Matrix transpose(Matrix matrix);
 
 }
