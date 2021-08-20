@@ -1,7 +1,7 @@
-package by.alex.task03.context;
+package by.alex.task03.dao;
 
-import by.alex.task03.context.impl.ArrayFileReader;
-import by.alex.task03.context.impl.MatrixFileReader;
+import by.alex.task03.dao.impl.ArrayFileReader;
+import by.alex.task03.dao.impl.MatrixFileReader;
 
 public class EntityReaderFactory {
 

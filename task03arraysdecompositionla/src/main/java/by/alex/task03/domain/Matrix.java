@@ -1,7 +1,5 @@
 package by.alex.task03.domain;
 
-import by.alex.task03.exception.MatrixException;
-
 import java.util.Arrays;
 
 public class Matrix extends AbstractBaseEntity {
@@ -58,7 +56,7 @@ public class Matrix extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("\nMatrix : " + values.length + "x" + values[0].length + "\n");
+        StringBuilder s = new StringBuilder("\nMatrix : id=" + getId() + " " + values.length + "x" + values[0].length + "\n");
         for (double[] row : values) {
             for (double value : row) {
                 s.append(value + " ");

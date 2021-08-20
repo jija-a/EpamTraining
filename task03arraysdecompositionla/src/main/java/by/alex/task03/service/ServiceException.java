@@ -1,4 +1,4 @@
-package by.alex.task03.exception;
+package by.alex.task03.service;
 
 public class ServiceException extends RuntimeException {
 
@@ -16,4 +16,5 @@ public class ServiceException extends RuntimeException {
     public ServiceException(Throwable cause) {
         super(cause);
     }
+
 }

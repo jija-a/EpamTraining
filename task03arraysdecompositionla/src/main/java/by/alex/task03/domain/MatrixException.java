@@ -1,4 +1,4 @@
-package by.alex.task03.exception;
+package by.alex.task03.domain;
 
 public class MatrixException extends Exception {
 

@@ -6,16 +6,16 @@ import org.slf4j.LoggerFactory;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class MessageManagerUtil {
+public class MessageManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessageManagerUtil.class);
-    public static final MessageManagerUtil INSTANCE = new MessageManagerUtil();
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageManager.class);
+    public static final MessageManager INSTANCE = new MessageManager();
 
     private final String resources = "ui_language";
     private ResourceBundle resourceBundle;
 
 
-    private MessageManagerUtil() {
+    private MessageManager() {
         LOGGER.debug("Initializing Message Manager");
         resourceBundle = ResourceBundle.getBundle(resources, Locale.getDefault());
     }

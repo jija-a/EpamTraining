@@ -1,8 +1,11 @@
-package by.alex.task03.context.impl;
+package by.alex.task03.dao.impl;
 
-import by.alex.task03.context.BaseEntityFileReader;
+import by.alex.task03.dao.BaseEntityFileReader;
 import by.alex.task03.domain.Matrix;
+import by.alex.task03.domain.factory.impl.MatrixFactoryImpl;
 import by.alex.task03.service.ServiceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,10 +13,15 @@ import java.util.Scanner;
 
 public class MatrixFileReader implements BaseEntityFileReader {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MatrixFileReader.class);
+
     @Override
     public void read(String filePath) throws IOException {
+        LOGGER.info("Reading matrix file");
+
         Scanner scanner = new Scanner(new File(filePath));
         if (!scanner.hasNextLine()) {
+            LOGGER.error("Non readable matrix file");
             throw new IllegalArgumentException("Non readable file");
         }
 
@@ -36,9 +44,10 @@ public class MatrixFileReader implements BaseEntityFileReader {
                     matrixValues[i][j] = Double.parseDouble(valuesLine[i + j]);
                 }
             }
-            Matrix matrix = ServiceFactory.getInstance().getMatrixService().createMatrix(rows, columns);
+            Matrix matrix = MatrixFactoryImpl.ENTITY_FACTORY.create(rows, columns);
             ServiceFactory.getInstance().getMatrixService().fillMatrixWithValues(matrix, matrixValues);
         }
+
         scanner.close();
     }
 
