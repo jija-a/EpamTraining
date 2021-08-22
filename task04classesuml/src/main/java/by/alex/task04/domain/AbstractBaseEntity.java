@@ -1,4 +1,4 @@
-package by.alex.task03.domain;
+package by.alex.task04.domain;
 
 import java.util.Objects;
 
