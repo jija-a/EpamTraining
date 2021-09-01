@@ -8,12 +8,11 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class ApplicationConfig {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
     public static final ApplicationConfig APPLICATION_CONFIG = new ApplicationConfig();
 
     private static String inputDir;
-    private static String accountFileName;
+    private static String accountsFileName;
 
     private ApplicationConfig() {
     }
@@ -23,7 +22,7 @@ public class ApplicationConfig {
         try {
             ResourceBundle rb = ResourceBundle.getBundle("application");
             inputDir = rb.getString("application.input_dir");
-            accountFileName = rb.getString("application.account_file_name");
+            accountsFileName = rb.getString("application.account_file_name");
         } catch (ExceptionInInitializerError | MissingResourceException e) {
             LOGGER.error("Error while initializing application configuration", e);
             throw new InitializingException("Error while initializing application configuration", e);
@@ -34,8 +33,8 @@ public class ApplicationConfig {
         return inputDir;
     }
 
-    public static String getAccountFileName() {
-        return accountFileName;
+    public static String getAccountsFileName() {
+        return accountsFileName;
     }
 
 }

@@ -16,14 +16,7 @@ public class Controller {
 
         CommandFactory type = new CommandFactory();
         Command command = type.getCommand(commandName);
-
-        /*try {
-            command.execute();
-        } catch (ServiceException e) {
-            LOGGER.error("Service exception: ", e);
-            ConsoleWriter.writeln(MessageManager.INSTANCE.getMessage(MessageConstant.OUTPUT_ERROR_WRONG_ARGUMENTS));
-        }*/
-
+        command.execute();
     }
 
 }

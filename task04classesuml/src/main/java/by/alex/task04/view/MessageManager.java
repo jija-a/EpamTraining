@@ -1,4 +1,4 @@
-package by.alex.task04.util;
+package by.alex.task04.view;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

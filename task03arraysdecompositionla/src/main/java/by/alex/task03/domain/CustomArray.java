@@ -43,3 +43,16 @@ public class CustomArray extends AbstractBaseEntity {
                 "}\n";
     }
 }
+/*
+public class AddItemService <T extends Number>  {
+    private static <T extends Number> T calc (Item<T> arg1, Item<T> arg2){
+        double a1 = arg1.getValue().doubleValue();
+        double a2 = arg2.getValue().doubleValue();
+        double res = a1 + a2;
+
+        if (arg1.value instanceof Double) {
+            return (T) new Double(res);
+        } else if (arg1.value instanceof Integer) {
+            return (T) new Integer((int)res);
+...
+*/

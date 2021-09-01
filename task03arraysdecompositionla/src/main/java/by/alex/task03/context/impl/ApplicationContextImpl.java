@@ -39,6 +39,7 @@ public class ApplicationContextImpl implements ApplicationContext {
         return collection;
     }
 
+    //todo service command
     @Override
     public void init() throws InitializingException {
         LOGGER.info("Initializing application context");

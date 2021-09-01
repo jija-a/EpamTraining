@@ -31,12 +31,12 @@ public class Matrix extends AbstractBaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Matrix matrix = (Matrix) o;
-        return Arrays.equals(values, matrix.values);
+        return Arrays.deepEquals(values, matrix.values);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(values);
+        return Arrays.deepHashCode(values);
     }
 
     @Override

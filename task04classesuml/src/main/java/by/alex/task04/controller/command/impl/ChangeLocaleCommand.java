@@ -1,7 +1,7 @@
 package by.alex.task04.controller.command.impl;
 
 import by.alex.task04.controller.command.Command;
-import by.alex.task04.util.MessageManager;
+import by.alex.task04.view.MessageManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,6 @@
 package by.alex.task04.domain;
 
-public enum AccountStatus implements BaseEntity {
-
+public enum AccountStatus {
     BLOCKED(1L),
     ACTIVE(2L);
 
@@ -11,16 +10,17 @@ public enum AccountStatus implements BaseEntity {
         this.id = id;
     }
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return "AccountStatus{" +
-                "id=" + id +
-                '}';
+    public static AccountStatus resolveStatusById(Long id) throws UnknownEntityException {
+        for (AccountStatus status : AccountStatus.values()) {
+            if (status.getId().equals(id)) {
+                return status;
+            }
+        }
+        throw new UnknownEntityException("Unknown status id: " + id);
     }
 
 }

@@ -2,7 +2,7 @@ package by.alex.task03.dao.impl;
 
 import by.alex.task03.dao.BaseEntityFileReader;
 import by.alex.task03.domain.Matrix;
-import by.alex.task03.domain.factory.impl.MatrixFactoryImpl;
+import by.alex.task04.service.factory.impl.MatrixFactoryImpl;
 import by.alex.task03.service.ServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

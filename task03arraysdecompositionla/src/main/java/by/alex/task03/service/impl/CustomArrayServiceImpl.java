@@ -52,27 +52,28 @@ public class CustomArrayServiceImpl implements CustomArrayService {
     public void shakerSort(CustomArray customArray) {
         LOGGER.trace("Executing shaker sort");
 
-        boolean swapped = true;
+        //todo index last swapped element
+        boolean isSwapped = true;
         int start = 0;
         int size = customArray.getSize();
 
-        while (swapped) {
-            swapped = false;
+        while (isSwapped) {
+            isSwapped = false;
             for (int i = start; i < size - 1; ++i) {
                 if (customArray.getValue(i) > customArray.getValue(i + 1)) {
                     swap(customArray, i, i + 1);
-                    swapped = true;
+                    isSwapped = true;
                 }
             }
-            if (!swapped) {
+            if (!isSwapped) {
                 break;
             }
-            swapped = false;
+            isSwapped = false;
             size--;
             for (int i = size - 1; i >= start; i--) {
                 if (customArray.getValue(i) > customArray.getValue(i + 1)) {
                     swap(customArray, i, i + 1);
-                    swapped = true;
+                    isSwapped = true;
                 }
             }
             start++;

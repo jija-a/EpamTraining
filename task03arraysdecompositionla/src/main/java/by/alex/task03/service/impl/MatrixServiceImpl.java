@@ -2,10 +2,10 @@ package by.alex.task03.service.impl;
 
 import by.alex.task03.context.impl.ApplicationContextImpl;
 import by.alex.task03.domain.Matrix;
-import by.alex.task03.domain.factory.impl.MatrixFactoryImpl;
+import by.alex.task04.service.factory.impl.MatrixFactoryImpl;
 import by.alex.task03.service.MatrixService;
 import by.alex.task03.service.ServiceException;
-import by.alex.task03.validator.MatrixValidator;
+import by.alex.task03.service.validator.MatrixValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

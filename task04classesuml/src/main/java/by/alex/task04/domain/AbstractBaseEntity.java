@@ -1,8 +1,9 @@
 package by.alex.task04.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class AbstractBaseEntity implements BaseEntity {
+public abstract class AbstractBaseEntity implements Serializable, Cloneable {
 
     private final long id;
     private static Long idCounter = 0L;
@@ -11,7 +12,6 @@ public abstract class AbstractBaseEntity implements BaseEntity {
         this.id = ++idCounter;
     }
 
-    @Override
     public Long getId() {
         return id;
     }

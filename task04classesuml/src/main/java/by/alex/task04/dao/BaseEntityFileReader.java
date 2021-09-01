@@ -1,8 +1,11 @@
 package by.alex.task04.dao;
 
+import by.alex.task04.domain.AbstractBaseEntity;
+
 import java.io.IOException;
+import java.util.List;
 
-public interface BaseEntityFileReader {
+public interface BaseEntityFileReader<T extends AbstractBaseEntity> {
 
-    void read(String filePath) throws IOException;
+    List<T> read(String filePath) throws IOException;
 }

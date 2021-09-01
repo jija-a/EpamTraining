@@ -13,6 +13,7 @@
         <module>Task02BranchingAndLoopsStatement</module>
         <module>task03arraysdecompositionla</module>
         <module>task04classesuml</module>
+        <module>demothreads</module>
     </modules>
 
     <properties>
