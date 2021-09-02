@@ -11,13 +11,13 @@ public class PriorityRunner {
         PriorityThread max = new PriorityThread("Max");
         PriorityThread norm = new PriorityThread("Norm");
 
-        //priorityThread();
-        priorityWithSleepThread(min, max, norm);
+        //priorityThread(min, max, norm);
+        priorityWithJoinThread(min, max, norm);
 
         System.out.println("Thread '" + Thread.currentThread().getName() + "' end");
     }
 
-    private static void priorityWithSleepThread(Thread min, Thread max, Thread norm) {
+    private static void priorityWithJoinThread(Thread min, Thread max, Thread norm) {
         min.setPriority(Thread.MIN_PRIORITY);
         max.setPriority(Thread.MAX_PRIORITY);
         norm.setPriority(Thread.NORM_PRIORITY);
