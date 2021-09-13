@@ -1,13 +1,11 @@
 package service.validator;
 
 import domain.Limit;
-import domain.Matrix;
 
 public class MatrixValidator {
 
-    public static boolean validateLimit(Matrix matrix, Limit limit) {
+    public static boolean validateLimit(int matrixSize, Limit limit) {
 
-        int matrixSize = matrix.getColumns();
         return matrixSize >= limit.getLowerLimit() && matrixSize <= limit.getHigherLimit();
     }
 

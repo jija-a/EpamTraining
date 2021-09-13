@@ -19,7 +19,7 @@ public class MatrixLockFillCommand implements Command {
     public void execute() throws ServiceException {
 
         Matrix matrix = service.readMatrix();
-        service.fillMatrixWithLockThread();
+        service.fillMatrixWithLockThread(matrix);
 
         ConsoleWriter.write(matrix.toString());
     }

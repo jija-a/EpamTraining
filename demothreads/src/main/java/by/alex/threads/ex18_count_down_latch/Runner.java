@@ -17,7 +17,7 @@ public class Runner {
             Task t = new Task("Task ##" + i);
             student2.addTask(t);
         }
-        ArrayList<Student> lst = new ArrayList<Student>();
+        ArrayList<Student> lst = new ArrayList<>();
         lst.add(student1);
         lst.add(student2);
         Tutor tutor = new Tutor(lst);

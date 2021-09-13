@@ -36,7 +36,7 @@ public class ApplicationMenuImpl implements ApplicationMenu {
                 Controller.CONTROLLER.handleRequest(CommandName.MATRIX_SEMAPHORE_FILL);
                 break;
             case 0:
-                System.exit(-1);
+                System.exit(0);
                 break;
         }
     }

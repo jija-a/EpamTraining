@@ -6,11 +6,11 @@ public interface MatrixService {
 
     Matrix readMatrix() throws ServiceException;
 
-    void fillMatrixWithCountdownThread();
+    void fillMatrixWithCountdownThread(Matrix matrix);
 
-    void fillMatrixWithLockThread();
+    void fillMatrixWithLockThread(Matrix matrix);
 
-    void fillMatrixWithPhaseThread();
+    void fillMatrixWithPhaseThread(Matrix matrix);
 
-    void fillMatrixWithSemaphoreThread();
+    void fillMatrixWithSemaphoreThread(Matrix matrix);
 }

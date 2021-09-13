@@ -19,7 +19,7 @@ public class MatrixSemaphoreFillCommand implements Command {
     public void execute() throws ServiceException {
 
         Matrix matrix = service.readMatrix();
-        service.fillMatrixWithSemaphoreThread();
+        service.fillMatrixWithSemaphoreThread(matrix);
 
         ConsoleWriter.write(matrix.toString());
     }

@@ -19,7 +19,7 @@ public class MatrixPhaserFillCommand implements Command {
     public void execute() throws ServiceException {
 
         Matrix matrix = service.readMatrix();
-        service.fillMatrixWithPhaseThread();
+        service.fillMatrixWithPhaseThread(matrix);
 
         ConsoleWriter.write(matrix.toString());
     }

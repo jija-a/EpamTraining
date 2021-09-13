@@ -19,7 +19,7 @@ public class MatrixCountdownFillCommand implements Command {
     public void execute() throws ServiceException {
 
         Matrix matrix = service.readMatrix();
-        service.fillMatrixWithCountdownThread();
+        service.fillMatrixWithCountdownThread(matrix);
 
         ConsoleWriter.write(matrix.toString());
     }
