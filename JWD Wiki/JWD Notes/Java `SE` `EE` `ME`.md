@@ -8,3 +8,4 @@
 `Java ME` (Java Platform Micro Edition) - это редакция Java для разработки приложений для микрокомпьютеров. До 6 версии `Java` эта редакция имела название `J2ME` (Java 2 Platform Micro Edition).
 
 #JavaFundamentals
+#Java

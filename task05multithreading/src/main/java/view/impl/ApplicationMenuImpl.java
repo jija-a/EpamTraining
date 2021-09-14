@@ -11,9 +11,9 @@ public class ApplicationMenuImpl implements ApplicationMenu {
 
     @Override
     public void print() {
-        System.out.println("1.Countdown" +
+        System.out.println("1.Atomic" +
                 "\n2.Lock" +
-                "\n3.Phaser" +
+                "\n3.Set" +
                 "\n4.Semaphore" +
                 "\n0.Exit");
     }
@@ -24,13 +24,13 @@ public class ApplicationMenuImpl implements ApplicationMenu {
         input = InputReader.readInt();
         switch (input) {
             case 1:
-                Controller.CONTROLLER.handleRequest(CommandName.MATRIX_COUNTDOWN_FILL);
+                Controller.CONTROLLER.handleRequest(CommandName.MATRIX_ATOMIC_FILL);
                 break;
             case 2:
                 Controller.CONTROLLER.handleRequest(CommandName.MATRIX_LOCK_FILL);
                 break;
             case 3:
-                Controller.CONTROLLER.handleRequest(CommandName.MATRIX_PHASER_FILL);
+                Controller.CONTROLLER.handleRequest(CommandName.MATRIX_SET_FILL);
                 break;
             case 4:
                 Controller.CONTROLLER.handleRequest(CommandName.MATRIX_SEMAPHORE_FILL);

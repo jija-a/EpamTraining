@@ -1,8 +1,10 @@
 package service.impl;
 
 import domain.Matrix;
+import service.MatrixService;
 
-import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 class MatrixLockFillThread implements Runnable {
@@ -10,6 +12,7 @@ class MatrixLockFillThread implements Runnable {
     private final int id;
     private final Matrix matrix;
     private final ReentrantLock lock;
+    private final AtomicBoolean isDone = new AtomicBoolean();
 
     public MatrixLockFillThread(int id, Matrix matrix) {
         this.lock = new ReentrantLock();
@@ -20,29 +23,29 @@ class MatrixLockFillThread implements Runnable {
     @Override
     public void run() {
 
-        lock.lock();
-        try {
-            Optional<Integer> dIndex = Storage.STORAGE.getIndexes().stream().findAny();
-            if (dIndex.isPresent()) {
-                matrix.setElement(dIndex.get(), dIndex.get(), id);
-                Storage.STORAGE.getIndexes().remove(dIndex.get());
-                Thread.sleep(100);
-            } else {
-                this.checkIfMatrixDiagonalElIsNotZero();
+        if (!isDone.get()) {
+            try {
+                lock.lock();
+                int index = findEmptyIndex();
+                if (index != -1) {
+                    matrix.setElement(index, index, id);
+                } else {
+                    isDone.set(false);
+                }
+            } finally {
+                lock.unlock();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
         }
     }
 
-    private void checkIfMatrixDiagonalElIsNotZero() {
+    private int findEmptyIndex() {
         for (int i = 0; i < matrix.getRows(); i++) {
             if (matrix.getElement(i, i) == 0) {
-                matrix.setElement(i, i, id);
+                return i;
             }
         }
+        return -1;
     }
+
 
 }

@@ -15,7 +15,7 @@
         <module>task04classesuml</module>
         <module>demothreads</module>
         <module>task05multithreading</module>
-        <module>task06quadrangle</module>
+        <module>task06triangle</module>
     </modules>
 
     <properties>

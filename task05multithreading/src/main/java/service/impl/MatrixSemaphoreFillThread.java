@@ -3,35 +3,53 @@ package service.impl;
 import domain.Matrix;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 class MatrixSemaphoreFillThread implements Runnable {
 
-    //  CommonResource res;
-    Semaphore sem;
-    String name;
+    private final int id;
+    private final Matrix matrix;
+    private final Semaphore semaphore;
+    private final AtomicBoolean isDone = new AtomicBoolean();
 
-    MatrixSemaphoreFillThread(Semaphore sem, String name) {
-  //      this.res = res;
-        this.sem = sem;
-        this.name = name;
+    public MatrixSemaphoreFillThread(int id, Matrix matrix, Semaphore semaphore) {
+        this.id = id;
+        this.matrix = matrix;
+        this.semaphore = semaphore;
     }
 
+    @Override
     public void run() {
-/*
-        try {
-            System.out.println(name + " ожидает разрешение");
-            sem.acquire();
-            res.x = 1;
-            for (int i = 1; i < 5; i++) {
-                System.out.println(this.name + ": " + res.x);
-                res.x++;
-                Thread.sleep(100);
+
+        if (!isDone.get()) {
+            try {
+                semaphore.acquire();
+                int index = findEmptyIndex();
+                if (index != -1) {
+                    matrix.setElement(index, index, id);
+                } else {
+                    isDone.set(false);
+                }
+
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            } finally {
+                semaphore.release();
             }
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
         }
-        System.out.println(name + " освобождает разрешение");
-        sem.release();
-*/
+
     }
+
+    private int findEmptyIndex() {
+        for (int i = 0; i < matrix.getRows(); i++) {
+            if (matrix.getElement(i, i) == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
