@@ -8,14 +8,13 @@ public class Triangle extends Figure {
         ;
     }
 
-    private final List<Point> points;
-    private final String name;
-    private final TriangleType type;
+    private List<Point> points;
+    private String name;
+    private TriangleType type;
 
-    public Triangle(List<Point> points, String name, TriangleType type) {
+    public Triangle(List<Point> points, String name) {
         this.points = points;
         this.name = name;
-        this.type = type;
     }
 
     public List<Point> getPoints() {
@@ -28,6 +27,18 @@ public class Triangle extends Figure {
 
     public TriangleType getType() {
         return type;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(TriangleType type) {
+        this.type = type;
     }
 
     @Override
