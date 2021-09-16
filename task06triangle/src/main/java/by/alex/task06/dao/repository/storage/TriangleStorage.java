@@ -1,26 +1,36 @@
 package by.alex.task06.dao.repository.storage;
 
+import by.alex.task06.dao.InitializingException;
 import by.alex.task06.domain.Triangle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 public class TriangleStorage {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TriangleStorage.class);
     public static final TriangleStorage STORAGE = new TriangleStorage();
-    private List<Triangle> triangles;
+    private static Map<Long, Triangle> triangles;
 
-    public TriangleStorage() {
-        triangles = new ArrayList<>();
+    private TriangleStorage() {
+        init();
     }
 
-    public List<Triangle> getAll() {
+    private static void init() throws InitializingException {
+
+    }
+
+    public Map<Long, Triangle> getAll() {
         return triangles;
     }
 
-    public Optional<Triangle> findById(long id) {
-        return triangles.stream().filter(triangle -> triangle.getId().equals(id)).findAny();
+    public void addTriangle(Triangle triangle) {
+        triangles.put(triangle.getId(), triangle);
+    }
+
+    public void removeTriangle(Long id) {
+        triangles.remove(id);
     }
 
 }

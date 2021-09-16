@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class Circle extends Figure {
 
-    private final Point centerPoint;
+    private final CustomPoint centerPoint;
     private final double radius;
 
-    public Circle(Point centerPoint, double radius) {
+    public Circle(CustomPoint centerPoint, double radius) {
         this.radius = radius;
         this.centerPoint = centerPoint;
     }
 
-    public Point getCenterPoint() {
+    public CustomPoint getCenterPoint() {
         return centerPoint;
     }
 

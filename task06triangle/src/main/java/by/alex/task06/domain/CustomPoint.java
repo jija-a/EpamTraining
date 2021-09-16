@@ -2,12 +2,12 @@ package by.alex.task06.domain;
 
 import java.util.Objects;
 
-public class Point extends Figure {
+public class CustomPoint extends Figure {
 
     private final double x;
     private final double y;
 
-    public Point(double x, double y) {
+    public CustomPoint(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -24,7 +24,7 @@ public class Point extends Figure {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Point point = (Point) o;
+        CustomPoint point = (CustomPoint) o;
         return Double.compare(point.x, x) == 0 && Double.compare(point.y, y) == 0;
     }
 

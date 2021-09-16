@@ -8,16 +8,16 @@ public class Triangle extends Figure {
         ;
     }
 
-    private List<Point> points;
+    private List<CustomPoint> points;
     private String name;
-    private TriangleType type;
+    private List<TriangleType> type;
 
-    public Triangle(List<Point> points, String name) {
+    public Triangle(List<CustomPoint> points, String name) {
         this.points = points;
         this.name = name;
     }
 
-    public List<Point> getPoints() {
+    public List<CustomPoint> getPoints() {
         return points;
     }
 
@@ -25,11 +25,11 @@ public class Triangle extends Figure {
         return name;
     }
 
-    public TriangleType getType() {
+    public List<TriangleType> getType() {
         return type;
     }
 
-    public void setPoints(List<Point> points) {
+    public void setPoints(List<CustomPoint> points) {
         this.points = points;
     }
 
@@ -37,7 +37,7 @@ public class Triangle extends Figure {
         this.name = name;
     }
 
-    public void setType(TriangleType type) {
+    public void setType(List<TriangleType> type) {
         this.type = type;
     }
 
@@ -47,7 +47,7 @@ public class Triangle extends Figure {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Triangle triangle = (Triangle) o;
-        return points.equals(triangle.points) && name.equals(triangle.name) && type == triangle.type;
+        return points.equals(triangle.points) && name.equals(triangle.name) && type.equals(triangle.type);
     }
 
     @Override

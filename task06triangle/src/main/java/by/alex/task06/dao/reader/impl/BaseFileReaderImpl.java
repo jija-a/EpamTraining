@@ -10,6 +10,11 @@ import java.util.stream.Collectors;
 
 public class BaseFileReaderImpl implements BaseFileReader {
 
+    public static final BaseFileReader READER = new BaseFileReaderImpl();
+
+    private BaseFileReaderImpl(){
+    }
+
     @Override
     public List<String> read(String filePath) throws IOException {
 

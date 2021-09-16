@@ -1,6 +1,6 @@
-package by.alex.task06.service.factory;
+package by.alex.task06.service.creator;
 
-public class WrongArgumentsException extends Exception {
+public class WrongArgumentsException extends RuntimeException {
 
     public WrongArgumentsException() {
     }

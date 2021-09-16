@@ -8,45 +8,37 @@ import by.alex.task06.dao.repository.specification.sort.TriangleSortSpecificatio
 import by.alex.task06.dao.repository.storage.TriangleStorage;
 import by.alex.task06.domain.Triangle;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class TriangleRepositoryImpl implements Repository<Triangle> {
 
-    /**
-     * @see Repository
-     */
+    private final Map<Long, Triangle> triangles = new HashMap<>();
+
     @Override
     public void add(final Triangle triangle) {
-        TriangleStorage.STORAGE.getAll().add(triangle);
+        TriangleStorage.STORAGE.addTriangle(triangle);
     }
 
-    /**
-     * @see Repository
-     */
     @Override
     public void remove(final Triangle triangle) {
-        TriangleStorage.STORAGE.getAll().remove(triangle);
+        TriangleStorage.STORAGE.removeTriangle(triangle.getId());
     }
 
-    /**
-     * @see Repository
-     */
     @Override
     public void update(final Triangle triangle) throws RepositoryException {
-        Optional<Triangle> originalTriangleOptional =
-                TriangleStorage.STORAGE.findById(triangle.getId());
 
-        if (originalTriangleOptional.isEmpty()) {
-            throw new RepositoryException("Wrong triangle to update");
+        long id = triangle.getId();
+        if (triangles.containsKey(id)) {
+            throw new RepositoryException("Unable to update figure, the incoming figure with id: " + id +
+                    "did not exist in repository");
         }
-        this.updateTriangleFields(originalTriangleOptional.get(), triangle);
+        Triangle originalTriangle = triangles.get(id);
+
+        originalTriangle.setName(triangle.getName());
+        originalTriangle.setPoints(triangle.getPoints());
+        originalTriangle.setType(triangle.getType());
     }
 
-    /**
-     * @see Repository
-     */
     @Override
     public List<Triangle> query(final Specification<Triangle> specification)
             throws RepositoryException {
@@ -58,17 +50,11 @@ public class TriangleRepositoryImpl implements Repository<Triangle> {
         } else if (specification instanceof TriangleSortSpecification) {
             listToReturn = this.sortTrianglesBySpecification(specification);
         } else {
-            throw new RepositoryException("Wrong specification for query");
+            throw new RepositoryException("Unable to complete query: wrong specification. " +
+                    "It must be instance of sort or find specification");
         }
 
         return listToReturn;
-    }
-
-    private void updateTriangleFields(final Triangle originalTriangle,
-                                      final Triangle updatedTriangle) {
-        originalTriangle.setName(updatedTriangle.getName());
-        originalTriangle.setPoints(updatedTriangle.getPoints());
-        originalTriangle.setType(updatedTriangle.getType());
     }
 
     private List<Triangle> sortTrianglesBySpecification(
@@ -81,11 +67,12 @@ public class TriangleRepositoryImpl implements Repository<Triangle> {
             final Specification<Triangle> specification) {
 
         List<Triangle> listToReturn = new ArrayList<>();
-        for (Triangle triangle : TriangleStorage.STORAGE.getAll()) {
+
+        TriangleStorage.STORAGE.getAll().forEach((id, triangle) -> {
             if (specification.isSpecified(triangle)) {
                 listToReturn.add(triangle);
             }
-        }
+        });
 
         return listToReturn;
     }
