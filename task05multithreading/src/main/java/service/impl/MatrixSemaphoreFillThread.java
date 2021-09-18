@@ -11,7 +11,7 @@ class MatrixSemaphoreFillThread implements Runnable {
     private final int id;
     private final Matrix matrix;
     private final Semaphore semaphore;
-    private final AtomicBoolean isDone = new AtomicBoolean();
+    private final AtomicBoolean isDone = new AtomicBoolean(false);
 
     public MatrixSemaphoreFillThread(int id, Matrix matrix, Semaphore semaphore) {
         this.id = id;
@@ -23,21 +23,21 @@ class MatrixSemaphoreFillThread implements Runnable {
     public void run() {
 
         if (!isDone.get()) {
-            try {
-                semaphore.acquire();
-                int index = findEmptyIndex();
-                if (index != -1) {
-                    matrix.setElement(index, index, id);
-                } else {
-                    isDone.set(false);
+            int index = 0;
+            while (index != -1 && !isDone.get()) {
+                try {
+                    semaphore.acquire();
+                    index = findEmptyIndex();
+                    if (index != -1) {
+                        matrix.setElement(index, index, id);
+                    }
+                    TimeUnit.MILLISECONDS.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
+                } finally {
+                    semaphore.release();
                 }
-
-                TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                Thread.currentThread().interrupt();
-            } finally {
-                semaphore.release();
             }
         }
 

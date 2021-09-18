@@ -35,23 +35,27 @@ public final class TriangleParserImpl implements FigureParser<Triangle> {
         List<Triangle> triangles = new ArrayList<>();
 
         for (String line : string) {
-            if (validator.validateFileLineRegex(line)) {
+            if (validator.isFileLineMatchesRegex(line)) {
                 String[] data = line.split(SPACE_REGEX);
                 List<CustomPoint> points = new ArrayList<>();
 
                 for (int i = 0; i < data.length - 1; i = i + 2) {
                     List<String> pointLines = new ArrayList<>();
                     pointLines.add(data[i] + " " + data[i + 1]);
-                    points.addAll(FigureParserFactory.PARSER_FACTORY
+                    points.addAll(FigureParserFactory.FACTORY
                             .getPointsParser().parse(pointLines));
                 }
 
-                Triangle triangle = FigureCreatorFactory
-                        .getTriangleCreator().create(points, "name");
-                triangles.add(triangle);
-
+                try {
+                    Triangle triangle = FigureCreatorFactory
+                            .getTriangleCreator().create(points, "name");
+                    triangles.add(triangle);
+                } catch (WrongArgumentsException e) {
+                    LOGGER.warn("Creator provided exception: ", e);
+                }
             }
         }
+
         return triangles;
     }
 

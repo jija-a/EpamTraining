@@ -5,7 +5,7 @@ public class PointValidator extends FigureValidator{
     private static final String FILE_LINE_REGEX = "(-?\\d+(\\.\\d+)?)\\s(-?\\d+(\\.\\d+)?)";
 
     @Override
-    public boolean validateFileLineRegex(String line) {
+    public boolean isFileLineMatchesRegex(String line) {
         return line.matches(FILE_LINE_REGEX);
     }
 

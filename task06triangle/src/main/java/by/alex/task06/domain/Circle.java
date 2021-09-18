@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public class Circle extends Figure {
 
-    private final CustomPoint centerPoint;
-    private final double radius;
+    private CustomPoint centerPoint;
+    private double radius;
+    private String name;
 
     public Circle(CustomPoint centerPoint, double radius) {
+        super();
         this.radius = radius;
         this.centerPoint = centerPoint;
     }
@@ -16,8 +18,24 @@ public class Circle extends Figure {
         return centerPoint;
     }
 
+    public void setCenterPoint(CustomPoint centerPoint) {
+        this.centerPoint = centerPoint;
+    }
+
     public double getRadius() {
         return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

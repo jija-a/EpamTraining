@@ -4,10 +4,11 @@ import java.util.Objects;
 
 public class CustomPoint extends Figure {
 
-    private final double x;
-    private final double y;
+    private double x;
+    private double y;
 
     public CustomPoint(double x, double y) {
+        super();
         this.x = x;
         this.y = y;
     }
@@ -18,6 +19,14 @@ public class CustomPoint extends Figure {
 
     public Double getY() {
         return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     @Override

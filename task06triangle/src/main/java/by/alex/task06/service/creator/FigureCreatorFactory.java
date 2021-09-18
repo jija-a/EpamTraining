@@ -1,8 +1,6 @@
 package by.alex.task06.service.creator;
 
-public class FigureCreatorFactory {
-
-    public static final FigureCreatorFactory FACTORY = new FigureCreatorFactory();
+public final class FigureCreatorFactory {
 
     private FigureCreatorFactory() {
     }

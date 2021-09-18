@@ -6,10 +6,13 @@ import org.slf4j.LoggerFactory;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class ApplicationProperties {
+public final class ApplicationProperties {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationProperties.class);
-    public static final ApplicationProperties PROPERTIES = new ApplicationProperties();
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ApplicationProperties.class);
+
+    public static final ApplicationProperties PROPERTIES =
+            new ApplicationProperties();
 
     private String trianglesFilePath;
     private String pointsFilePath;
@@ -22,13 +25,17 @@ public class ApplicationProperties {
     private void init() throws InitializingException {
         LOGGER.trace("Initializing application configuration");
         try {
-            ResourceBundle rb = ResourceBundle.getBundle("task06triangle/src/main/resources/application.properties");
+            ResourceBundle rb = ResourceBundle
+                    .getBundle("application");
+
             trianglesFilePath = rb.getString("application.file_path.triangles");
             pointsFilePath = rb.getString("application.file_path.points");
             circlesFilePath = rb.getString("application.file_path.circles");
         } catch (ExceptionInInitializerError | MissingResourceException e) {
-            LOGGER.error("Error while initializing application configuration", e);
-            throw new InitializingException("Error while initializing application configuration", e);
+            LOGGER.error("Error while "
+                    + "initializing application configuration", e);
+            throw new InitializingException("Error while "
+                    + "initializing application configuration", e);
         }
     }
 

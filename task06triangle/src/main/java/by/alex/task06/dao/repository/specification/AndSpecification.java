@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class AndSpecification<T> extends AbstractSpecification<T> {
 
-    private Set<Specification<T>> set = new HashSet<Specification<T>>();
+    private final Set<Specification<T>> set = new HashSet<>();
 
     public AndSpecification(Specification<T> a, Specification<T> b) {
         set.add(a);

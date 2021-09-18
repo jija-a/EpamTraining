@@ -3,11 +3,11 @@ package by.alex.task06.dao.repository.specification.find;
 import by.alex.task06.dao.repository.specification.AbstractSpecification;
 import by.alex.task06.domain.Triangle;
 
-public class FindTriangleByIdSpecification extends AbstractSpecification<Triangle> implements TriangleFindSpecification {
+public class FindTriangleById extends AbstractSpecification<Triangle> implements TriangleFindSpecification {
 
     private long id;
 
-    public FindTriangleByIdSpecification(long id) {
+    public FindTriangleById(long id) {
         this.id = id;
     }
 

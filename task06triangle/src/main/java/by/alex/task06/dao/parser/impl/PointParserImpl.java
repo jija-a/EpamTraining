@@ -31,7 +31,7 @@ public final class PointParserImpl implements FigureParser<CustomPoint> {
 
         List<CustomPoint> points = new ArrayList<>();
         for (String line : string) {
-            if (!validator.validateFileLineRegex(line)) {
+            if (!validator.isFileLineMatchesRegex(line)) {
                 LOGGER.warn("Wrong values in point file line: {}", line);
                 break;
             }

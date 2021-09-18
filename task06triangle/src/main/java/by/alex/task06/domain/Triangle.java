@@ -4,15 +4,27 @@ import java.util.List;
 import java.util.Objects;
 
 public class Triangle extends Figure {
-    private enum TriangleType {
-        ;
+    public enum TriangleType {
+        RECTANGULAR,
+        ISOSCELES,
+        SHARP_ANGLED,
+        OBTUSE,
+        EQUILATERAL;
     }
 
     private List<CustomPoint> points;
     private String name;
-    private List<TriangleType> type;
+    private List<TriangleType> types;
+
+    public Triangle(List<CustomPoint> points, String name, List<TriangleType> types) {
+        super();
+        this.points = points;
+        this.name = name;
+        this.types = types;
+    }
 
     public Triangle(List<CustomPoint> points, String name) {
+        super();
         this.points = points;
         this.name = name;
     }
@@ -25,8 +37,8 @@ public class Triangle extends Figure {
         return name;
     }
 
-    public List<TriangleType> getType() {
-        return type;
+    public List<TriangleType> getTypes() {
+        return types;
     }
 
     public void setPoints(List<CustomPoint> points) {
@@ -37,8 +49,8 @@ public class Triangle extends Figure {
         this.name = name;
     }
 
-    public void setType(List<TriangleType> type) {
-        this.type = type;
+    public void setTypes(List<TriangleType> types) {
+        this.types = types;
     }
 
     @Override
@@ -47,12 +59,12 @@ public class Triangle extends Figure {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Triangle triangle = (Triangle) o;
-        return points.equals(triangle.points) && name.equals(triangle.name) && type.equals(triangle.type);
+        return points.equals(triangle.points) && name.equals(triangle.name) && types.equals(triangle.types);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), points, name, type);
+        return Objects.hash(super.hashCode(), points, name, types);
     }
 
     @Override
@@ -60,7 +72,7 @@ public class Triangle extends Figure {
         return "Triangle{" +
                 "points=" + points +
                 ", name='" + name + '\'' +
-                ", type=" + type +
+                ", type=" + types +
                 '}';
     }
 }

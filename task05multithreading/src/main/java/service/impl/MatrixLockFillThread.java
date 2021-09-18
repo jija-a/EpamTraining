@@ -12,7 +12,7 @@ class MatrixLockFillThread implements Runnable {
     private final int id;
     private final Matrix matrix;
     private final ReentrantLock lock;
-    private final AtomicBoolean isDone = new AtomicBoolean();
+    private final AtomicBoolean isDone = new AtomicBoolean(false);
 
     public MatrixLockFillThread(int id, Matrix matrix) {
         this.lock = new ReentrantLock();
@@ -24,16 +24,17 @@ class MatrixLockFillThread implements Runnable {
     public void run() {
 
         if (!isDone.get()) {
-            try {
-                lock.lock();
-                int index = findEmptyIndex();
-                if (index != -1) {
-                    matrix.setElement(index, index, id);
-                } else {
-                    isDone.set(false);
+            int index = 0;
+            while (index != -1 && !isDone.get()) {
+                try {
+                    lock.lock();
+                    index = findEmptyIndex();
+                    if (index != -1) {
+                        matrix.setElement(index, index, id);
+                    }
+                } finally {
+                    lock.unlock();
                 }
-            } finally {
-                lock.unlock();
             }
         }
     }

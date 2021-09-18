@@ -9,7 +9,7 @@ import by.alex.task06.domain.Triangle;
 
 public class FigureParserFactory {
 
-    public static final FigureParserFactory PARSER_FACTORY = new FigureParserFactory();
+    public static final FigureParserFactory FACTORY = new FigureParserFactory();
 
     private FigureParserFactory() {
     }

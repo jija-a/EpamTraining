@@ -1,14 +1,13 @@
-package service;
+package dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.InitializingException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.MissingResourceException;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 public class ApplicationConfig {
 

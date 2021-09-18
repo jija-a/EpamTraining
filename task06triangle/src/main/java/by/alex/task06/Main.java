@@ -1,11 +1,14 @@
 package by.alex.task06;
 
-import by.alex.task06.dao.parser.FigureParserFactory;
-import by.alex.task06.dao.reader.BaseFileReader;
-import by.alex.task06.dao.reader.impl.BaseFileReaderImpl;
+import by.alex.task06.dao.repository.RepositoryException;
+import by.alex.task06.dao.repository.impl.CircleRepositoryImpl;
+import by.alex.task06.dao.repository.impl.TriangleRepositoryImpl;
 import by.alex.task06.dao.repository.specification.Specification;
-import by.alex.task06.domain.Circle;
+import by.alex.task06.dao.repository.specification.find.FindTriangleById;
+import by.alex.task06.domain.Triangle;
 import by.alex.task06.service.creator.WrongArgumentsException;
+import by.alex.task06.service.observer.listener.TriangleParameters;
+import by.alex.task06.service.observer.listener.TriangleUpdateListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,12 +16,16 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] ars) throws IOException, WrongArgumentsException {
+    public static void main(String[] ars) throws IOException, WrongArgumentsException, RepositoryException {
 
-        BaseFileReader reader = BaseFileReaderImpl.READER;
-        List<String> strings = reader.read("task06triangle/src/main/resources/input/circle.txt");
-        List<Circle> circles = FigureParserFactory.PARSER_FACTORY.getCirclesParser().parse(strings);
-        System.out.println(circles.toString());
+        TriangleRepositoryImpl.REPOSITORY.init();
+        CircleRepositoryImpl.REPOSITORY.init();
+        List<Triangle> triangles = TriangleRepositoryImpl.REPOSITORY.query(new FindTriangleById(1));
+        Triangle triangle = triangles.get(0);
+        System.out.println(triangle.toString());
+
+        System.out.println(TriangleUpdateListener.LISTENER.getTriangle(1));
+
 
         /*List<CustomPoint> points = new ArrayList<>();
         CustomPoint point1 = new CustomPoint(1, 2);

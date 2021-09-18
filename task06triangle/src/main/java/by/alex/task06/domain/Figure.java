@@ -5,11 +5,13 @@ import java.util.Objects;
 
 public abstract class Figure implements Serializable, Cloneable {
 
-    private final long id;
-    private static Long idCounter = 0L;
+    private long id;
 
     public Figure() {
-        this.id = ++idCounter;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Long getId() {

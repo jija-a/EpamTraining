@@ -1,5 +1,6 @@
 package service.impl;
 
+import dao.ApplicationConfig;
 import dao.BaseFileReader;
 import dao.EntityParser;
 import dao.impl.BaseFileReaderImpl;
@@ -75,13 +76,7 @@ public class MatrixServiceImpl implements MatrixService {
     @Override
     public void fillMatrixWithSetThread(Matrix matrix) {
 
-        ConcurrentSkipListSet<Integer> skipListSet = new ConcurrentSkipListSet<>();
-        List<Thread> threads = new ArrayList<>();
-        for (int i = 1; i <= matrix.getRows(); i++) {
-            threads.add(new Thread(new MatrixSetFillThread(i, matrix, skipListSet)));
-        }
-        this.startThreads(threads);
-        this.joinThreads(threads);
+        //todo
     }
 
     @Override
@@ -89,7 +84,7 @@ public class MatrixServiceImpl implements MatrixService {
 
         List<Thread> threads = new ArrayList<>();
         Semaphore semaphore =  new Semaphore(1);
-        for (int i = 1; i <= matrix.getRows(); i++) {
+        for (int i = 1; i <= 10; i++) {
             threads.add(new Thread(new MatrixSemaphoreFillThread(i, matrix, semaphore)));
         }
         this.startThreads(threads);
