@@ -3,17 +3,17 @@ package by.alex.task06.dao.repository.specification.find;
 import by.alex.task06.dao.repository.specification.AbstractSpecification;
 import by.alex.task06.domain.Triangle;
 
-public class FindTriangleType extends AbstractSpecification<Triangle>
+public final class FindTriangleType extends AbstractSpecification<Triangle>
         implements TriangleFindSpecification {
 
-    private Triangle.TriangleType type;
+    private final Triangle.TriangleType type;
 
-    public FindTriangleType(Triangle.TriangleType type) {
-        this.type = type;
+    public FindTriangleType(final Triangle.TriangleType typeValue) {
+        this.type = typeValue;
     }
 
     @Override
-    public boolean isSpecified(Triangle triangle) {
+    public boolean isSpecified(final Triangle triangle) {
         boolean toReturn = false;
         for (Triangle.TriangleType triangleType : triangle.getTypes()) {
             if (triangleType.equals(this.type)) {
@@ -22,13 +22,5 @@ public class FindTriangleType extends AbstractSpecification<Triangle>
             }
         }
         return toReturn;
-    }
-
-    public Triangle.TriangleType getType() {
-        return type;
-    }
-
-    public void setType(Triangle.TriangleType type) {
-        this.type = type;
     }
 }

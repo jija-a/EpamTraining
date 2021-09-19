@@ -4,7 +4,9 @@ import by.alex.task06.domain.CustomPoint;
 import by.alex.task06.domain.Triangle;
 import by.alex.task06.service.TriangleService;
 
-public class TriangleServiceImpl implements TriangleService {
+import java.util.List;
+
+public final class TriangleServiceImpl implements TriangleService {
 
     public static final TriangleServiceImpl SERVICE = new TriangleServiceImpl();
 
@@ -13,11 +15,13 @@ public class TriangleServiceImpl implements TriangleService {
 
 
     @Override
-    public double calcArea(Triangle triangle) {
+    public double calcArea(final Triangle triangle) {
 
-        double a = createLine(triangle.getPoints().get(0), triangle.getPoints().get(1));
-        double b = createLine(triangle.getPoints().get(1), triangle.getPoints().get(2));
-        double c = createLine(triangle.getPoints().get(2), triangle.getPoints().get(0));
+        List<CustomPoint> points = triangle.getPoints();
+
+        double a = this.createLine(points.get(0), points.get(1));
+        double b = this.createLine(points.get(1), points.get(2));
+        double c = this.createLine(points.get(2), points.get(0));
 
         double hPerimeter = (a + b + c) / 2;
         return Math.sqrt(hPerimeter * (hPerimeter - a)
@@ -25,16 +29,18 @@ public class TriangleServiceImpl implements TriangleService {
     }
 
     @Override
-    public double calcPerimeter(Triangle triangle) {
+    public double calcPerimeter(final Triangle triangle) {
 
-        double a = createLine(triangle.getPoints().get(0), triangle.getPoints().get(1));
-        double b = createLine(triangle.getPoints().get(1), triangle.getPoints().get(2));
-        double c = createLine(triangle.getPoints().get(2), triangle.getPoints().get(0));
+        List<CustomPoint> points = triangle.getPoints();
+
+        double a = this.createLine(points.get(0), points.get(1));
+        double b = this.createLine(points.get(1), points.get(2));
+        double c = this.createLine(points.get(2), points.get(0));
 
         return a + b + c;
     }
 
-    private double createLine(CustomPoint p1, CustomPoint p2) {
+    private double createLine(final CustomPoint p1, final CustomPoint p2) {
         return Math.hypot(p1.getX() - p2.getX(), p1.getY() - p2.getY());
     }
 }

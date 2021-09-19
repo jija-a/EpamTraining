@@ -7,11 +7,11 @@ public abstract class Figure implements Serializable, Cloneable {
 
     private long id;
 
-    public Figure() {
+    protected Figure() {
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(final long idValue) {
+        this.id = idValue;
     }
 
     public Long getId() {
@@ -19,9 +19,13 @@ public abstract class Figure implements Serializable, Cloneable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Figure figure = (Figure) o;
         return id == figure.id;
     }
@@ -33,9 +37,9 @@ public abstract class Figure implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return "Figure{" +
-                "id=" + id +
-                '}';
+        return "Figure{"
+                + "id=" + id
+                + '}';
     }
 
 }

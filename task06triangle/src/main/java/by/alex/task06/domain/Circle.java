@@ -2,61 +2,73 @@ package by.alex.task06.domain;
 
 import java.util.Objects;
 
-public class Circle extends Figure {
+public final class Circle extends Figure {
 
     private CustomPoint centerPoint;
     private double radius;
     private String name;
 
-    public Circle(CustomPoint centerPoint, double radius) {
-        super();
-        this.radius = radius;
-        this.centerPoint = centerPoint;
+    public Circle(final CustomPoint centerPointValue,
+                  final double radiusValue,
+                  final String nameValue) {
+
+        this.centerPoint = centerPointValue;
+        this.radius = radiusValue;
+        this.name = nameValue;
     }
 
     public CustomPoint getCenterPoint() {
         return centerPoint;
     }
 
-    public void setCenterPoint(CustomPoint centerPoint) {
-        this.centerPoint = centerPoint;
+    public void setCenterPoint(final CustomPoint centerPointValue) {
+        this.centerPoint = centerPointValue;
     }
 
     public double getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius) {
-        this.radius = radius;
+    public void setRadius(final double radiusValue) {
+        this.radius = radiusValue;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(final String nameValue) {
+        this.name = nameValue;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Circle circle = (Circle) o;
-        return Double.compare(circle.radius, radius) == 0 && centerPoint.equals(circle.centerPoint);
+        return Double.compare(circle.radius, radius) == 0
+                && Objects.equals(centerPoint, circle.centerPoint)
+                && Objects.equals(name, circle.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(centerPoint, radius);
+        return Objects.hash(super.hashCode(), centerPoint, radius, name);
     }
 
     @Override
     public String toString() {
-        return "Circle{" +
-                "centerPoint=" + centerPoint +
-                ", radius=" + radius +
-                '}';
+        return "Circle{"
+                + "centerPoint=" + centerPoint
+                + ", radius=" + radius
+                + ", name='" + name + '\''
+                + '}';
     }
-
 }

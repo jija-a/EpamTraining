@@ -19,7 +19,7 @@ public final class CircleCreator {
             throws WrongArgumentsException {
 
         if (validator.isCircleExists(radius)) {
-            Circle circle = new Circle(centerPoint, radius);
+            Circle circle = new Circle(centerPoint, radius, "");
             CircleRepositoryImpl.REPOSITORY.add(circle);
             return circle;
         }

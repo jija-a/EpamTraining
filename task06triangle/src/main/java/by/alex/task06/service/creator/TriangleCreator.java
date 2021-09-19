@@ -24,7 +24,7 @@ public final class TriangleCreator {
         if (validator.isTriangleExists(points)) {
             Triangle triangle = new Triangle(points, name);
             List<Triangle.TriangleType> types = ServiceFactory.FACTORY
-                    .getTriangleTypesService().defineTriangleType(triangle);
+                    .getTriangleTypesService().defineType(triangle);
             triangle.setTypes(types);
             TriangleRepositoryImpl.REPOSITORY.add(triangle);
             return triangle;

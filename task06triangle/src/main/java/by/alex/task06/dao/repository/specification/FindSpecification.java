@@ -1,6 +1,6 @@
 package by.alex.task06.dao.repository.specification;
 
-public interface Specification<T> {
+public interface FindSpecification<T> {
 
     boolean isSpecified(T t);
 }

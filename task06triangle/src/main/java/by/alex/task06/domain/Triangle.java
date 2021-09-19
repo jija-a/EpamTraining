@@ -16,50 +16,61 @@ public class Triangle extends Figure {
     private String name;
     private List<TriangleType> types;
 
-    public Triangle(List<CustomPoint> points, String name, List<TriangleType> types) {
-        super();
-        this.points = points;
-        this.name = name;
-        this.types = types;
+    public Triangle(final List<CustomPoint> pointsValue,
+                    final String nameValue,
+                    final List<TriangleType> typesValue) {
+
+        this.points = pointsValue;
+        this.name = nameValue;
+        this.types = typesValue;
     }
 
-    public Triangle(List<CustomPoint> points, String name) {
-        super();
-        this.points = points;
-        this.name = name;
+    public Triangle(final List<CustomPoint> pointsValue,
+                    final String nameValue) {
+
+        this.points = pointsValue;
+        this.name = nameValue;
     }
 
     public List<CustomPoint> getPoints() {
         return points;
     }
 
+    public void setPoints(final List<CustomPoint> pointsValue) {
+        this.points = pointsValue;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(final String nameValue) {
+        this.name = nameValue;
     }
 
     public List<TriangleType> getTypes() {
         return types;
     }
 
-    public void setPoints(List<CustomPoint> points) {
-        this.points = points;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setTypes(List<TriangleType> types) {
-        this.types = types;
+    public void setTypes(final List<TriangleType> typesValue) {
+        this.types = typesValue;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Triangle triangle = (Triangle) o;
-        return points.equals(triangle.points) && name.equals(triangle.name) && types.equals(triangle.types);
+        return Objects.equals(points, triangle.points)
+                && Objects.equals(name, triangle.name)
+                && Objects.equals(types, triangle.types);
     }
 
     @Override
@@ -69,10 +80,10 @@ public class Triangle extends Figure {
 
     @Override
     public String toString() {
-        return "Triangle{" +
-                "points=" + points +
-                ", name='" + name + '\'' +
-                ", type=" + types +
-                '}';
+        return "Triangle{"
+                + "points=" + points
+                + ", name='" + name + '\''
+                + ", types=" + types
+                + '}';
     }
 }

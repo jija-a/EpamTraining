@@ -1,19 +1,19 @@
 package by.alex.task06.service;
 
-public class ServiceException extends Exception {
+public final class ServiceException extends Exception {
 
     public ServiceException() {
     }
 
-    public ServiceException(String message) {
+    public ServiceException(final String message) {
         super(message);
     }
 
-    public ServiceException(String message, Throwable cause) {
+    public ServiceException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
-    public ServiceException(Throwable cause) {
+    public ServiceException(final Throwable cause) {
         super(cause);
     }
 }

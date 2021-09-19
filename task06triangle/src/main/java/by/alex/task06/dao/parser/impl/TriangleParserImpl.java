@@ -32,30 +32,33 @@ public final class TriangleParserImpl implements FigureParser<Triangle> {
     @Override
     public List<Triangle> parse(final List<String> string) {
 
+        LOGGER.info("Parsing triangles file");
         List<Triangle> triangles = new ArrayList<>();
 
         for (String line : string) {
-            if (validator.isFileLineMatchesRegex(line)) {
-                String[] data = line.split(SPACE_REGEX);
-                List<CustomPoint> points = new ArrayList<>();
+            if (!validator.isFileLineMatchesRegex(line)) {
+                LOGGER.warn("Wrong values in triangles file line: {}", line);
+                break;
+            }
 
-                for (int i = 0; i < data.length - 1; i = i + 2) {
-                    List<String> pointLines = new ArrayList<>();
-                    pointLines.add(data[i] + " " + data[i + 1]);
-                    points.addAll(FigureParserFactory.FACTORY
-                            .getPointsParser().parse(pointLines));
-                }
+            String[] data = line.split(SPACE_REGEX);
+            List<CustomPoint> points = new ArrayList<>();
 
-                try {
-                    Triangle triangle = FigureCreatorFactory
-                            .getTriangleCreator().create(points, "name");
-                    triangles.add(triangle);
-                } catch (WrongArgumentsException e) {
-                    LOGGER.warn("Creator provided exception: ", e);
-                }
+            for (int i = 0; i < data.length - 1; i = i + 2) {
+                List<String> pointLines = new ArrayList<>();
+                pointLines.add(data[i] + " " + data[i + 1]);
+                points.addAll(FigureParserFactory.FACTORY
+                        .getPointsParser().parse(pointLines));
+            }
+
+            try {
+                Triangle triangle = FigureCreatorFactory
+                        .getTriangleCreator().create(points, "name");
+                triangles.add(triangle);
+            } catch (WrongArgumentsException e) {
+                LOGGER.warn("Creator provided exception: ", e);
             }
         }
-
         return triangles;
     }
 

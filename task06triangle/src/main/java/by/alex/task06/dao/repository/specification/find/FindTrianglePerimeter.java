@@ -2,37 +2,25 @@ package by.alex.task06.dao.repository.specification.find;
 
 import by.alex.task06.dao.repository.specification.AbstractSpecification;
 import by.alex.task06.domain.Triangle;
+import by.alex.task06.service.ServiceFactory;
+import by.alex.task06.service.TriangleService;
 
-public class FindTrianglePerimeter extends AbstractSpecification<Triangle>
+public final class FindTrianglePerimeter extends AbstractSpecification<Triangle>
         implements TriangleFindSpecification {
 
-    private double from;
-    private double to;
+    private final double from;
+    private final double to;
+    private final TriangleService service;
 
-    public FindTrianglePerimeter(double from, double to) {
-        this.from = from;
-        this.to = to;
+    public FindTrianglePerimeter(final double fromValue, final double toValue) {
+        this.from = fromValue;
+        this.to = toValue;
+        this.service = ServiceFactory.FACTORY.getTriangleService();
     }
 
     @Override
-    public boolean isSpecified(Triangle triangle) {
-        double trianglePerimeter = 0; //todo
+    public boolean isSpecified(final Triangle triangle) {
+        double trianglePerimeter = service.calcPerimeter(triangle);
         return trianglePerimeter >= from && trianglePerimeter <= to;
-    }
-
-    public double getFrom() {
-        return from;
-    }
-
-    public void setFrom(double from) {
-        this.from = from;
-    }
-
-    public double getTo() {
-        return to;
-    }
-
-    public void setTo(double to) {
-        this.to = to;
     }
 }

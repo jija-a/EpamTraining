@@ -2,15 +2,15 @@ package by.alex.task06.domain;
 
 import java.util.Objects;
 
-public class CustomPoint extends Figure {
+public final class CustomPoint extends Figure {
 
     private double x;
     private double y;
 
-    public CustomPoint(double x, double y) {
+    public CustomPoint(final double xValue, final double yValue) {
         super();
-        this.x = x;
-        this.y = y;
+        this.x = xValue;
+        this.y = yValue;
     }
 
     public Double getX() {
@@ -21,20 +21,25 @@ public class CustomPoint extends Figure {
         return y;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setX(final double xValue) {
+        this.x = xValue;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setY(final double yValue) {
+        this.y = yValue;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CustomPoint point = (CustomPoint) o;
-        return Double.compare(point.x, x) == 0 && Double.compare(point.y, y) == 0;
+        return Double.compare(point.x, x) == 0
+                && Double.compare(point.y, y) == 0;
     }
 
     @Override
@@ -44,10 +49,10 @@ public class CustomPoint extends Figure {
 
     @Override
     public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Point{"
+                + "x=" + x
+                + ", y=" + y
+                + '}';
     }
 
 }

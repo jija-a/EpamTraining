@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TriangleTypeService {
 
-    List<Triangle.TriangleType> defineTriangleType(Triangle triangle);
+    List<Triangle.TriangleType> defineType(Triangle triangle);
 }

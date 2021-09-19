@@ -6,11 +6,11 @@ public class CircleValidator extends FigureValidator {
             "(-?\\d+(\\.\\d+)?)(?:\\s(-?\\d+(\\.\\d+)?)){2}";
 
     @Override
-    public boolean isFileLineMatchesRegex(String line) {
+    public boolean isFileLineMatchesRegex(final String line) {
         return line.matches(FILE_LINE_REGEX);
     }
 
-    public boolean isCircleExists(double radius) {
+    public boolean isCircleExists(final double radius) {
         return radius > 0;
     }
 

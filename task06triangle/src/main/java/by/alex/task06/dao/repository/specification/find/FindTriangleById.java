@@ -3,24 +3,17 @@ package by.alex.task06.dao.repository.specification.find;
 import by.alex.task06.dao.repository.specification.AbstractSpecification;
 import by.alex.task06.domain.Triangle;
 
-public class FindTriangleById extends AbstractSpecification<Triangle> implements TriangleFindSpecification {
+public final class FindTriangleById extends AbstractSpecification<Triangle>
+        implements TriangleFindSpecification {
 
-    private long id;
+    private final long id;
 
-    public FindTriangleById(long id) {
-        this.id = id;
+    public FindTriangleById(final long idValue) {
+        this.id = idValue;
     }
 
     @Override
-    public boolean isSpecified(Triangle triangle) {
+    public boolean isSpecified(final Triangle triangle) {
         return id == triangle.getId();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

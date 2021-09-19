@@ -29,12 +29,14 @@ public final class PointParserImpl implements FigureParser<CustomPoint> {
     @Override
     public List<CustomPoint> parse(final List<String> string) {
 
+        LOGGER.info("Parsing points file");
         List<CustomPoint> points = new ArrayList<>();
         for (String line : string) {
             if (!validator.isFileLineMatchesRegex(line)) {
                 LOGGER.warn("Wrong values in point file line: {}", line);
                 break;
             }
+
             String[] data = line.split(SPACE_REGEX);
             double xCoordinate = Double.parseDouble(data[0]);
             double yCoordinate = Double.parseDouble(data[1]);

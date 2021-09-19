@@ -1,32 +1,25 @@
 package by.alex.task06.dao.repository.impl;
 
-import by.alex.task06.dao.ApplicationProperties;
-import by.alex.task06.dao.InitializingException;
-import by.alex.task06.dao.parser.FigureParserFactory;
-import by.alex.task06.dao.reader.impl.BaseFileReaderImpl;
+import by.alex.task06.dao.repository.IdGenerator;
 import by.alex.task06.dao.repository.Repository;
 import by.alex.task06.dao.repository.RepositoryException;
-import by.alex.task06.dao.repository.specification.Specification;
+import by.alex.task06.dao.repository.specification.FindSpecification;
+import by.alex.task06.dao.repository.specification.SortSpecification;
+import by.alex.task06.dao.repository.specification.find.CircleFindSpecification;
+import by.alex.task06.dao.repository.specification.sort.CircleSortSpecification;
 import by.alex.task06.domain.Circle;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class CircleRepositoryImpl implements Repository<Circle> {
 
-    private static long staticId = 0L;
     public static final CircleRepositoryImpl REPOSITORY
             = new CircleRepositoryImpl();
 
     private final Map<Long, Circle> circles;
-
-    @Override
-    public void init() throws InitializingException {
-        String path = ApplicationProperties.PROPERTIES.getCirclesFilePath();
-        List<String> strings = BaseFileReaderImpl.READER.read(path);
-        FigureParserFactory.FACTORY.getCirclesParser().parse(strings);
-    }
 
     private CircleRepositoryImpl() {
         circles = new HashMap<>();
@@ -34,7 +27,7 @@ public final class CircleRepositoryImpl implements Repository<Circle> {
 
     @Override
     public void add(final Circle circle) {
-        long id = ++staticId;
+        long id = IdGenerator.generate();
         circle.setId(id);
         circles.put(id, circle);
     }
@@ -61,16 +54,39 @@ public final class CircleRepositoryImpl implements Repository<Circle> {
     }
 
     @Override
-    public List<Circle> query(final Specification<Circle> specification)
+    public List<Circle> query(final FindSpecification<Circle> specification)
             throws RepositoryException {
 
-        throw new UnsupportedOperationException();
+        if (!(specification instanceof CircleFindSpecification)) {
+            throw new RepositoryException("Unable to complete query: "
+                    + "Specification must be instance of find");
+        }
+
+        List<Circle> listToReturn = new ArrayList<>();
+        this.circles.forEach((id, circle) -> {
+            if (specification.isSpecified(circle)) {
+                listToReturn.add(circle);
+            }
+        });
+
+        return listToReturn;
     }
 
     @Override
-    public List<Circle> sort(Specification<Circle> specification)
+    public List<Circle> sort(final SortSpecification<Circle> specification)
             throws RepositoryException {
 
-        throw new UnsupportedOperationException();
+        if (!(specification instanceof CircleSortSpecification)) {
+            throw new RepositoryException("Unable to complete sorting: "
+                    + "Specification must be instance of sort");
+        }
+
+        List<Circle> listToReturn = new ArrayList<>();
+        for (Map.Entry<Long, Circle> circleEntry: this.circles.entrySet()) {
+            listToReturn.add(circleEntry.getValue());
+        }
+
+        listToReturn.sort(specification);
+        return listToReturn;
     }
 }

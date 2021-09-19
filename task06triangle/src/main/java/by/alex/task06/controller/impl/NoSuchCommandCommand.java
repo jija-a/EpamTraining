@@ -7,7 +7,8 @@ import org.slf4j.LoggerFactory;
 
 public class NoSuchCommandCommand implements Command {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NoSuchCommandCommand.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(NoSuchCommandCommand.class);
 
     @Override
     public void execute() throws ServiceException {

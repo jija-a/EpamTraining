@@ -32,10 +32,14 @@ public final class CircleParserImpl implements FigureParser<Circle> {
     @Override
     public List<Circle> parse(final List<String> string) {
 
+        LOGGER.info("Parsing circles file");
         List<Circle> circles = new ArrayList<>();
 
         for (String line : string) {
-            if (validator.isFileLineMatchesRegex(line)) {
+            if (!validator.isFileLineMatchesRegex(line)) {
+                LOGGER.warn("Wrong values in circle file line: {}", line);
+                break;
+            }
                 String[] data = line.split(SPACE_REGEX);
                 List<String> pointsLine = new ArrayList<>();
                 pointsLine.add(data[0] + " " + data[1]);
@@ -54,10 +58,7 @@ public final class CircleParserImpl implements FigureParser<Circle> {
                         LOGGER.warn("Creator provided exception", e);
                     }
                 }
-
             }
-        }
-
         return circles;
     }
 

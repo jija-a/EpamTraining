@@ -3,25 +3,17 @@ package by.alex.task06.dao.repository.specification.find;
 import by.alex.task06.dao.repository.specification.AbstractSpecification;
 import by.alex.task06.domain.Triangle;
 
-public class FindTriangleName extends AbstractSpecification<Triangle>
+public final class FindTriangleName extends AbstractSpecification<Triangle>
         implements TriangleFindSpecification {
 
-    private String name;
+    private final String name;
 
-    public FindTriangleName(String name) {
-        this.name = name;
+    public FindTriangleName(final String nameValue) {
+        this.name = nameValue;
     }
 
     @Override
-    public boolean isSpecified(Triangle triangle) {
+    public boolean isSpecified(final Triangle triangle) {
         return name.equals(triangle.getName());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
