@@ -15,7 +15,7 @@ public class CircleValidator implements FigureValidator {
      * Regular expression for circle line.
      */
     private static final String FILE_LINE_REGEX =
-            "(-?\\d+(\\.\\d+)?)(?:\\s(-?\\d+(\\.\\d+)?)){2}.+";
+            "(-?\\d+(\\.\\d+)?)(?:\\s(-?\\d+(\\.\\d+)?)){2}\\s\\D\\S.+";
 
     /**
      * @see FigureValidator

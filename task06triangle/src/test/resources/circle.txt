@@ -1,0 +1,7 @@
+1.0 2.0 3.0 circle1
+1.z0 2.0 3.0 circle2
+1.0 2.0 circle3
+1.0 2.0 4.5 2.3 circle4
+1.0 2.0 3.0 circle5
+2.0 3.0 2.0 circle6
+5.0 7.0 0.0 circle7

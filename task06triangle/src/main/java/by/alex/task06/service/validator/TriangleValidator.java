@@ -18,7 +18,7 @@ public class TriangleValidator implements FigureValidator {
      * Regular expression for triangle file line.
      */
     private static final String FILE_LINE_REGEX =
-            "(-?\\d+(\\.\\d+)?)(?:\\s(-?\\d+(\\.\\d+)?)){5}.+";
+            "(-?\\d+(\\.\\d+)?)(?:\\s(-?\\d+(\\.\\d+)?)){5}\\s\\D\\S.+";
 
     /**
      * @see FigureValidator

@@ -1,6 +1,7 @@
 package by.alex.task06.dao.reader;
 
-import java.io.IOException;
+import by.alex.task06.dao.InitializingError;
+
 import java.util.List;
 
 public interface BaseFileReader {
@@ -11,5 +12,5 @@ public interface BaseFileReader {
      * @param filePath - path to file.
      * @return List of strings, file lines.
      */
-    List<String> read(String filePath) throws IOException;
+    List<String> read(String filePath) throws InitializingError;
 }

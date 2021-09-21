@@ -21,9 +21,6 @@ public final class CircleServiceImpl implements CircleService {
     private CircleServiceImpl() {
     }
 
-    /**
-     * @see CircleService
-     */
     @Override
     public double calcArea(final Circle circle) {
 
@@ -32,9 +29,6 @@ public final class CircleServiceImpl implements CircleService {
         return Math.PI * radius * radius;
     }
 
-    /**
-     * @see CircleService
-     */
     @Override
     public double calcPerimeter(final Circle circle) {
 
@@ -43,9 +37,6 @@ public final class CircleServiceImpl implements CircleService {
         return 2 * Math.PI * radius;
     }
 
-    /**
-     * @see CircleService
-     */
     @Override
     public boolean isCircleCrossesOnlyOneAxis(final Circle circle) {
 

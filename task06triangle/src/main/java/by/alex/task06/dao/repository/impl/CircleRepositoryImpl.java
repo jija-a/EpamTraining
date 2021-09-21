@@ -17,7 +17,6 @@ import by.alex.task06.service.observer.impl.CirclePerimeterObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,17 +56,13 @@ public final class CircleRepositoryImpl implements Repository<Circle> {
      * @throws InitializingError if can't read file
      */
     private void init() throws InitializingError {
-        try {
-            String filePath = ApplicationProperties.PROPERTIES
-                    .getCirclesFilePath();
-            List<String> circleLines = BaseFileReaderImpl.READER.read(filePath);
-            List<Circle> circleList = FigureParserFactory.FACTORY
-                    .getCirclesParser().parse(circleLines);
-            for (Circle circle : circleList) {
-                CircleRepositoryImpl.REPOSITORY.add(circle);
-            }
-        } catch (IOException e) {
-            throw new InitializingError(e);
+        String filePath = ApplicationProperties.PROPERTIES
+                .getCirclesFilePath();
+        List<String> circleLines = BaseFileReaderImpl.READER.read(filePath);
+        List<Circle> circleList = FigureParserFactory.FACTORY
+                .getCirclesParser().parse(circleLines);
+        for (Circle circle : circleList) {
+            CircleRepositoryImpl.REPOSITORY.add(circle);
         }
     }
 

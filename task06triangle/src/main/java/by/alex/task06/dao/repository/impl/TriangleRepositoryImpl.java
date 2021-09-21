@@ -17,7 +17,6 @@ import by.alex.task06.service.observer.impl.TrianglePerimeterObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,17 +57,13 @@ public final class TriangleRepositoryImpl implements Repository<Triangle> {
      * @throws InitializingError if can't read file
      */
     private void init() throws InitializingError {
-        try {
-            String filePath = ApplicationProperties.PROPERTIES
-                    .getTrianglesFilePath();
-            List<String> fileLines = BaseFileReaderImpl.READER.read(filePath);
-            List<Triangle> triangleList = FigureParserFactory.FACTORY
-                    .getTriangleParser().parse(fileLines);
-            for (Triangle triangle : triangleList) {
-                this.add(triangle);
-            }
-        } catch (IOException e) {
-            throw new InitializingError(e);
+        String filePath = ApplicationProperties.PROPERTIES
+                .getTrianglesFilePath();
+        List<String> fileLines = BaseFileReaderImpl.READER.read(filePath);
+        List<Triangle> triangleList = FigureParserFactory.FACTORY
+                .getTriangleParser().parse(fileLines);
+        for (Triangle triangle : triangleList) {
+            this.add(triangle);
         }
     }
 

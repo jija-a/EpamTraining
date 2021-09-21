@@ -1,5 +1,6 @@
 package by.alex.task06.dao.reader.impl;
 
+import by.alex.task06.dao.InitializingError;
 import by.alex.task06.dao.reader.BaseFileReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +29,13 @@ public final class BaseFileReaderImpl implements BaseFileReader {
     }
 
     @Override
-    public List<String> read(final String filePath) throws IOException {
+    public List<String> read(final String filePath) {
 
         LOGGER.info("Reading file with file path: {}", filePath);
         try (Stream<String> stringStream = Files.lines(Paths.get(filePath))) {
             return stringStream.collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new InitializingError(e);
         }
     }
 
