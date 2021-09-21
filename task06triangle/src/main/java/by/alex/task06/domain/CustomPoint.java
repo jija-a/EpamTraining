@@ -1,52 +1,78 @@
 package by.alex.task06.domain;
 
-import java.util.Objects;
-
 public final class CustomPoint extends Figure {
 
-    private double x;
-    private double y;
+    /**
+     * x coordinate.
+     */
+    private Double x;
 
+    /**
+     * y coordinate.
+     */
+    private Double y;
+
+    /**
+     * Class constructor.
+     *
+     * @param xValue - value of x coordinate
+     * @param yValue - value of y coordinate
+     */
     public CustomPoint(final double xValue, final double yValue) {
         super();
         this.x = xValue;
         this.y = yValue;
     }
 
+    /**
+     * x coordinate getter.
+     *
+     * @return {@link Double} x
+     */
     public Double getX() {
         return x;
     }
 
+    /**
+     * y coordinate getter.
+     *
+     * @return {@link Double} y
+     */
     public Double getY() {
         return y;
     }
 
-    public void setX(final double xValue) {
-        this.x = xValue;
-    }
-
-    public void setY(final double yValue) {
-        this.y = yValue;
-    }
-
+    /**
+     * Equals method, overridden from {@link Object} class.
+     */
     @Override
     public boolean equals(final Object o) {
-        if (this == o) {
+        if (o == this) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CustomPoint)) {
             return false;
         }
-        CustomPoint point = (CustomPoint) o;
-        return Double.compare(point.x, x) == 0
-                && Double.compare(point.y, y) == 0;
+        CustomPoint c = (CustomPoint) o;
+        return Double.compare(c.getX(), this.x) == 0
+                && Double.compare(c.getY(), this.y) == 0;
     }
 
+    /**
+     * HashCode method, overridden from {@link Object} class.
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        int prime = HASH_PRIME;
+        int result = 1;
+        result = prime * result + ((x == null) ? 0 : x.hashCode());
+        result = prime * result + ((y == null) ? 0 : y.hashCode());
+        return result;
     }
 
+    /**
+     * ToString method, overridden from {@link Object} class.
+     */
     @Override
     public String toString() {
         return "Point{"
@@ -54,5 +80,4 @@ public final class CustomPoint extends Figure {
                 + ", y=" + y
                 + '}';
     }
-
 }

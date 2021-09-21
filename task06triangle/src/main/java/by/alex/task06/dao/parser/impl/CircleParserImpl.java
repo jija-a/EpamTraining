@@ -16,15 +16,30 @@ import java.util.List;
 
 public final class CircleParserImpl implements FigureParser<Circle> {
 
-    public static final CircleParserImpl PARSER = new CircleParserImpl();
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER =
             LoggerFactory.getLogger(CircleParserImpl.class);
 
+    /**
+     * Class instance (Singleton pattern).
+     */
+    public static final CircleParserImpl PARSER = new CircleParserImpl();
+
+    /**
+     * Regular expression for space symbol.
+     */
     private static final String SPACE_REGEX = "\\s";
 
+    /**
+     * {@link FigureValidator} instance.
+     */
     private final FigureValidator validator;
 
+    /**
+     * Class constructor, initializes validator.
+     */
     private CircleParserImpl() {
         validator = new CircleValidator();
     }
@@ -32,34 +47,34 @@ public final class CircleParserImpl implements FigureParser<Circle> {
     @Override
     public List<Circle> parse(final List<String> string) {
 
-        LOGGER.info("Parsing circles file");
         List<Circle> circles = new ArrayList<>();
 
         for (String line : string) {
+            LOGGER.info("Parsing circle file line: {}", line);
             if (!validator.isFileLineMatchesRegex(line)) {
                 LOGGER.warn("Wrong values in circle file line: {}", line);
                 break;
             }
-                String[] data = line.split(SPACE_REGEX);
-                List<String> pointsLine = new ArrayList<>();
-                pointsLine.add(data[0] + " " + data[1]);
-                List<CustomPoint> points = FigureParserFactory.FACTORY
-                        .getPointsParser().parse(pointsLine);
+            String[] data = line.split(SPACE_REGEX);
+            List<String> pointsLine = new ArrayList<>();
+            pointsLine.add(data[0] + " " + data[1]);
+            List<CustomPoint> points = FigureParserFactory.FACTORY
+                    .getPointsParser().parse(pointsLine);
 
-                if (!points.isEmpty()) {
-                    CustomPoint centerPoint = points.get(0);
-                    double radius = Double.parseDouble(data[2]);
+            if (!points.isEmpty()) {
+                CustomPoint centerPoint = points.get(0);
+                double radius = Double.parseDouble(data[2]);
 
-                    try {
-                        Circle circle = FigureCreatorFactory.getCircleCreator()
-                                .create(centerPoint, radius);
-                        circles.add(circle);
-                    } catch (WrongArgumentsException e) {
-                        LOGGER.warn("Creator provided exception", e);
-                    }
+                String name = data[data.length - 1];
+                try {
+                    Circle circle = FigureCreatorFactory.getCircleCreator()
+                            .create(centerPoint, radius, name);
+                    circles.add(circle);
+                } catch (WrongArgumentsException e) {
+                    LOGGER.warn("Creator provided exception", e);
                 }
             }
+        }
         return circles;
     }
-
 }

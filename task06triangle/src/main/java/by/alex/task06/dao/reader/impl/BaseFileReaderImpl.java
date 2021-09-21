@@ -13,10 +13,16 @@ import java.util.stream.Stream;
 
 public final class BaseFileReaderImpl implements BaseFileReader {
 
-    public static final BaseFileReader READER = new BaseFileReaderImpl();
-
+    /**
+     * Logger of this class.
+     */
     private static final Logger LOGGER =
             LoggerFactory.getLogger(BaseFileReaderImpl.class);
+
+    /**
+     * Class instance (Singleton pattern).
+     */
+    public static final BaseFileReader READER = new BaseFileReaderImpl();
 
     private BaseFileReaderImpl() {
     }

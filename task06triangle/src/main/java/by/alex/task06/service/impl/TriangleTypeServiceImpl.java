@@ -3,6 +3,8 @@ package by.alex.task06.service.impl;
 import by.alex.task06.domain.CustomPoint;
 import by.alex.task06.domain.Triangle;
 import by.alex.task06.service.TriangleTypeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +12,28 @@ import java.util.Optional;
 
 public final class TriangleTypeServiceImpl implements TriangleTypeService {
 
+    /**
+     * @see Logger
+     */
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TriangleTypeServiceImpl.class);
+
+    /**
+     * Class instance (Singleton pattern).
+     */
     public static final TriangleTypeService SERVICE =
             new TriangleTypeServiceImpl();
 
+    /**
+     * Private class constructor.
+     */
     private TriangleTypeServiceImpl() {
     }
 
     @Override
     public List<Triangle.TriangleType> defineType(final Triangle triangle) {
 
+        LOGGER.trace("Defining triangle type");
         List<Triangle.TriangleType> types = new ArrayList<>();
         List<CustomPoint> points = triangle.getPoints();
 
@@ -47,6 +62,7 @@ public final class TriangleTypeServiceImpl implements TriangleTypeService {
             type = Triangle.TriangleType.ISOSCELES;
         }
 
+        LOGGER.trace("Triangle sides type: {}", type);
         return Optional.ofNullable(type);
     }
 
@@ -67,10 +83,12 @@ public final class TriangleTypeServiceImpl implements TriangleTypeService {
             }
         }
 
+        LOGGER.trace("Triangle angle type: {}", type);
         return type;
     }
 
     private double createLine(final CustomPoint p1, final CustomPoint p2) {
+        LOGGER.trace("Creating triangle line");
         return Math.hypot(p1.getX() - p2.getX(), p1.getY() - p2.getY());
     }
 

@@ -13,25 +13,43 @@ import java.util.List;
 
 public final class PointParserImpl implements FigureParser<CustomPoint> {
 
-    public static final PointParserImpl PARSER = new PointParserImpl();
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER =
             LoggerFactory.getLogger(PointParserImpl.class);
 
+    /**
+     * Class instance (Singleton pattern).
+     */
+    public static final PointParserImpl PARSER = new PointParserImpl();
+
+    /**
+     * Regular expression for space symbol.
+     */
     private static final String SPACE_REGEX = "\\s";
 
+    /**
+     * {@link FigureValidator} instance.
+     */
     private final FigureValidator validator;
 
+    /**
+     * Private class constructor.
+     */
     private PointParserImpl() {
         validator = new PointValidator();
     }
 
+    /**
+     * @see FigureParser
+     */
     @Override
     public List<CustomPoint> parse(final List<String> string) {
 
-        LOGGER.info("Parsing points file");
         List<CustomPoint> points = new ArrayList<>();
         for (String line : string) {
+            LOGGER.info("Parsing points file line: {}", line);
             if (!validator.isFileLineMatchesRegex(line)) {
                 LOGGER.warn("Wrong values in point file line: {}", line);
                 break;

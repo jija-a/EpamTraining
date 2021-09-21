@@ -16,15 +16,30 @@ import java.util.List;
 
 public final class TriangleParserImpl implements FigureParser<Triangle> {
 
-    public static final TriangleParserImpl PARSER = new TriangleParserImpl();
-
+    /**
+     * @see Logger
+     */
     private static final Logger LOGGER =
             LoggerFactory.getLogger(TriangleParserImpl.class);
 
+    /**
+     * Class instance (Singleton pattern).
+     */
+    public static final TriangleParserImpl PARSER = new TriangleParserImpl();
+
+    /**
+     * Regular expression for space symbol.
+     */
     private static final String SPACE_REGEX = "\\s";
 
+    /**
+     * {@link FigureValidator} instance.
+     */
     private final FigureValidator validator;
 
+    /**
+     * Private class constructor.
+     */
     private TriangleParserImpl() {
         this.validator = new TriangleValidator();
     }
@@ -32,13 +47,13 @@ public final class TriangleParserImpl implements FigureParser<Triangle> {
     @Override
     public List<Triangle> parse(final List<String> string) {
 
-        LOGGER.info("Parsing triangles file");
         List<Triangle> triangles = new ArrayList<>();
 
         for (String line : string) {
+            LOGGER.info("Parsing triangles file line: {}", line);
             if (!validator.isFileLineMatchesRegex(line)) {
                 LOGGER.warn("Wrong values in triangles file line: {}", line);
-                break;
+                continue;
             }
 
             String[] data = line.split(SPACE_REGEX);
@@ -51,9 +66,10 @@ public final class TriangleParserImpl implements FigureParser<Triangle> {
                         .getPointsParser().parse(pointLines));
             }
 
+            String name = data[data.length - 1];
             try {
                 Triangle triangle = FigureCreatorFactory
-                        .getTriangleCreator().create(points, "name");
+                        .getTriangleCreator().create(points, name);
                 triangles.add(triangle);
             } catch (WrongArgumentsException e) {
                 LOGGER.warn("Creator provided exception: ", e);

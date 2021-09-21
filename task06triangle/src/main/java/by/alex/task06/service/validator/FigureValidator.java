@@ -1,6 +1,13 @@
 package by.alex.task06.service.validator;
 
-public abstract class FigureValidator {
+public interface FigureValidator {
 
-    public abstract boolean isFileLineMatchesRegex(String line);
+    /**
+     * Method to check if line of file matches
+     * regular expression.
+     *
+     * @param line - file line
+     * @return true - if matches, else - false
+     */
+    boolean isFileLineMatchesRegex(String line);
 }
