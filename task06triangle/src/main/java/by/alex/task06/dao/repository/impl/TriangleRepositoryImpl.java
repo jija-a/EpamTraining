@@ -109,18 +109,24 @@ public final class TriangleRepositoryImpl implements Repository<Triangle> {
     }
 
     @Override
-    public List<Triangle> query(final FindSpecification<Triangle> specification)
+    public List<Triangle> findAll() {
+        LOGGER.info("Getting all entities from triangles repository");
+        return new ArrayList<>(triangles.values());
+    }
+
+    @Override
+    public List<Triangle> queryFind(final FindSpecification<Triangle> spec)
             throws RepositoryException {
 
         LOGGER.info("Searching for triangle in repository");
-        if (!(specification instanceof TriangleFindSpecification)) {
+        if (!(spec instanceof TriangleFindSpecification)) {
             throw new RepositoryException("Unable to complete query: "
                     + "Specification must be instance of find");
         }
 
         List<Triangle> listToReturn = new ArrayList<>();
         this.triangles.forEach((id, triangle) -> {
-            if (specification.isSpecified(triangle)) {
+            if (spec.isSpecified(triangle)) {
                 listToReturn.add(triangle);
             }
         });
@@ -129,11 +135,11 @@ public final class TriangleRepositoryImpl implements Repository<Triangle> {
     }
 
     @Override
-    public List<Triangle> sort(final SortSpecification<Triangle> specification)
+    public List<Triangle> querySort(final SortSpecification<Triangle> spec)
             throws RepositoryException {
 
         LOGGER.info("Sorting triangles in repository");
-        if (!(specification instanceof TriangleSortSpecification)) {
+        if (!(spec instanceof TriangleSortSpecification)) {
             throw new RepositoryException("Unable to complete sorting: "
                     + "Specification must be instance of sort");
         }
@@ -143,7 +149,7 @@ public final class TriangleRepositoryImpl implements Repository<Triangle> {
             listToReturn.add(triangle.getValue());
         }
 
-        listToReturn.sort(specification);
+        listToReturn.sort(spec);
         return listToReturn;
     }
 

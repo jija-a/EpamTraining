@@ -12,7 +12,7 @@ public interface Repository<T> {
      * Add and notify {@link by.alex.task06.service.observer.FigureObserver}
      * about it.
      *
-     * @param entity - {@link by.alex.task06.domain.Figure} child.
+     * @param entity - <T>
      */
     void add(T entity);
 
@@ -21,7 +21,7 @@ public interface Repository<T> {
      * Remove {@link by.alex.task06.service.observer.FigureObserver}
      * from it.
      *
-     * @param entity - {@link by.alex.task06.domain.Figure} child.
+     * @param entity - <T>
      */
     void remove(T entity);
 
@@ -30,18 +30,25 @@ public interface Repository<T> {
      * Notify {@link by.alex.task06.service.observer.FigureObserver}
      * about it.
      *
-     * @param entity - {@link by.alex.task06.domain.Figure} child.
+     * @param entity - <T>
      */
     void update(T entity) throws RepositoryException;
+
+    /**
+     * Method to find all entities of <T> type in repository.
+     *
+     * @return list of <T>
+     */
+    List<T> findAll();
 
     /**
      * Method to search entity in repository by certain
      * {@link FindSpecification}.
      *
      * @param specification - {@link FindSpecification} implementation
-     * @return list of {@link by.alex.task06.domain.Figure} child
+     * @return list of <T>
      */
-    List<T> query(FindSpecification<T> specification)
+    List<T> queryFind(FindSpecification<T> specification)
             throws RepositoryException;
 
     /**
@@ -49,8 +56,8 @@ public interface Repository<T> {
      * in repository and return it.
      *
      * @param specification - {@link SortSpecification} implementation
-     * @return list of {@link by.alex.task06.domain.Figure} child
+     * @return list of <T>
      */
-    List<T> sort(SortSpecification<T> specification)
+    List<T> querySort(SortSpecification<T> specification)
             throws RepositoryException;
 }

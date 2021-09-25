@@ -106,7 +106,13 @@ public final class CircleRepositoryImpl implements Repository<Circle> {
     }
 
     @Override
-    public List<Circle> query(final FindSpecification<Circle> specification)
+    public List<Circle> findAll() {
+        LOGGER.info("Getting all entities from circles repository");
+        return new ArrayList<>(circles.values());
+    }
+
+    @Override
+    public List<Circle> queryFind(final FindSpecification<Circle> specification)
             throws RepositoryException {
 
         LOGGER.info("Searching for circle in repository");
@@ -126,7 +132,7 @@ public final class CircleRepositoryImpl implements Repository<Circle> {
     }
 
     @Override
-    public List<Circle> sort(final SortSpecification<Circle> specification)
+    public List<Circle> querySort(final SortSpecification<Circle> specification)
             throws RepositoryException {
 
         LOGGER.info("Sorting circles in repository");
