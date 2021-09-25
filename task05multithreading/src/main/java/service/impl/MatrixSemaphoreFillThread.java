@@ -24,27 +24,26 @@ class MatrixSemaphoreFillThread implements Runnable {
 
         if (!isDone.get()) {
             int index = 0;
-            while (index != -1 && !isDone.get()) {
-                try {
-                    semaphore.acquire();
-                    index = findEmptyIndex();
-                    if (index != -1) {
-                        matrix.setElement(index, index, id);
-                    }
-                    TimeUnit.MILLISECONDS.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    Thread.currentThread().interrupt();
-                } finally {
-                    semaphore.release();
+            try {
+                semaphore.acquire();
+                index = findEmptyIndex(index);
+                if (index != -1) {
+                    matrix.setElement(index, index, id);
+                } else {
+                    isDone.set(true);
                 }
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            } finally {
+                semaphore.release();
             }
         }
-
     }
 
-    private int findEmptyIndex() {
-        for (int i = 0; i < matrix.getRows(); i++) {
+    private int findEmptyIndex(int index) {
+        for (int i = index; i < matrix.getRows(); i++) {
             if (matrix.getElement(i, i) == 0) {
                 return i;
             }

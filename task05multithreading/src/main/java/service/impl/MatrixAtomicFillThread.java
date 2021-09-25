@@ -19,17 +19,17 @@ public class MatrixAtomicFillThread implements Runnable {
 
     @Override
     public void run() {
-
-        if (!isDone.get()) {
-            int index = 0;
-            while (index != -1 && !isDone.get()) {
-                index = findEmptyIndex();
-                if (index != -1) {
+        int index = -1;
+        while (!isDone.get()) {
+            index = findEmptyIndex();
+            if (index != -1) {
+                index = lastIndex.incrementAndGet();
+                if (index < matrix.getRows()) {
                     matrix.setElement(index, index, id);
-                    lastIndex.incrementAndGet();
+                } else {
+                    isDone.set(true);
                 }
             }
-            isDone.set(true);
         }
     }
 
