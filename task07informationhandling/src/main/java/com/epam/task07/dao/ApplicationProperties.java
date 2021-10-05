@@ -40,7 +40,7 @@ public final class ApplicationProperties {
      * Method read application.properties file and initializes class fields.
      */
     public void init() throws InitializingError {
-        LOGGER.trace("Initializing application configuration");
+        LOGGER.info("Initializing application configuration");
         try {
             ResourceBundle rb = ResourceBundle.getBundle("application");
             inputDir = rb.getString("application.dir.name");

@@ -34,7 +34,7 @@ public final class TextStorage {
      * @return new {@link TextComponent} instance with storing components
      */
     public TextComponent getText() {
-        LOGGER.info("Returning new Composite instance");
+        LOGGER.trace("Returning new Composite instance");
         return new Composite(component);
     }
 

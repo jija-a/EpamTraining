@@ -75,7 +75,7 @@ public class WordParser implements TextParser {
         TextComponent word = successor.parse(builder.toString());
         lexeme.add(word);
 
-        LOGGER.info("Word parsed");
+        LOGGER.trace("Word parsed");
         return lexeme;
     }
 }

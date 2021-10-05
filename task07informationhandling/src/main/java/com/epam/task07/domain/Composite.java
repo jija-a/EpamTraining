@@ -134,7 +134,22 @@ public class Composite implements TextComponent {
                 LOGGER.error("Interpreter throws exception: ", e);
             }
         }
+
+        this.setBefore();
+        this.setAfter();
         return printBefore + text + printAfter;
+    }
+
+    private void setBefore() {
+        if (this.printBefore == null) {
+            this.printBefore = "";
+        }
+    }
+
+    private void setAfter() {
+        if (this.printAfter == null) {
+            this.printAfter = "";
+        }
     }
 
 }

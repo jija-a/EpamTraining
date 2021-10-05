@@ -50,7 +50,7 @@ public class LexemeParser implements TextParser {
             TextComponent lexeme = successor.parse(lexemeText);
             sentence.add(lexeme);
         }
-        LOGGER.info("Lexemes parsed");
+        LOGGER.trace("Lexemes parsed");
         return sentence;
     }
 }

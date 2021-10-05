@@ -54,7 +54,7 @@ public class ParagraphParser implements TextParser {
             }
         }
 
-        LOGGER.info("Paragraphs parsed");
+        LOGGER.trace("Paragraphs parsed");
         return baseText;
     }
 }

@@ -8,6 +8,12 @@ import com.epam.task07.dao.reader.BaseFileReader;
 import com.epam.task07.dao.reader.impl.BaseFileReaderImpl;
 import com.epam.task07.dao.repository.TextStorage;
 import com.epam.task07.domain.TextComponent;
+import com.epam.task07.service.SortService;
+import com.epam.task07.service.sort.LexemeSortService;
+import com.epam.task07.service.sort.ParagraphSortService;
+import com.epam.task07.service.sort.WordSortService;
+import com.epam.task07.service.sort.specification.LengthSpecification;
+import com.epam.task07.service.sort.specification.SymbolOccurrenceSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,9 +39,9 @@ public class Main {
         TextComponent parsedComponent = parser.parse(originalText);
         TextStorage.STORAGE.setText(parsedComponent);
 
-        String text = TextStorage.STORAGE.getText().collect();
-        LOGGER.info("Collected text:\n{}", text);
-        /*        /////////////////////////////////////////////////////////////////////
+        String collected = TextStorage.STORAGE.getText().collect();
+        LOGGER.info("Collected:\n{}", collected);
+       /*         /////////////////////////////////////////////////////////////////////
         //Sorting by sentence qty
         SortService paragraphSortService = new ParagraphSortService();
 
@@ -73,6 +79,6 @@ public class Main {
         String collectedTextBySymbol = sortedTextBySymbol.collect();
         LOGGER.info("Sorted text:\n{}", collectedTextBySymbol);
         /////////////////////////////////////////////////////////////////////
-        */
+*/
     }
 }

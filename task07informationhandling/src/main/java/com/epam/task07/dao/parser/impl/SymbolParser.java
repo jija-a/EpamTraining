@@ -32,7 +32,7 @@ public class SymbolParser implements TextParser {
             word.add(symbol);
         }
 
-        LOGGER.info("Symbols parsed");
+        LOGGER.trace("Symbols parsed");
         return word;
     }
 }

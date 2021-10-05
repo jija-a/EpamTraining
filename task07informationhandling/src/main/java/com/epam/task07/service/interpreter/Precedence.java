@@ -2,11 +2,14 @@ package com.epam.task07.service.interpreter;
 
 import java.util.Map;
 
-public class Precedence {
+public final class Precedence {
 
+    /**
+     * Map of operation as a key and precedence level as a value.
+     */
     private static final Map<String, Integer> OPERATION_PRECEDENCE = initMap();
 
-    private Precedence(){
+    private Precedence() {
     }
 
     private static Map<String, Integer> initMap() {
@@ -64,7 +67,13 @@ public class Precedence {
         );
     }
 
-    public static int precedence(String c) {
+    /**
+     * Method to define operation precedence.
+     *
+     * @param c - operation
+     * @return {@link Integer} precedence
+     */
+    public static int precedence(final String c) {
         return OPERATION_PRECEDENCE.getOrDefault(c, 0);
     }
 }

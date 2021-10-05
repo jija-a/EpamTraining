@@ -54,7 +54,7 @@ public class SentenceParser implements TextParser {
             paragraph.add(sentence);
         }
 
-        LOGGER.info("Sentences parsed");
+        LOGGER.trace("Sentences parsed");
         return paragraph;
     }
 }

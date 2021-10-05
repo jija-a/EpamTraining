@@ -1,9 +1,20 @@
 package com.epam.task07.service.validator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class TextComponentValidator {
+
+    /**
+     * Class logger.
+     *
+     * @see Logger
+     */
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TextComponentValidator.class);
 
     /**
      * Pattern to define if {@link String} is math expression.
@@ -29,8 +40,13 @@ public final class TextComponentValidator {
      * @return true - if expression, false if not
      */
     public boolean isExpression(final String text) {
+        LOGGER.trace("Validating if string is expression: {}", text);
+        boolean result;
         Pattern pattern = Pattern.compile(MATH_PATTERN);
         Matcher matcher = pattern.matcher(text);
-        return matcher.find();
+
+        result = matcher.find();
+        LOGGER.trace("{} - is expression - {}", text, result);
+        return result;
     }
 }
