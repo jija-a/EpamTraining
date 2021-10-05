@@ -14,56 +14,56 @@ public final class Precedence {
 
     private static Map<String, Integer> initMap() {
         return Map.ofEntries(
-                Map.entry("++", 14),
-                Map.entry("--", 14),
+                Map.entry("++", PrecedenceLvlConstant.FOURTEEN),
+                Map.entry("--", PrecedenceLvlConstant.FOURTEEN),
 
-                Map.entry("new", 13),
+                Map.entry("new", PrecedenceLvlConstant.THIRTEEN),
 
-                Map.entry("*", 12),
-                Map.entry("/", 12),
-                Map.entry("%", 12),
-                Map.entry("~", 12),
+                Map.entry("*", PrecedenceLvlConstant.TWELVE),
+                Map.entry("/", PrecedenceLvlConstant.TWELVE),
+                Map.entry("%", PrecedenceLvlConstant.TWELVE),
+                Map.entry("~", PrecedenceLvlConstant.TWELVE),
 
-                Map.entry("+", 11),
-                Map.entry("-", 11),
+                Map.entry("+", PrecedenceLvlConstant.ELEVEN),
+                Map.entry("-", PrecedenceLvlConstant.ELEVEN),
 
-                Map.entry(">>", 10),
-                Map.entry("<<", 10),
-                Map.entry(">>>", 10),
+                Map.entry(">>", PrecedenceLvlConstant.TEN),
+                Map.entry("<<", PrecedenceLvlConstant.TEN),
+                Map.entry(">>>", PrecedenceLvlConstant.TEN),
 
-                Map.entry("<", 9),
-                Map.entry(">", 9),
-                Map.entry("<=", 9),
-                Map.entry(">=", 9),
-                Map.entry("instanceof", 9),
+                Map.entry("<", PrecedenceLvlConstant.NINE),
+                Map.entry(">", PrecedenceLvlConstant.NINE),
+                Map.entry("<=", PrecedenceLvlConstant.NINE),
+                Map.entry(">=", PrecedenceLvlConstant.NINE),
+                Map.entry("instanceof", PrecedenceLvlConstant.NINE),
 
-                Map.entry("==", 8),
-                Map.entry("!=", 8),
+                Map.entry("==", PrecedenceLvlConstant.EIGHT),
+                Map.entry("!=", PrecedenceLvlConstant.EIGHT),
 
-                Map.entry("&", 7),
+                Map.entry("&", PrecedenceLvlConstant.SEVEN),
 
-                Map.entry("^", 6),
+                Map.entry("^", PrecedenceLvlConstant.SIX),
 
-                Map.entry("|", 5),
+                Map.entry("|", PrecedenceLvlConstant.FIVE),
 
-                Map.entry("&&", 4),
+                Map.entry("&&", PrecedenceLvlConstant.FOUR),
 
-                Map.entry("||", 3),
+                Map.entry("||", PrecedenceLvlConstant.THREE),
 
-                Map.entry("?", 2),
-                Map.entry(":", 2),
+                Map.entry("?", PrecedenceLvlConstant.TWO),
+                Map.entry(":", PrecedenceLvlConstant.TWO),
 
-                Map.entry("=", 1),
-                Map.entry("+=", 1),
-                Map.entry("-=", 1),
-                Map.entry("*=", 1),
-                Map.entry("/=", 1),
-                Map.entry("%=", 1),
-                Map.entry("^=", 1),
-                Map.entry("|=", 1),
-                Map.entry("<<=", 1),
-                Map.entry(">>=", 1),
-                Map.entry(">>>=", 1)
+                Map.entry("=", PrecedenceLvlConstant.ONE),
+                Map.entry("+=", PrecedenceLvlConstant.ONE),
+                Map.entry("-=", PrecedenceLvlConstant.ONE),
+                Map.entry("*=", PrecedenceLvlConstant.ONE),
+                Map.entry("/=", PrecedenceLvlConstant.ONE),
+                Map.entry("%=", PrecedenceLvlConstant.ONE),
+                Map.entry("^=", PrecedenceLvlConstant.ONE),
+                Map.entry("|=", PrecedenceLvlConstant.ONE),
+                Map.entry("<<=", PrecedenceLvlConstant.ONE),
+                Map.entry(">>=", PrecedenceLvlConstant.ONE),
+                Map.entry(">>>=", PrecedenceLvlConstant.ONE)
         );
     }
 

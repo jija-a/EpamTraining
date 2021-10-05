@@ -19,7 +19,7 @@ public final class TextComponentValidator {
     /**
      * Pattern to define if {@link String} is math expression.
      */
-    private static final String MATH_PATTERN = "^?(\\d)[\\d+*/().,~><|&]+$";
+    private static final String MATH_PATTERN = "[^\\D]+[|^~&><]+";
 
     /**
      * Class instance. Singleton pattern.
