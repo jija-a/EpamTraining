@@ -16,6 +16,8 @@
         <module>demothreads</module>
         <module>task05multithreading</module>
         <module>task06triangle</module>
+        <module>task07informationhandling</module>
+        <module>task08xml</module>
     </modules>
 
     <properties>
