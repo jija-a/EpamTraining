@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/papers"
+        xmlns:tns="http://www.example.org/papers" elementFormDefault="qualified">
+
+    <element name="paper" type="tns:Paper" abstract="true"/>
+    <element name="journal" type="tns:Journal" substitutionGroup="tns:paper"/>
+    <element name="newspaper" type="tns:Newspaper" substitutionGroup="tns:paper"/>
+    <element name="magazine" type="tns:Magazine" substitutionGroup="tns:paper"/>
+
+    <element name="papers">
+        <complexType>
+            <sequence>
+                <element ref="tns:paper"
+                         minOccurs="2"
+                         maxOccurs="16"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="Paper">
+        <sequence>
+            <element name="title" type="string"/>
+            <element name="Chars" type="tns:Chars"/>
+        </sequence>
+        <attribute name="id" type="long" use="required"/>
+    </complexType>
+
+    <complexType name="Chars">
+        <sequence>
+            <element name="volume" type="positiveInteger"/>
+            <element name="monthly" type="boolean"/>
+            <element name="color" type="boolean"/>
+            <element name="glance" type="boolean"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Journal">
+        <complexContent>
+            <extension base="tns:Paper">
+                <sequence>
+                    <element name="index" type="string"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="Newspaper">
+        <complexContent>
+            <extension base="tns:Paper">
+                <sequence>
+                    <element name="index" type="string"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="Magazine">
+        <complexContent>
+            <extension base="tns:Paper">
+            </extension>
+        </complexContent>
+    </complexType>
+
+</schema>
