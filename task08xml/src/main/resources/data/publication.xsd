@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/publication"
+        xmlns:tns="http://www.example.org/publication" elementFormDefault="qualified">
+
+    <element name="publications">
+        <complexType>
+            <sequence>
+                <element name="publication" type="tns:Publication"
+                         minOccurs="1"
+                         maxOccurs="16"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="Publication">
+        <sequence>
+            <element name="title" type="string"/>
+            <element name="type">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="JOURNAL"/>
+                        <enumeration value="MAGAZINE"/>
+                        <enumeration value="BOOKLET"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="monthly" type="boolean"/>
+            <element name="Chars" type="tns:Chars"/>
+        </sequence>
+        <attribute name="id" type="string" use="required"/>
+    </complexType>
+
+    <complexType name="Chars">
+        <sequence>
+            <element name="color" type="boolean"/>
+            <element name="page-qty" type="int"/>
+            <element name="glance" type="boolean"/>
+            <element name="index" type="boolean"/>
+        </sequence>
+    </complexType>
+
+</schema>
