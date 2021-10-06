@@ -6,7 +6,7 @@ public class Booklet extends Paper {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         return super.equals(o);
     }
 

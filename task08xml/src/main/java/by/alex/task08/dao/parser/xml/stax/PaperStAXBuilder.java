@@ -1,9 +1,9 @@
 package by.alex.task08.dao.parser.xml.stax;
 
+import by.alex.task08.dao.DaoException;
+import by.alex.task08.dao.parser.xml.AbstractPaperBuilder;
 import by.alex.task08.dao.parser.PaperEnum;
-import by.alex.task08.domain.Booklet;
-import by.alex.task08.domain.Newspaper;
-import by.alex.task08.domain.Paper;
+import by.alex.task08.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,122 +14,108 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
-public class PaperStAXBuilder {
+public class PaperStAXBuilder extends AbstractPaperBuilder {
 
     private static final Logger LOGGER =
             LoggerFactory.getLogger(PaperStAXBuilder.class);
 
-    private final Set<Paper> papers;
     private final XMLInputFactory inputFactory;
 
     public PaperStAXBuilder() {
-        this.papers = new HashSet<>();
         this.inputFactory = XMLInputFactory.newInstance();
     }
 
-    public Set<Paper> getPapers() {
-        return this.papers;
-    }
-
-    public void buildSetPapers(String fileName) {
-        FileInputStream inputStream = null;
-        XMLStreamReader reader = null;
+    @Override
+    public void buildSetPapers(String filename) throws DaoException {
+        XMLStreamReader reader;
         String name;
-        try {
-            inputStream = new FileInputStream(fileName);
+        try (FileInputStream inputStream = new FileInputStream(filename)) {
             reader = inputFactory.createXMLStreamReader(inputStream);
-            // StAX parsing
             while (reader.hasNext()) {
                 int type = reader.next();
                 if (type == XMLStreamConstants.START_ELEMENT) {
                     name = reader.getLocalName();
-                    if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.NEWSPAPER) {
-                        Paper paper = buildPaper(reader);
-                        papers.add(paper);
+                    PaperEnum tag = PaperEnum.resolveFiledByString(name);
+                    switch (tag) {
+                        case NEWSPAPER:
+                            Paper paper = new Newspaper();
+                            buildPaper(reader, paper);
+                            this.getPapers().add(paper);
+                            break;
+                        case MAGAZINE:
+                            paper = new Magazine();
+                            buildPaper(reader, paper);
+                            this.getPapers().add(paper);
+                            break;
+                        case BOOKLET:
+                            paper = new Booklet();
+                            buildPaper(reader, paper);
+                            this.getPapers().add(paper);
+                            break;
                     }
                 }
             }
-        } catch (XMLStreamException ex) {
-            LOGGER.error("StAX parsing error! " + ex.getMessage());
-        } catch (FileNotFoundException ex) {
-            LOGGER.error("File " + fileName + " not found! " + ex);
-        } finally {
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (IOException e) {
-                LOGGER.error("Impossible close file " + fileName + " : " + e);
-            }
+        } catch (XMLStreamException | FileNotFoundException e) {
+            throw new DaoException("parsing error", e);
+        } catch (IOException e) {
+            throw new DaoException(filename + " is not found", e);
         }
     }
 
-    private Paper buildPaper(XMLStreamReader reader) throws XMLStreamException {
-        Newspaper pp = new Newspaper();
-        pp.setId(Long.valueOf(reader.getAttributeValue(null, PaperEnum.ID.getValue())));
+    private Paper buildPaper(XMLStreamReader reader, Paper paper) throws XMLStreamException {
+        paper.setId(Long.valueOf(reader.getAttributeValue(null, PaperEnum.ID.getValue())));
+        String genreText = reader.getAttributeValue(null, PaperEnum.GENRE.getValue());
+        if (genreText != null) {
+            PaperGenre genre = PaperGenre.resolveGenreByString(genreText);
+            paper.getChars().setGenre(genre);
+        }
+
         String name;
         while (reader.hasNext()) {
             int type = reader.next();
-            if (type == XMLStreamConstants.START_ELEMENT) {
-                name = reader.getLocalName();
-                switch (PaperEnum.valueOf(name.toUpperCase())) {
-                    case TITLE:
-                        pp.setTitle(getXMLText(reader));
-                        break;
-                    case SUBSCRIPT_INDEX:
-                        name = getXMLText(reader);
-                        pp.setIndex(name);
-                        break;
-                    /*case CHARS:
-                        pp.set(getXMLAddress(reader));
-                        break;*/
-                }
-            } else if (type == XMLStreamConstants.END_ELEMENT) {
-                name = reader.getLocalName();
-                if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.NEWSPAPER) {
-                    return pp;
-                }
-            }
-        }
-        throw new XMLStreamException("Unknown element in tag Student");
-    }
-
-    private Paper.Chars getXMLAddress(XMLStreamReader reader) throws XMLStreamException {
-        Paper.Chars chars = new Paper.Chars();
-        int type;
-        String name;
-        while (reader.hasNext()) {
-            type = reader.next();
             switch (type) {
                 case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
-                    switch (PaperEnum.valueOf(name.toUpperCase())) {
-                        case IS_GLANCE:
-                            chars.setGlance(Boolean.parseBoolean(getXMLText(reader)));
-                            break;
-                        case VOLUME:
-                            chars.setVolume(Integer.valueOf(getXMLText(reader)));
+                    PaperEnum tag = PaperEnum.resolveFiledByString(name);
+                    switch (tag) {
+                        case TITLE:
+                            paper.setTitle(getXMLText(reader));
                             break;
                         case IS_MONTHLY:
-                            chars.setMonthly(Boolean.parseBoolean(getXMLText(reader)));
+                            paper.getChars().setMonthly(Boolean.parseBoolean(getXMLText(reader)));
                             break;
                         case IS_COLOR:
-                            chars.setColor(Boolean.parseBoolean(getXMLText(reader)));
+                            paper.getChars().setColor(Boolean.parseBoolean(getXMLText(reader)));
+                            break;
+                        case VOLUME:
+                            paper.getChars().setVolume(Integer.valueOf(getXMLText(reader)));
+                            break;
+                        case IS_GLANCE:
+                            paper.getChars().setGlance(Boolean.parseBoolean(getXMLText(reader)));
+                            break;
+                        case SUBSCRIPT_INDEX:
+                            if (paper instanceof Newspaper) {
+                                ((Newspaper) paper).setIndex(getXMLText(reader));
+                            }
+                            if (paper instanceof Magazine) {
+                                ((Magazine) paper).setIndex(getXMLText(reader));
+                            }
                             break;
                     }
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     name = reader.getLocalName();
-                    if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.CHARS) {
-                        return chars;
+                    PaperEnum paperEnum = PaperEnum.resolveFiledByString(name);
+                    if (PaperEnum.NEWSPAPER.equals(paperEnum)
+                            || PaperEnum.MAGAZINE.equals(paperEnum)
+                            || PaperEnum.BOOKLET.equals(paperEnum)) {
+                        return paper;
                     }
                     break;
             }
         }
-        throw new XMLStreamException("Unknown element in tag Address");
+        throw new XMLStreamException("Unknown element in tag Paper");
     }
 
     private String getXMLText(XMLStreamReader reader) throws XMLStreamException {

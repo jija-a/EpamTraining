@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<papers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.example.org/papers"
+        xsi:schemaLocation="http://www.example.org/papers papersTest.xsd">
+
+    <newspaper id="1" genre="education">
+        <title>Guardian</title>
+        <Chars>
+            <volume>40</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>false</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+        <subscript-index>123412</subscript-index>
+    </newspaper>
+
+    <magazine id="2">
+        <title>Cars</title>
+        <Chars>
+            <volume>20</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+        <subscript-index>124332</subscript-index>
+    </magazine>
+
+</papers>

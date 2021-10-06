@@ -1,7 +1,5 @@
 package by.alex.task08.dao.parser;
 
-import by.alex.task08.domain.PaperGenre;
-
 public enum PaperEnum {
     PAPERS("papers"),
     BOOKLET("booklet"),
@@ -31,7 +29,7 @@ public enum PaperEnum {
         PaperEnum toReturn = null;
 
         for (PaperEnum filed : values()) {
-            if (filed.getValue().equals(filedStr)) {
+            if (filed.getValue().equals(filedStr.toLowerCase())) {
                 toReturn = filed;
             }
         }

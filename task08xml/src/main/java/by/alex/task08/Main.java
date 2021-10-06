@@ -1,15 +1,14 @@
 package by.alex.task08;
 
-import by.alex.task08.dao.parser.xml.dom.PaperDOMBuilder;
-import by.alex.task08.dao.parser.xml.sax.PaperSAXBuilder;
-import by.alex.task08.dao.parser.xml.stax.PaperStAXBuilder;
+import by.alex.task08.dao.DaoException;
+import by.alex.task08.dao.parser.xml.AbstractPaperBuilder;
+import by.alex.task08.dao.parser.xml.PaperXMLBuilderFactory;
 import by.alex.task08.domain.Paper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
-import java.util.HashSet;
 import java.util.Set;
 
 public class Main {
@@ -19,26 +18,16 @@ public class Main {
 
     public static void main(String[] args) {
         String absolutePath = getAbsolutePath();
-        Set<Paper> papers = runSAXBuilder(absolutePath);
-        printPapers(papers);
-    }
+        try {
+            PaperXMLBuilderFactory factory = new PaperXMLBuilderFactory();
+            AbstractPaperBuilder builder = factory.getPaperDOMBuilder();
+            builder.buildSetPapers(absolutePath);
 
-    private static Set<Paper> runStAXBuilder(String absolutePath) {
-        PaperStAXBuilder stAXBuilder = new PaperStAXBuilder();
-        stAXBuilder.buildSetPapers(absolutePath);
-        return stAXBuilder.getPapers();
-    }
-
-    private static Set<Paper> runDOMBuilder(String absolutePath) {
-        PaperDOMBuilder domBuilder = new PaperDOMBuilder();
-        domBuilder.buildSetPapers(absolutePath);
-        return domBuilder.getPapers();
-    }
-
-    private static Set<Paper> runSAXBuilder(String filePath) {
-        PaperSAXBuilder builder = new PaperSAXBuilder();
-        builder.buildSetPapers(filePath);
-        return builder.getPapers();
+            Set<Paper> papers = builder.getPapers();
+            printPapers(papers);
+        } catch (DaoException e) {
+            LOGGER.error("Dao exception: ", e);
+        }
     }
 
     private static String getAbsolutePath() {

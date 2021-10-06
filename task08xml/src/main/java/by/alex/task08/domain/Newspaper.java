@@ -7,7 +7,10 @@ public class Newspaper extends Paper {
     private String index;
 
     public Newspaper() {
-        super();
+    }
+
+    public Newspaper(String index) {
+        this.index = index;
     }
 
     public String getIndex() {
