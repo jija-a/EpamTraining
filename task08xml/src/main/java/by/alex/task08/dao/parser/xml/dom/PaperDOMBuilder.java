@@ -1,6 +1,7 @@
 package by.alex.task08.dao.parser.xml.dom;
 
 import by.alex.task08.domain.Booklet;
+import by.alex.task08.domain.Newspaper;
 import by.alex.task08.domain.Paper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +59,7 @@ public class PaperDOMBuilder {
     }
 
     private Paper buildPaper(Element paperElement) {
-        Booklet paper = new Booklet();
+        Newspaper paper = new Newspaper();
 
         LOGGER.info("Setting 'paper' fields");
         paper.setId(Long.valueOf(paperElement.getAttribute("id")));

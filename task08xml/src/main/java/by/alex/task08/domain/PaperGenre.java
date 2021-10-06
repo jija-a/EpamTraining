@@ -16,4 +16,15 @@ public enum PaperGenre {
     public String getValue() {
         return this.value;
     }
+
+    public static PaperGenre resolveGenreByString(String genreStr) {
+        PaperGenre toReturn = PaperGenre.NEWS;
+
+        for (PaperGenre genre : values()) {
+            if (genre.getValue().equals(genreStr)) {
+                toReturn = genre;
+            }
+        }
+        return toReturn;
+    }
 }

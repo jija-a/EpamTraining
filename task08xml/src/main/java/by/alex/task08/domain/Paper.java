@@ -63,6 +63,10 @@ public abstract class Paper {
         private boolean color;
         private boolean glance;
 
+        public Chars() {
+            this.genre = PaperGenre.NEWS;
+        }
+
         public Integer getVolume() {
             return volume;
         }

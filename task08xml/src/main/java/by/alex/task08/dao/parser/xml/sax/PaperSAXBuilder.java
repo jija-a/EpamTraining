@@ -18,16 +18,18 @@ public class PaperSAXBuilder {
             LoggerFactory.getLogger(PaperSAXBuilder.class);
 
     private Set<Paper> papers;
-    private PaperHandler handler;
+    private final PaperHandler contentHandler;
     private XMLReader reader;
 
     public PaperSAXBuilder() {
-        handler = new PaperHandler();
+        contentHandler = new PaperHandler();
+        PaperErrorHandler errorHandler = new PaperErrorHandler();
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
             SAXParser parser = parserFactory.newSAXParser();
             reader = parser.getXMLReader();
-            reader.setContentHandler(handler);
+            reader.setContentHandler(contentHandler);
+            reader.setErrorHandler(errorHandler);
         } catch (ParserConfigurationException e) {
             LOGGER.error("Parser configuration error: ", e);
         } catch (SAXException e) {
@@ -47,6 +49,6 @@ public class PaperSAXBuilder {
         } catch (SAXException e) {
             LOGGER.error("SAX parser error: ", e);
         }
-        papers = handler.getPapers();
+        papers = contentHandler.getPapers();
     }
 }

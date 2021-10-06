@@ -22,6 +22,7 @@
             <element name="title" type="string"/>
             <element name="Chars" type="tns:Chars"/>
         </sequence>
+        <attribute name="genre" type="tns:Genre" default="news"/>
         <attribute name="id" type="long" use="required"/>
     </complexType>
 
@@ -41,7 +42,6 @@
             <element name="is-color" type="boolean"/>
             <element name="is-glance" type="boolean"/>
         </sequence>
-        <attribute name="genre" type="tns:Genre" default="news"/>
     </complexType>
 
     <complexType name="Booklet">

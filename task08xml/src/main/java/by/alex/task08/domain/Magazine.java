@@ -33,8 +33,8 @@ public class Magazine extends Paper {
 
     @Override
     public String toString() {
-        return "Magazine{" +
-                "index='" + index + '\'' +
+        return super.toString() +
+                "{index='" + index + '\'' +
                 '}';
     }
 }

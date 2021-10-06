@@ -2,6 +2,7 @@ package by.alex.task08.dao.parser.xml.stax;
 
 import by.alex.task08.dao.parser.PaperEnum;
 import by.alex.task08.domain.Booklet;
+import by.alex.task08.domain.Newspaper;
 import by.alex.task08.domain.Paper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,7 @@ public class PaperStAXBuilder {
                 int type = reader.next();
                 if (type == XMLStreamConstants.START_ELEMENT) {
                     name = reader.getLocalName();
-                    if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.JOURNAL) {
+                    if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.NEWSPAPER) {
                         Paper paper = buildPaper(reader);
                         papers.add(paper);
                     }
@@ -67,7 +68,7 @@ public class PaperStAXBuilder {
     }
 
     private Paper buildPaper(XMLStreamReader reader) throws XMLStreamException {
-        Booklet pp = new Booklet();
+        Newspaper pp = new Newspaper();
         pp.setId(Long.valueOf(reader.getAttributeValue(null, PaperEnum.ID.getValue())));
         String name;
         while (reader.hasNext()) {
@@ -78,17 +79,17 @@ public class PaperStAXBuilder {
                     case TITLE:
                         pp.setTitle(getXMLText(reader));
                         break;
-                    case INDEX:
+                    case SUBSCRIPT_INDEX:
                         name = getXMLText(reader);
                         pp.setIndex(name);
                         break;
-                    case CHARS:
-                        pp.setChars(getXMLAddress(reader));
-                        break;
+                    /*case CHARS:
+                        pp.set(getXMLAddress(reader));
+                        break;*/
                 }
             } else if (type == XMLStreamConstants.END_ELEMENT) {
                 name = reader.getLocalName();
-                if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.JOURNAL) {
+                if (PaperEnum.valueOf(name.toUpperCase()) == PaperEnum.NEWSPAPER) {
                     return pp;
                 }
             }
@@ -106,16 +107,16 @@ public class PaperStAXBuilder {
                 case XMLStreamConstants.START_ELEMENT:
                     name = reader.getLocalName();
                     switch (PaperEnum.valueOf(name.toUpperCase())) {
-                        case GLANCE:
+                        case IS_GLANCE:
                             chars.setGlance(Boolean.parseBoolean(getXMLText(reader)));
                             break;
                         case VOLUME:
                             chars.setVolume(Integer.valueOf(getXMLText(reader)));
                             break;
-                        case MONTHLY:
+                        case IS_MONTHLY:
                             chars.setMonthly(Boolean.parseBoolean(getXMLText(reader)));
                             break;
-                        case COLOR:
+                        case IS_COLOR:
                             chars.setColor(Boolean.parseBoolean(getXMLText(reader)));
                             break;
                     }

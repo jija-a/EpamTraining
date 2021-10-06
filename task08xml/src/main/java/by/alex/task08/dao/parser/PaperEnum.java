@@ -1,13 +1,16 @@
 package by.alex.task08.dao.parser;
 
+import by.alex.task08.domain.PaperGenre;
+
 public enum PaperEnum {
     PAPERS("papers"),
     BOOKLET("booklet"),
     NEWSPAPER("newspaper"),
     MAGAZINE("magazine"),
-    TITLE("title"),
     ID("id"),
+    TITLE("title"),
     CHARS("chars"),
+    VOLUME("volume"),
     GENRE("genre"),
     IS_MONTHLY("is-monthly"),
     IS_COLOR("is-color"),
@@ -22,5 +25,16 @@ public enum PaperEnum {
 
     public String getValue() {
         return value;
+    }
+
+    public static PaperEnum resolveFiledByString(String filedStr) {
+        PaperEnum toReturn = null;
+
+        for (PaperEnum filed : values()) {
+            if (filed.getValue().equals(filedStr)) {
+                toReturn = filed;
+            }
+        }
+        return toReturn;
     }
 }
