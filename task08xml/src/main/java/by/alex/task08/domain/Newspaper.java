@@ -7,6 +7,7 @@ public class Newspaper extends Paper {
     private String index;
 
     public Newspaper() {
+        super();
     }
 
     public String getIndex() {
@@ -33,8 +34,8 @@ public class Newspaper extends Paper {
 
     @Override
     public String toString() {
-        return "Newspaper{" +
-                "index='" + index + '\'' +
-                '}';
+        return super.toString() + '\n'
+                + "index='" + index + '\''
+                + '}';
     }
 }

@@ -3,7 +3,7 @@
         xmlns:tns="http://www.example.org/papers" elementFormDefault="qualified">
 
     <element name="paper" type="tns:Paper" abstract="true"/>
-    <element name="journal" type="tns:Journal" substitutionGroup="tns:paper"/>
+    <element name="journal" type="tns:Booklet" substitutionGroup="tns:paper"/>
     <element name="newspaper" type="tns:Newspaper" substitutionGroup="tns:paper"/>
     <element name="magazine" type="tns:Magazine" substitutionGroup="tns:paper"/>
 
@@ -25,30 +25,45 @@
         <attribute name="id" type="long" use="required"/>
     </complexType>
 
+    <simpleType name="Genre">
+        <restriction base="string">
+            <enumeration value="sport"/>
+            <enumeration value="life"/>
+            <enumeration value="tech"/>
+            <enumeration value="education"/>
+        </restriction>
+    </simpleType>
+
     <complexType name="Chars">
         <sequence>
             <element name="volume" type="positiveInteger"/>
-            <element name="monthly" type="boolean"/>
-            <element name="color" type="boolean"/>
-            <element name="glance" type="boolean"/>
+            <element name="is-monthly" type="boolean"/>
+            <element name="is-color" type="boolean"/>
+            <element name="is-glance" type="boolean"/>
         </sequence>
+        <attribute name="genre" type="tns:Genre" default="news"/>
     </complexType>
 
-    <complexType name="Journal">
+    <complexType name="Booklet">
         <complexContent>
             <extension base="tns:Paper">
                 <sequence>
-                    <element name="index" type="string"/>
                 </sequence>
             </extension>
         </complexContent>
     </complexType>
 
+    <simpleType name="SubscriptIndex">
+        <restriction base="string">
+            <pattern value="\d{5,8}"/>
+        </restriction>
+    </simpleType>
+
     <complexType name="Newspaper">
         <complexContent>
             <extension base="tns:Paper">
                 <sequence>
-                    <element name="index" type="string"/>
+                    <element name="subscript-index" type="tns:SubscriptIndex"/>
                 </sequence>
             </extension>
         </complexContent>
@@ -57,6 +72,9 @@
     <complexType name="Magazine">
         <complexContent>
             <extension base="tns:Paper">
+                <sequence>
+                    <element name="subscript-index" type="tns:SubscriptIndex"/>
+                </sequence>
             </extension>
         </complexContent>
     </complexType>

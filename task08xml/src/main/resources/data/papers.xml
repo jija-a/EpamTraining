@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <papers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.example.org/papers"
-        xsi:schemaLocation="http://www.example.org/publication papers.xsd">
-    <journal id="1">
-        <title>Vogue</title>
-        <Chars>
-            <volume>74</volume>
-            <monthly>true</monthly>
-            <color>true</color>
-            <glance>true</glance>
-        </Chars>
-        <index>1243-12</index>
-    </journal>
-    <newspaper id="2">
-        <title>Komsomolskaya pravda</title>
-        <Chars>
-            <volume>40</volume>
-            <monthly>true</monthly>
-            <color>true</color>
-            <glance>false</glance>
-        </Chars>
-        <index>1111-12</index>
-    </newspaper>
+        xsi:schemaLocation="http://www.example.org/papers papers.xsd">
+
+
+
 </papers>

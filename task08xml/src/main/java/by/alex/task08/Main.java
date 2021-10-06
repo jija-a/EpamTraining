@@ -1,16 +1,12 @@
 package by.alex.task08;
 
-import by.alex.task08.dao.parser.xml.sax.PaperHandler;
+import by.alex.task08.dao.parser.xml.dom.PaperDOMBuilder;
+import by.alex.task08.dao.parser.xml.sax.PaperSAXBuilder;
+import by.alex.task08.dao.parser.xml.stax.PaperStAXBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 public class Main {
@@ -19,27 +15,35 @@ public class Main {
             LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        try {
-            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-            SAXParser parser = parserFactory.newSAXParser();
-            XMLReader reader = parser.getXMLReader();
-            PaperHandler handler = new PaperHandler();
-            reader.setContentHandler(handler);
-            String path = getAbsolutePath("data/papers.xml");
-            reader.parse(path);
-        } catch (ParserConfigurationException e) {
-            LOGGER.error("Parser configuration error: ", e);
-        } catch (SAXException e) {
-            LOGGER.error("SAX parser error: ", e);
-        } catch (IOException e) {
-            LOGGER.error("IO Thread exception: ", e);
-        }
+        String absolutePath = getAbsolutePath();
+        String papers;
+
+        PaperSAXBuilder builder = new PaperSAXBuilder();
+        builder.buildSetPapers(absolutePath);
+        papers = builder.getPapers().toString();
+        LOGGER.info(papers);
+
+        //runCompleted(absolutePath);
     }
 
-    private static String getAbsolutePath(String filePath) {
+    private static String getAbsolutePath() {
         ClassLoader classLoader = Main.class.getClassLoader();
-        URL url = classLoader.getResource(filePath);
+        URL url = classLoader.getResource("data/papers.xml");
         File file = new File(url.getFile());
         return file.getAbsolutePath();
+    }
+
+    private static void runCompleted(String absolutePath) {
+        String papers;
+
+        PaperDOMBuilder domBuilder = new PaperDOMBuilder();
+        domBuilder.buildSetPapers(absolutePath);
+        papers = domBuilder.getPapers().toString();
+        LOGGER.info(papers);
+
+        PaperStAXBuilder stAXBuilder = new PaperStAXBuilder();
+        stAXBuilder.buildSetPapers(absolutePath);
+        papers = stAXBuilder.getPapers().toString();
+        LOGGER.info(papers);
     }
 }

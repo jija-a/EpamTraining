@@ -6,7 +6,11 @@ public abstract class Paper {
 
     private Long id;
     private String title;
-    private Chars chars;
+    private final Chars chars;
+
+    protected Paper() {
+        this.chars = new Chars();
+    }
 
     public Long getId() {
         return id;
@@ -28,16 +32,14 @@ public abstract class Paper {
         return chars;
     }
 
-    public void setChars(Chars chars) {
-        this.chars = chars;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Paper paper = (Paper) o;
-        return id.equals(paper.id) && title.equals(paper.title) && chars.equals(paper.chars);
+        return id.equals(paper.id)
+                && title.equals(paper.title)
+                && chars.equals(paper.chars);
     }
 
     @Override
@@ -48,14 +50,15 @@ public abstract class Paper {
     @Override
     public String toString() {
         return "Paper{" +
-                "id=" + id
-                + ", title='" + title + '\''
-                + ", chars=" + chars
-                + '}';
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", chars=" + chars +
+                '}';
     }
 
     public static class Chars {
         private Integer volume;
+        private PaperGenre genre;
         private boolean monthly;
         private boolean color;
         private boolean glance;
@@ -66,6 +69,14 @@ public abstract class Paper {
 
         public void setVolume(Integer volume) {
             this.volume = volume;
+        }
+
+        public PaperGenre getGenre() {
+            return genre;
+        }
+
+        public void setGenre(PaperGenre genre) {
+            this.genre = genre;
         }
 
         public boolean isMonthly() {
@@ -100,22 +111,24 @@ public abstract class Paper {
             return monthly == chars.monthly
                     && color == chars.color
                     && glance == chars.glance
-                    && volume.equals(chars.volume);
+                    && volume.equals(chars.volume)
+                    && Objects.equals(genre, chars.genre);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(volume, monthly, color, glance);
+            return Objects.hash(volume, genre, monthly, color, glance);
         }
 
         @Override
         public String toString() {
             return "Chars{" +
-                    "volume=" + volume
-                    + ", monthly=" + monthly
-                    + ", color=" + color
-                    + ", glance=" + glance
-                    + '}';
+                    "volume=" + volume +
+                    ", genre='" + genre + '\'' +
+                    ", monthly=" + monthly +
+                    ", color=" + color +
+                    ", glance=" + glance +
+                    '}';
         }
     }
 }
