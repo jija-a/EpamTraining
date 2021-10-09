@@ -1,9 +1,14 @@
 package by.alex.task08.dao.parser.xml.dom;
 
 import by.alex.task08.dao.DaoException;
-import by.alex.task08.dao.parser.xml.AbstractPaperBuilder;
 import by.alex.task08.dao.parser.PaperEnum;
-import by.alex.task08.domain.*;
+import by.alex.task08.dao.parser.xml.AbstractPaperBuilder;
+import by.alex.task08.domain.Paper;
+import by.alex.task08.domain.Magazine;
+import by.alex.task08.domain.PaperGenre;
+import by.alex.task08.domain.Newspaper;
+import by.alex.task08.domain.Booklet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -16,14 +21,28 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class PaperDOMBuilder extends AbstractPaperBuilder {
 
+    /**
+     * Class logger.
+     *
+     * @see Logger
+     */
     private static final Logger LOGGER =
             LoggerFactory.getLogger(PaperDOMBuilder.class);
 
+    /**
+     * Document builder.
+     *
+     * @see DocumentBuilder
+     */
     private DocumentBuilder docBuilder;
 
+    /**
+     * Public constructor.
+     */
     public PaperDOMBuilder() {
         super();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -34,8 +53,14 @@ public class PaperDOMBuilder extends AbstractPaperBuilder {
         }
     }
 
+    /**
+     * Method to build {@link java.util.Set} if {@link Paper}.
+     *
+     * @param fileName - name of xml file
+     * @see AbstractPaperBuilder
+     */
     @Override
-    public void buildSetPapers(String fileName) throws DaoException {
+    public void buildSetPapers(final String fileName) throws DaoException {
         Document doc;
         try {
             doc = docBuilder.parse(fileName);
@@ -50,7 +75,9 @@ public class PaperDOMBuilder extends AbstractPaperBuilder {
         }
     }
 
-    private void buildSpecificPapers(Element root, PaperEnum paperEnum) {
+    private void buildSpecificPapers(final Element root,
+                                     final PaperEnum paperEnum) {
+
         NodeList papersList = root.getElementsByTagName(paperEnum.getValue());
         for (int i = 0; i < papersList.getLength(); i++) {
             Element paperElement = (Element) papersList.item(i);
@@ -59,7 +86,8 @@ public class PaperDOMBuilder extends AbstractPaperBuilder {
         }
     }
 
-    private Paper buildPaper(Element paperElement, PaperEnum paperEnum) {
+    private Paper buildPaper(final Element paperElement,
+                             final PaperEnum paperEnum) {
         Paper paper = null;
         if (PaperEnum.MAGAZINE.equals(paperEnum)) {
             paper = new Magazine();
@@ -70,32 +98,58 @@ public class PaperDOMBuilder extends AbstractPaperBuilder {
         }
 
         LOGGER.info("Setting 'paper' fields");
-        paper.setId(Long.valueOf(paperElement.getAttribute(PaperEnum.ID.getValue())));
+        paper.setId(Long.valueOf(paperElement
+                .getAttribute(PaperEnum.ID.getValue())));
         paper.setTitle(getElementTextContent(
                 paperElement, PaperEnum.TITLE.getValue()));
         Paper.Chars chars = paper.getChars();
 
         LOGGER.info("Setting 'Chars' fields");
-        chars.setMonthly(Boolean.parseBoolean(getElementTextContent(paperElement, PaperEnum.IS_MONTHLY.getValue())));
-        chars.setGlance(Boolean.parseBoolean(getElementTextContent(paperElement, PaperEnum.IS_GLANCE.getValue())));
-        chars.setColor(Boolean.parseBoolean(getElementTextContent(paperElement, PaperEnum.IS_COLOR.getValue())));
-        chars.setVolume(Integer.valueOf(getElementTextContent(paperElement, PaperEnum.VOLUME.getValue())));
+        chars.setMonthly(Boolean.parseBoolean(
+                getElementTextContent(paperElement,
+                        PaperEnum.IS_MONTHLY.getValue())));
 
-        if (paperElement.getElementsByTagName(PaperEnum.GENRE.getValue()) != null) {
-            String genreStr = paperElement.getAttribute(PaperEnum.GENRE.getValue());
+        chars.setGlance(Boolean.parseBoolean(
+                getElementTextContent(paperElement,
+                PaperEnum.IS_GLANCE.getValue())));
+
+        chars.setColor(Boolean.parseBoolean(
+                getElementTextContent(paperElement,
+                PaperEnum.IS_COLOR.getValue())));
+
+        chars.setVolume(Integer.valueOf(
+                getElementTextContent(paperElement,
+                PaperEnum.VOLUME.getValue())));
+
+        String dateStr = paperElement
+                .getAttribute(PaperEnum.DATE_OF_ISSUE.getValue());
+        if (!dateStr.isEmpty()) {
+            LocalDate date = LocalDate.parse(dateStr);
+            chars.setDateOfIssue(date);
+        }
+
+        if (paperElement
+                .getElementsByTagName(PaperEnum.GENRE.getValue()) != null) {
+            String genreStr = paperElement
+                    .getAttribute(PaperEnum.GENRE.getValue());
             PaperGenre genre = PaperGenre.resolveGenreByString(genreStr);
             chars.setGenre(genre);
         }
 
         if (paper instanceof Magazine) {
-            ((Magazine) paper).setIndex(getElementTextContent(paperElement, PaperEnum.TITLE.getValue()));
+            ((Magazine) paper).setIndex(
+                    getElementTextContent(paperElement,
+                            PaperEnum.TITLE.getValue()));
         } else if (paper instanceof Newspaper) {
-            ((Newspaper) paper).setIndex(getElementTextContent(paperElement, PaperEnum.TITLE.getValue()));
+            ((Newspaper) paper).setIndex(
+                    getElementTextContent(paperElement,
+                            PaperEnum.TITLE.getValue()));
         }
         return paper;
     }
 
-    private static String getElementTextContent(Element element, String elementName) {
+    private static String getElementTextContent(final Element element,
+                                                final String elementName) {
         LOGGER.info("Getting element by element name - '{}'", elementName);
         NodeList nList = element.getElementsByTagName(elementName);
         Node node = nList.item(0);

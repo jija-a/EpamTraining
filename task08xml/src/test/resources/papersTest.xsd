@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/papers"
-        xmlns:tns="http://www.example.org/papers" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/papersTest"
+        xmlns:tns="http://www.example.org/papersTest" elementFormDefault="qualified">
 
     <element name="paper" type="tns:Paper" abstract="true"/>
-    <element name="journal" type="tns:Booklet" substitutionGroup="tns:paper"/>
+    <element name="booklet" type="tns:Booklet" substitutionGroup="tns:paper"/>
     <element name="newspaper" type="tns:Newspaper" substitutionGroup="tns:paper"/>
     <element name="magazine" type="tns:Magazine" substitutionGroup="tns:paper"/>
 
@@ -22,12 +22,14 @@
             <element name="title" type="string"/>
             <element name="Chars" type="tns:Chars"/>
         </sequence>
+        <attribute name="dateOfIssue" type="date"/>
         <attribute name="genre" type="tns:Genre" default="news"/>
         <attribute name="id" type="long" use="required"/>
     </complexType>
 
     <simpleType name="Genre">
         <restriction base="string">
+            <enumeration value="news"/>
             <enumeration value="sport"/>
             <enumeration value="life"/>
             <enumeration value="tech"/>

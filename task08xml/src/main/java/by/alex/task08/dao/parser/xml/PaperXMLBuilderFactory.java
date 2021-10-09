@@ -6,25 +6,54 @@ import by.alex.task08.dao.parser.xml.stax.PaperStAXBuilder;
 
 public class PaperXMLBuilderFactory {
 
-    private final AbstractPaperBuilder paperDOMBuilder;
-    private final AbstractPaperBuilder paperSAXBuilder;
-    private final AbstractPaperBuilder paperStAXBuilder;
+    /**
+     * {@link PaperDOMBuilder}.
+     */
+    private final PaperDOMBuilder paperDOMBuilder;
 
+    /**
+     * {@link PaperSAXBuilder}.
+     */
+    private final PaperSAXBuilder paperSAXBuilder;
+
+    /**
+     * {@link PaperStAXBuilder}.
+     */
+    private final PaperStAXBuilder paperStAXBuilder;
+
+    /**
+     * Public constructor.
+     */
     public PaperXMLBuilderFactory() {
         this.paperDOMBuilder = new PaperDOMBuilder();
         this.paperSAXBuilder = new PaperSAXBuilder();
         this.paperStAXBuilder = new PaperStAXBuilder();
     }
 
-    public AbstractPaperBuilder getPaperDOMBuilder() {
+    /**
+     * {@link PaperDOMBuilder} getter.
+     *
+     * @return {@link PaperDOMBuilder}
+     */
+    public PaperDOMBuilder getPaperDOMBuilder() {
         return paperDOMBuilder;
     }
 
-    public AbstractPaperBuilder getPaperSAXBuilder() {
+    /**
+     * {@link PaperSAXBuilder} getter.
+     *
+     * @return {@link PaperSAXBuilder}
+     */
+    public PaperSAXBuilder getPaperSAXBuilder() {
         return paperSAXBuilder;
     }
 
-    public AbstractPaperBuilder getPaperStAXBuilder() {
+    /**
+     * {@link PaperStAXBuilder} getter.
+     *
+     * @return {@link PaperStAXBuilder}
+     */
+    public PaperStAXBuilder getPaperStAXBuilder() {
         return paperStAXBuilder;
     }
 }

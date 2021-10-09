@@ -3,26 +3,177 @@
         xmlns="http://www.example.org/papers"
         xsi:schemaLocation="http://www.example.org/papers papers.xsd">
 
-    <newspaper id="1" genre="education">
+    <newspaper id="1" dateOfIssue="2021-08-27">
         <title>Guardian</title>
         <Chars>
-            <volume>40</volume>
+            <volume>20</volume>
             <is-monthly>true</is-monthly>
             <is-color>false</is-color>
             <is-glance>false</is-glance>
         </Chars>
-        <subscript-index>123412</subscript-index>
+        <subscript-index>123456</subscript-index>
     </newspaper>
 
-    <magazine id="2">
-        <title>Cars</title>
+    <magazine id="2" genre="sport">
+        <title>Football 2021</title>
+        <Chars>
+            <volume>60</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>true</is-glance>
+        </Chars>
+        <subscript-index>234567</subscript-index>
+    </magazine>
+
+    <booklet id="3" genre="education" dateOfIssue="2015-04-10">
+        <title>Base physics</title>
+        <Chars>
+            <volume>10</volume>
+            <is-monthly>false</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+    </booklet>
+
+    <newspaper id="4">
+        <title>Sun</title>
+        <Chars>
+            <volume>24</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>false</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+        <subscript-index>345678</subscript-index>
+    </newspaper>
+
+    <magazine id="5" genre="life" dateOfIssue="1999-08-27">
+        <title>Living creatures</title>
+        <Chars>
+            <volume>45</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>true</is-glance>
+        </Chars>
+        <subscript-index>456789</subscript-index>
+    </magazine>
+
+    <newspaper id="6" genre="sport" dateOfIssue="2021-09-10">
+        <title>Setanta sports</title>
+        <Chars>
+            <volume>20</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>false</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+        <subscript-index>12312322</subscript-index>
+    </newspaper>
+
+    <magazine id="7" genre="life">
+        <title>Life for all</title>
+        <Chars>
+            <volume>40</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>true</is-glance>
+        </Chars>
+        <subscript-index>12332121</subscript-index>
+    </magazine>
+
+    <booklet id="8" genre="education" dateOfIssue="2021-02-02">
+        <title>Edu</title>
+        <Chars>
+            <volume>21</volume>
+            <is-monthly>false</is-monthly>
+            <is-color>false</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+    </booklet>
+
+    <magazine id="9" genre="sport">
+        <title>Tesla</title>
         <Chars>
             <volume>20</volume>
             <is-monthly>true</is-monthly>
             <is-color>true</is-color>
             <is-glance>false</is-glance>
         </Chars>
-        <subscript-index>124332</subscript-index>
+        <subscript-index>32132132</subscript-index>
     </magazine>
+
+    <newspaper id="10">
+        <title>Belaruska</title>
+        <Chars>
+            <volume>3</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>false</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+        <subscript-index>00003</subscript-index>
+    </newspaper>
+
+    <magazine id="11" genre="tech" dateOfIssue="2020-05-05">
+        <title>Tech PRO</title>
+        <Chars>
+            <volume>20</volume>
+            <is-monthly>false</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>true</is-glance>
+        </Chars>
+        <subscript-index>32132100</subscript-index>
+    </magazine>
+
+    <newspaper id="12">
+        <title>Pravda</title>
+        <Chars>
+            <volume>97</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>true</is-glance>
+        </Chars>
+        <subscript-index>979797</subscript-index>
+    </newspaper>
+
+    <magazine id="13" dateOfIssue="2022-03-20" genre="education">
+        <title>IfUWannaUGet</title>
+        <Chars>
+            <volume>20</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>true</is-glance>
+        </Chars>
+        <subscript-index>000000</subscript-index>
+    </magazine>
+
+    <newspaper id="14" dateOfIssue="2001-01-01">
+        <title>Yellow</title>
+        <Chars>
+            <volume>99</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+        <subscript-index>0001001</subscript-index>
+    </newspaper>
+
+    <booklet id="15" genre="life">
+        <title>KFC</title>
+        <Chars>
+            <volume>1</volume>
+            <is-monthly>false</is-monthly>
+            <is-color>true</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+    </booklet>
+
+    <newspaper id="16" genre="news" dateOfIssue="2020-01-01">
+        <title>EverydayNews</title>
+        <Chars>
+            <volume>13</volume>
+            <is-monthly>true</is-monthly>
+            <is-color>false</is-color>
+            <is-glance>false</is-glance>
+        </Chars>
+        <subscript-index>01010101</subscript-index>
+    </newspaper>
 
 </papers>

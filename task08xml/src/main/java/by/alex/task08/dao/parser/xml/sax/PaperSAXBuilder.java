@@ -14,12 +14,27 @@ import java.io.IOException;
 
 public class PaperSAXBuilder extends AbstractPaperBuilder {
 
+    /**
+     * Class logger.
+     *
+     * @see Logger
+     */
     private static final Logger LOGGER =
             LoggerFactory.getLogger(PaperSAXBuilder.class);
 
+    /**
+     * {@link PaperHandler}.
+     */
     private final PaperHandler contentHandler;
+
+    /**
+     * {@link XMLReader}.
+     */
     private XMLReader reader;
 
+    /**
+     * Public constructor.
+     */
     public PaperSAXBuilder() {
         super();
         contentHandler = new PaperHandler();
@@ -37,8 +52,11 @@ public class PaperSAXBuilder extends AbstractPaperBuilder {
         }
     }
 
+    /**
+     * @see AbstractPaperBuilder
+     */
     @Override
-    public void buildSetPapers(String fileName) throws DaoException {
+    public void buildSetPapers(final String fileName) throws DaoException {
         try {
             reader.parse(fileName);
         } catch (SAXException e) {
