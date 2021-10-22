@@ -1,6 +1,6 @@
 package by.alex.task08.service.validator;
 
-import by.alex.task08.dao.parser.xml.sax.PaperErrorHandler;
+import by.alex.task08.service.builder.xml.sax.PaperErrorHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;

@@ -52,13 +52,12 @@ public enum PaperGenre {
      * @return {@link PaperGenre}
      */
     public static PaperGenre resolveGenreByString(final String genreStr) {
-        PaperGenre toReturn = PaperGenre.NEWS;
-
+        System.out.println("Genre: " + genreStr);
         for (PaperGenre genre : values()) {
             if (genre.getValue().equals(genreStr)) {
-                toReturn = genre;
+                return genre;
             }
         }
-        return toReturn;
+        throw new RuntimeException("LOL KEK CHEBUREK");
     }
 }
